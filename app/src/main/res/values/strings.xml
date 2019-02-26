@@ -1,3 +1,32 @@
 <resources>
     <string name="app_name">GameApp</string>
+    <string name="top5">Top 5</string>
+    <string name="game_top5_1">Numero 1</string>
+    <string name="game_top5_2">Numero 2</string>
+    <string name="game_top5_3">Numero 3</string>
+    <string name="game_top5_4">Numero 4</string>
+    <string name="game_top5_5">Numero 5</string>
+    <string name="search">Search</string>
+    <string name="genre">Genre</string>
+    <string name="name_typed">Name</string>
+    <string name="date_typed">Date</string>
+    <string name="nb_etoile">Number of stars</string>
+
+    <!-- liste de valeur pour la recherche par genre-->
+    <string-array name="genre">
+        <item>Adventure</item>
+        <item>Action</item>
+        <item>Strategy</item>
+        <item>Puzzle</item>
+        <item>Sports</item>
+    </string-array>
+
+    <!-- liste de valeur pour la recherche nombre d'étoile-->
+    <string-array name="nb_etoile">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
 </resources>
