@@ -1,6 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+    android:layout_height="fill_parent"
+    android:background="@drawable/back">
 
     <!-- Layout de la page d'accueil -->
     <TextView
@@ -66,7 +67,7 @@
         android:layout_height="75dp"
         android:layout_below="@+id/top5"
         android:layout_alignParentLeft="true"
-        android:layout_marginLeft="320dp"
+        android:layout_marginLeft="325dp"
         android:layout_marginTop="20dp"
         android:ems="10"
         android:hint="@string/game_top5_5"></Button>
@@ -88,6 +89,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/search"
+        android:layout_marginTop="27dp"
         android:hint="@string/genre" />
 
     <EditText
@@ -95,6 +97,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/genre"
+        android:layout_marginTop="27dp"
         android:hint="@string/name_typed" />
 
     <EditText
@@ -102,6 +105,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/name_typed"
+        android:layout_marginTop="27dp"
         android:hint="@string/date_typed"
         android:inputType="datetime" />
 
@@ -110,5 +114,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/date_typed"
+        android:layout_marginTop="27dp"
         android:hint="@string/nb_etoile" />
+
+    <Button
+        android:id="@+id/validate"
+        android:layout_width="100dp"
+        android:layout_height="55dp"
+        android:layout_below="@+id/nb_etoile"
+        android:layout_marginTop="27dp"
+        android:layout_marginLeft="159dp"
+        android:hint="Validate"
+        />
 </RelativeLayout>

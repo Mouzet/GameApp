@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
 
         spinner1.setAdapter(adapter1);
 
-        //Coding the second spinner (nb_etoile)
+        //Coding the second6 spinner (nb_etoile)
         Spinner spinner2 = (Spinner) findViewById(R.id.nb_etoile);
         ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this,
                 R.array.nb_etoile, android.R.layout.simple_spinner_item);
