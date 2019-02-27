@@ -1,12 +1,12 @@
 <resources>
     <string name="app_name">GameApp</string>
-    <string name="top5">Top 5</string>
+    <string name="top5"><u>Top 5</u></string>
     <string name="game_top5_1">Numero 1</string>
     <string name="game_top5_2">Numero 2</string>
     <string name="game_top5_3">Numero 3</string>
     <string name="game_top5_4">Numero 4</string>
     <string name="game_top5_5">Numero 5</string>
-    <string name="search">Search</string>
+    <string name="search"><u>Search</u></string>
     <string name="genre">Genre</string>
     <string name="name_typed">Name</string>
     <string name="date_typed">Date</string>

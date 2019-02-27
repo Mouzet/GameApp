@@ -16,19 +16,21 @@
         android:text="@string/top5"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textSize="28dp"
-        android:textStyle="bold" />
+        android:textStyle="bold"/>
 
-    <Button
+    <ImageButton
         android:id="@+id/game_top5_1"
         android:layout_width="75dp"
         android:layout_height="75dp"
         android:layout_below="@+id/top5"
         android:layout_marginTop="20dp"
         android:layout_marginLeft="5dp"
+        android:src="@drawable/pacman"
+        android:background="@drawable/back"
         android:ems="10"
-        android:hint="@string/game_top5_1"></Button>
+        android:hint="@string/game_top5_1"></ImageButton>
 
-    <Button
+    <ImageButton
         android:id="@+id/game_top5_2"
         android:layout_width="75dp"
         android:layout_height="75dp"
@@ -36,10 +38,12 @@
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="85dp"
         android:layout_marginTop="20dp"
+        android:src="@drawable/roller"
+        android:background="@drawable/back"
         android:ems="10"
-        android:hint="@string/game_top5_2"></Button>
+        android:hint="@string/game_top5_2"></ImageButton>
 
-    <Button
+    <ImageButton
         android:id="@+id/game_top5_3"
         android:layout_width="75dp"
         android:layout_height="75dp"
@@ -47,10 +51,12 @@
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="165dp"
         android:layout_marginTop="20dp"
+        android:src="@drawable/mario"
+        android:background="@drawable/back"
         android:ems="10"
-        android:hint="@string/game_top5_3"></Button>
+        android:hint="@string/game_top5_3"></ImageButton>
 
-    <Button
+    <ImageButton
         android:id="@+id/game_top5_4"
         android:layout_width="75dp"
         android:layout_height="75dp"
@@ -58,10 +64,12 @@
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="245dp"
         android:layout_marginTop="20dp"
+        android:src="@drawable/arc"
+        android:background="@drawable/back"
         android:ems="10"
-        android:hint="@string/game_top5_4"></Button>
+        android:hint="@string/game_top5_4"></ImageButton>
 
-    <Button
+    <ImageButton
         android:id="@+id/game_top5_5"
         android:layout_width="75dp"
         android:layout_height="75dp"
@@ -69,8 +77,10 @@
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="325dp"
         android:layout_marginTop="20dp"
+        android:src="@drawable/wow"
+        android:background="@drawable/back"
         android:ems="10"
-        android:hint="@string/game_top5_5"></Button>
+        android:hint="@string/game_top5_5"></ImageButton>
 
     <TextView
         android:id="@+id/search"
@@ -84,12 +94,14 @@
         android:ems="10"
         android:hint="@string/search"></TextView>
 
+
     <Spinner
         android:id="@+id/genre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/search"
         android:layout_marginTop="27dp"
+        android:textSize="18dp"
         android:hint="@string/genre" />
 
     <EditText
@@ -98,6 +110,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/genre"
         android:layout_marginTop="27dp"
+        android:textSize="18dp"
         android:hint="@string/name_typed" />
 
     <EditText
@@ -106,6 +119,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/name_typed"
         android:layout_marginTop="27dp"
+        android:textSize="18dp"
         android:hint="@string/date_typed"
         android:inputType="datetime" />
 
@@ -115,6 +129,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/date_typed"
         android:layout_marginTop="27dp"
+        android:textSize="18dp"
         android:hint="@string/nb_etoile" />
 
     <Button
@@ -124,6 +139,7 @@
         android:layout_below="@+id/nb_etoile"
         android:layout_marginTop="27dp"
         android:layout_marginLeft="159dp"
+        android:textStyle="bold"
         android:hint="Validate"
         />
 </RelativeLayout>
