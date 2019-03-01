@@ -90,8 +90,8 @@
         android:layout_marginTop="27dp"
         android:textSize="28dp"
         android:textStyle="bold"
-        android:ems="10"
-        android:hint="@string/search"></TextView>
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/search"></TextView>
 
 
     <EditText
@@ -149,6 +149,7 @@
         android:layout_marginTop="25dp"
         android:layout_marginLeft="159dp"
         android:textStyle="bold"
-        android:hint="Validate"
+        android:text="@string/validate"
+        android:onClick="validateSearch"
         />
 </RelativeLayout>

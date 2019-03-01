@@ -20,6 +20,7 @@
     <string name="date_typed">Date</string>
     <string name="nb_etoile">Number of stars</string>
     <string name="price_typed">Price</string>
+    <string name="validate">Validate</string>
 
     <!-- String page des jeux -->
     <string name="games"><u>Games</u></string>
