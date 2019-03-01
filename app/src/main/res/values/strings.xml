@@ -1,5 +1,13 @@
 <resources>
-    <string name="app_name">GameApp</string>
+
+    <!-- String barre de navigation -->
+    <string name="action_game"><em>Games</em></string>
+    <string name="action_genre"><em>Genre</em></string>
+    <string name="action_about"><em>About</em></string>
+
+
+    <!-- String page d'accueil -->
+    <string name="app_name"><strong>GameApp</strong></string>
     <string name="top5"><u>Top 5</u></string>
     <string name="game_top5_1">Numero 1</string>
     <string name="game_top5_2">Numero 2</string>
@@ -11,7 +19,13 @@
     <string name="name_typed">Name</string>
     <string name="date_typed">Date</string>
     <string name="nb_etoile">Number of stars</string>
+    <string name="price_typed">Price</string>
 
+    <!-- String page des jeux -->
+    <string name="games"><u>Games</u></string>
+    <string name="name_game1">Pacman</string>
+    <string name="description_game1">Description du premier jeu</string>
+    <string name="action_games">Games</string>
     <!-- liste de valeur pour la recherche par genre-->
     <string-array name="genre">
         <item>Adventure</item>

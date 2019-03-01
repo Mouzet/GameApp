@@ -79,7 +79,6 @@
         android:layout_marginTop="20dp"
         android:src="@drawable/wow"
         android:background="@drawable/back"
-        android:ems="10"
         android:hint="@string/game_top5_5"></ImageButton>
 
     <TextView
@@ -95,21 +94,12 @@
         android:hint="@string/search"></TextView>
 
 
-    <Spinner
-        android:id="@+id/genre"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/search"
-        android:layout_marginTop="27dp"
-        android:textSize="18dp"
-        android:hint="@string/genre" />
-
     <EditText
         android:id="@+id/name_typed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/genre"
-        android:layout_marginTop="27dp"
+        android:layout_below="@+id/search"
+        android:layout_marginTop="25dp"
         android:textSize="18dp"
         android:hint="@string/name_typed" />
 
@@ -118,17 +108,36 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/name_typed"
-        android:layout_marginTop="27dp"
+        android:layout_marginTop="25dp"
         android:textSize="18dp"
         android:hint="@string/date_typed"
         android:inputType="datetime" />
+
+    <EditText
+        android:id="@+id/price_typed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:textSize="18dp"
+        android:hint="@string/price_typed"
+        android:layout_below="@id/date_typed"
+        android:inputType="number"/>
+
+    <Spinner
+        android:id="@+id/genre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/price_typed"
+        android:layout_marginTop="25dp"
+        android:textSize="18dp"
+        android:hint="@string/genre" />
 
     <Spinner
         android:id="@+id/nb_etoile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/date_typed"
-        android:layout_marginTop="27dp"
+        android:layout_below="@+id/genre"
+        android:layout_marginTop="25dp"
         android:textSize="18dp"
         android:hint="@string/nb_etoile" />
 
@@ -137,7 +146,7 @@
         android:layout_width="100dp"
         android:layout_height="55dp"
         android:layout_below="@+id/nb_etoile"
-        android:layout_marginTop="27dp"
+        android:layout_marginTop="25dp"
         android:layout_marginLeft="159dp"
         android:textStyle="bold"
         android:hint="Validate"

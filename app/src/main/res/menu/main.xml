@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <!--
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:yourapp="http://schemas.android.com/apk/res-auto" >
+
+
         <item android:id="@+id/action_games"
-            android:title="@string/action_games"
-            />
+            android:title="@string/action_game"
+            yourapp:showAsAction="ifRoom" />
 
         <item android:id="@+id/action_genre"
             android:title="@string/action_genre"
+            yourapp:showAsAction="ifRoom"
             />
 
         <item android:id="@+id/action_about"
             android:title="@string/action_about"
+            yourapp:showAsAction="ifRoom"
             />
 
-        <item android:id="@+id/action_connexion"
-            android:icon="@drawable/user"
-            android:title="@string/action_user"
-            />
-    -->
 </menu>
