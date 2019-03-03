@@ -27,6 +27,10 @@
     <string name="name_game1">Pacman</string>
     <string name="description_game1">Description du premier jeu</string>
     <string name="action_games">Games</string>
+
+    <!-- String page about -->
+    <string name="infos">Informations Page</string>
+
     <!-- liste de valeur pour la recherche par genre-->
     <string-array name="genre">
         <item>Adventure</item>

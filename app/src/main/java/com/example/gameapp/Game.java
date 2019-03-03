@@ -20,9 +20,8 @@ public class Game extends AppCompatActivity{
         setContentView(R.layout.games);
 
         Intent intent = getIntent();
-        name = intent.getStringExtra("name");
 
-        TextView name_game = (TextView) findViewById(R.id.name_game1);
-        name_game.setText(name);
 
-    }}
+    }
+
+}
