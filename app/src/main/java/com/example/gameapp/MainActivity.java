@@ -86,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+
     public void modifyGame(View view){
         Intent intent = new Intent(this, Details.class);
 
