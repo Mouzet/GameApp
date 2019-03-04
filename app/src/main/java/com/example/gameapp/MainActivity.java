@@ -7,11 +7,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
 public class MainActivity extends AppCompatActivity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,8 +34,6 @@ public class MainActivity extends AppCompatActivity {
 
         spinner2.setAdapter(adapter2);
 
-
-
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -52,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
 
         switch(item.getItemId()){
             case R.id.action_games:
-                intent = new Intent(MainActivity.this, Game.class);
+                intent = new Intent(MainActivity.this, GameActivity.class);
 
 
                 MainActivity.this.startActivity(intent);
@@ -60,14 +58,14 @@ public class MainActivity extends AppCompatActivity {
 
             case R.id.action_about:
 
-                intent = new Intent(MainActivity.this, About.class);
+                intent = new Intent(MainActivity.this, AboutActivity.class);
 
                 MainActivity.this.startActivity(intent);
                 break;
 
             case R.id.action_genre:
 
-                intent = new Intent(MainActivity.this, Genre.class);
+                intent = new Intent(MainActivity.this, GenreActivity.class);
 
                 MainActivity.this.startActivity(intent);
                 break;
@@ -79,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
     // creating the intent for the validate button
 
     public void validateSearch(View view){
-        Intent intent = new Intent(this, Game.class);
+        Intent intent = new Intent(this, GameActivity.class);
         EditText name = (EditText)findViewById(R.id.name_typed);
         intent.putExtra("name", name.getText().toString());
 
@@ -88,8 +86,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void modifyGame(View view){
-        Intent intent = new Intent(this, Details.class);
-
+        Intent intent = new Intent(this, DetailsActivity.class);
 
         startActivity(intent);
     }

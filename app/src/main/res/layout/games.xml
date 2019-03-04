@@ -9,11 +9,15 @@
         android:id="@+id/game_page"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerVertical="true"
         android:layout_marginLeft="159dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="23dp"
+        android:text="Games"
+        android:textAppearance="?android:attr/textAppearanceLarge"
         android:textSize="28dp"
-        android:textStyle="bold"
-        android:text="@string/games"/>
+        android:textStyle="bold"/>
 
    <ImageView
     android:id="@+id/image2"
@@ -75,14 +79,15 @@
         android:layout_below="@id/modify"
         android:text="@string/delete"/>
 
-    <Button
-        android:layout_width="80dp"
-        android:layout_height="35dp"
-        android:layout_below="@id/delete"
-        android:layout_marginLeft="265dp"
-        android:layout_marginTop="-6dp"
-        android:text="@string/modify"
-        android:onClick="modifyGame" />
+ <Button
+     android:id="@+id/modify1"
+     android:layout_width="80dp"
+     android:layout_height="35dp"
+     android:layout_below="@id/delete"
+     android:layout_marginLeft="265dp"
+     android:layout_marginTop="-6dp"
+     android:text="@string/modify"
+     android:onClick="modifyGame" />
 
     <ImageView
         android:id="@+id/image1"
@@ -155,16 +160,13 @@
         android:text="@string/modify"
         android:onClick="modifyGame" />
 
- <Button
-     android:id="@+id/add"
-     android:layout_width="wrap_content"
-     android:layout_height="wrap_content"
-     android:layout_marginLeft="159dp"
-     android:layout_marginTop="100dp"
-     android:layout_below="@id/description2"
-     android:text="@string/add"/>
-
-
-
+    <Button
+        android:id="@+id/add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="159dp"
+        android:layout_marginTop="100dp"
+        android:layout_below="@id/description2"
+        android:text="@string/add"/>
 
 </RelativeLayout>

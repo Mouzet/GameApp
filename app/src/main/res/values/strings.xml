@@ -21,6 +21,7 @@
     <string name="nb_etoile">Number of stars</string>
     <string name="price_typed">Price</string>
     <string name="validate">Validate</string>
+    <string name="select_gender">Select Genders:</string>
 
     <!-- String page des jeux -->
     <string name="games"><u>Games</u></string>
