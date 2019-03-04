@@ -28,7 +28,8 @@
         android:src="@drawable/pacman"
         android:background="@drawable/back"
         android:ems="10"
-        android:hint="@string/game_top5_1"></ImageButton>
+        android:hint="@string/game_top5_1"
+        android:onClick="modifyGame"></ImageButton>
 
     <ImageButton
         android:id="@+id/game_top5_2"
@@ -41,7 +42,8 @@
         android:src="@drawable/roller"
         android:background="@drawable/back"
         android:ems="10"
-        android:hint="@string/game_top5_2"></ImageButton>
+        android:hint="@string/game_top5_2"
+        android:onClick="modifyGame"></ImageButton>
 
     <ImageButton
         android:id="@+id/game_top5_3"
@@ -54,7 +56,8 @@
         android:src="@drawable/mario"
         android:background="@drawable/back"
         android:ems="10"
-        android:hint="@string/game_top5_3"></ImageButton>
+        android:hint="@string/game_top5_3"
+        android:onClick="modifyGame"></ImageButton>
 
     <ImageButton
         android:id="@+id/game_top5_4"
@@ -67,7 +70,8 @@
         android:src="@drawable/arc"
         android:background="@drawable/back"
         android:ems="10"
-        android:hint="@string/game_top5_4"></ImageButton>
+        android:hint="@string/game_top5_4"
+        android:onClick="modifyGame"></ImageButton>
 
     <ImageButton
         android:id="@+id/game_top5_5"
@@ -79,7 +83,8 @@
         android:layout_marginTop="20dp"
         android:src="@drawable/wow"
         android:background="@drawable/back"
-        android:hint="@string/game_top5_5"></ImageButton>
+        android:hint="@string/game_top5_5"
+        android:onClick="modifyGame"></ImageButton>
 
     <TextView
         android:id="@+id/search"

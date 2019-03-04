@@ -42,7 +42,6 @@ public class MainActivity extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
 
-
         return true;
     }
 
@@ -83,6 +82,13 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, Game.class);
         EditText name = (EditText)findViewById(R.id.name_typed);
         intent.putExtra("name", name.getText().toString());
+
+        startActivity(intent);
+    }
+
+    public void modifyGame(View view){
+        Intent intent = new Intent(this, Details.class);
+
 
         startActivity(intent);
     }

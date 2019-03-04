@@ -27,7 +27,13 @@
     <string name="name_game1">Pacman</string>
     <string name="description_game1">Description du premier jeu</string>
     <string name="action_games">Games</string>
-
+    <string name="date1">28.11.2012</string>
+    <string name="name_game2">Mario</string>
+    <string name="description_game2">Description du deuxieme jeu</string>
+    <string name="date2">13.02.1997</string>
+    <string name="delete">Delete</string>
+    <string name="modify">Modify</string>
+    <string name="add">Add</string>
     <!-- String page about -->
     <string name="infos">Informations Page</string>
 
