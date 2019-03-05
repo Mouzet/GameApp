@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- liste de valeur pour la recherche par genre-->
+    <string-array name="gamesList">
+        <item>Pac-man</item>
+        <item>Pokemon</item>
+        <item>World Of Warcarft</item>
+        <item>Mario</item>
+        <item>Paper Toss</item>
+    </string-array>
+</resources>

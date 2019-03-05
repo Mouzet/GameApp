@@ -1,13 +1,17 @@
 package com.example.gameapp.Controller;
 
 import android.content.Intent;
+import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.gameapp.Controller.DetailsActivity;
 import com.example.gameapp.R;
+
+import java.util.ArrayList;
 
 public class GameActivity extends AppCompatActivity{
 
@@ -16,6 +20,13 @@ public class GameActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.games);
+
+        TextView mPageTitle = (TextView) findViewById(R.id.game_page);
+        ImageView mImage = (ImageView) findViewById(R.id.image);
+        TextView mNameGame = (TextView) findViewById(R.id.name_game);
+        TextView mDescription = (TextView) findViewById(R.id.description);
+        ImageView mStars = (ImageView) findViewById(R.id.stars);
+        TextView mDate = (TextView) findViewById(R.id.date);
 
         Intent intent = getIntent();
 
@@ -27,10 +38,29 @@ public class GameActivity extends AppCompatActivity{
             }
         }
 
-        TextView textView = (TextView) findViewById(R.id.name_game1);
+        String [] arrayList = getResources().getStringArray(R.array.gamesList);
+        boolean test = true;
 
-        textView.setText(nameGame);
+        for(int i = 0; i < arrayList.length; i++)
+        {
+            if(nameGame.equals(arrayList[i]))
+            {
+                test = false;
+                mNameGame.setText(nameGame);
+            }
+        }
 
+        //Si le jeu n'est pas dans la tableau, on affiche null
+        //Et on désactive le reste
+        if(test)
+        {
+            mPageTitle.setText("No result found");
+            mNameGame.setText("Sorry, but we don't found anything with the research : " + nameGame);
+            mImage.setEnabled(false);
+            mDescription.setEnabled(false);
+            mStars.setEnabled(false);
+            mDate.setEnabled(false);
+        }
     }
 
     public void modifyGame(View view){

@@ -21,18 +21,17 @@
 
 
    <ImageView
-    android:id="@+id/image2"
+    android:id="@+id/image"
     android:layout_width="50dp"
     android:layout_height="50dp"
     android:src="@drawable/mario"
-    android:layout_below="@id/image1"
     android:background="@drawable/back"
     android:layout_marginLeft="5dp"
     android:layout_marginTop="24dp"/>
 
 
     <TextView
-        android:id="@+id/name_game2"
+        android:id="@+id/name_game"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/description"
@@ -42,10 +41,10 @@
         android:textSize="15dp" />
 
     <TextView
-        android:id="@+id/description2"
+        android:id="@+id/description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/name_game2"
+        android:layout_below="@+id/name_game"
         android:layout_marginLeft="60dp"
         android:layout_marginTop="13dp"
         android:text="@string/description_game2"
@@ -53,113 +52,43 @@
         android:textStyle="italic" />
 
     <ImageView
-        android:id="@+id/stars2"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:layout_below="@id/description"
-        android:layout_marginLeft="120dp"
-        android:layout_alignParentLeft="true"
-        android:layout_marginTop="22dp"
-        android:src="@drawable/star4" />
-
-    <TextView
-        android:id="@+id/date_2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="150dp"
-        android:layout_marginTop="25dp"
-        android:layout_below="@id/description"
-        android:textSize="12dp"
-        android:text="@string/date2"/>
-
-    <Button
-        android:layout_width="80dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="265dp"
-        android:layout_below="@id/modify"
-        android:text="@string/delete"/>
-
- <Button
-     android:id="@+id/modify1"
-     android:layout_width="80dp"
-     android:layout_height="35dp"
-     android:layout_below="@id/delete"
-     android:layout_marginLeft="265dp"
-     android:layout_marginTop="-6dp"
-     android:text="@string/modify"
-     android:onClick="modifyGame" />
-
-    <ImageView
-        android:id="@+id/image1"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:src="@drawable/pacman"
-        android:layout_below="@id/game_page"
-        android:background="@drawable/back"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="24dp"/>
-
-
-    <TextView
-        android:id="@+id/name_game1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/game_page"
-        android:layout_marginLeft="60dp"
-        android:layout_marginTop="25dp"
-        android:hint="@string/name_game1"
-        android:textSize="15dp" />
-
-    <TextView
-        android:id="@+id/description"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/name_game1"
-        android:layout_marginLeft="60dp"
-        android:layout_marginTop="13dp"
-        android:text="@string/description_game1"
-        android:textSize="12dp"
-        android:textStyle="italic" />
-
-    <ImageView
         android:id="@+id/stars"
         android:layout_width="25dp"
         android:layout_height="25dp"
-        android:layout_below="@id/game_page"
+        android:layout_below="@id/description"
         android:layout_marginLeft="120dp"
         android:layout_alignParentLeft="true"
         android:layout_marginTop="22dp"
         android:src="@drawable/star4" />
 
     <TextView
-        android:id="@+id/date_1"
+        android:id="@+id/date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="150dp"
         android:layout_marginTop="25dp"
-        android:layout_below="@id/game_page"
+        android:layout_below="@id/stars"
         android:textSize="12dp"
-        android:text="@string/date1"/>
+        android:text="@string/date2"/>
 
     <Button
         android:id="@+id/delete"
         android:layout_width="80dp"
         android:layout_height="35dp"
-        android:layout_marginTop="18dp"
+        android:layout_marginTop="15dp"
         android:layout_marginLeft="265dp"
-        android:layout_below="@id/game_page"
+        android:layout_below="@id/date"
         android:text="@string/delete"/>
 
     <Button
-        android:id="@+id/modify"
-        android:layout_width="80dp"
-        android:layout_height="35dp"
-        android:layout_below="@id/delete"
-        android:layout_marginLeft="265dp"
-        android:layout_marginTop="-6dp"
-        android:text="@string/modify"
-        android:onClick="modifyGame" />
+         android:id="@+id/modify"
+         android:layout_width="80dp"
+         android:layout_height="35dp"
+         android:layout_below="@id/delete"
+         android:layout_marginLeft="265dp"
+         android:layout_marginTop="-6dp"
+         android:text="@string/modify"
+         android:onClick="modifyGame" />
 
     <Button
         android:id="@+id/add"
@@ -167,7 +96,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="159dp"
         android:layout_marginTop="100dp"
-        android:layout_below="@id/description2"
+        android:layout_below="@id/modify"
         android:text="@string/add"/>
 
 </RelativeLayout>
