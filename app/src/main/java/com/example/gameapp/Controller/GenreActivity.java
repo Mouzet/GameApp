@@ -1,17 +1,19 @@
-package com.example.gameapp;
+package com.example.gameapp.Controller;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Adapter;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Button;
+import android.widget.Toast;
 
-public class GenreActivity extends AppCompatActivity
+import com.example.gameapp.R;
+
+public class GenreActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener
 {
     private TextView mGenderTitle;
     private TextView mGenderSelect;
@@ -35,20 +37,38 @@ public class GenreActivity extends AppCompatActivity
 
         mGenderSpinner.setAdapter(mAdapter);
 
+        mGenderSpinner.setOnItemSelectedListener(this);
+
+        Intent intent = getIntent();
+
 
         //Methode lorsqu'on clique sur le bouton search
-        mSelectGender.setOnClickListener(new View.OnClickListener() {
-
+        mSelectGender.setOnClickListener(new View.OnClickListener()
+        {
             @Override
             public void onClick(View v)
             {
                 //Démarre la nouvelle activité
                 Intent resultGameActivity = new Intent(GenreActivity.this, ResultGameActivity.class);
                 startActivity(resultGameActivity);
-
             }
         });
 
     }
 
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
+    {
+        //On selecting a spinner item
+        String item = parent.getItemAtPosition(position).toString();
+
+        //Showing selected spinner item in toast message for a short time
+        Toast.makeText(parent.getContext(), "Selected: " + item, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent)
+    {
+
+    }
 }

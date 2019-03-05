@@ -5,9 +5,10 @@
     android:layout_height="match_parent"
     android:background="@drawable/back">
 
+    <!--Titre-->
     <TextView
         android:id="@+id/result_game_page"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
@@ -18,16 +19,5 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textSize="28dp"
         android:textStyle="bold"/>
-
-    <ImageView
-        android:id="@+id/image2"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:src="@drawable/mario"
-        android:layout_below="@id/image1"
-        android:background="@drawable/back"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="24dp"/>
-
 
 </RelativeLayout>
