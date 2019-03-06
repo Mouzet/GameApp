@@ -26,15 +26,15 @@
     android:layout_height="50dp"
     android:src="@drawable/mario"
     android:background="@drawable/back"
+       android:layout_below="@id/game_page"
     android:layout_marginLeft="5dp"
-    android:layout_marginTop="24dp"/>
+    android:layout_marginTop="24dp" />
 
 
     <TextView
         android:id="@+id/name_game"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/description"
         android:layout_marginLeft="60dp"
         android:layout_marginTop="25dp"
         android:hint="@string/name_game2"
@@ -44,7 +44,7 @@
         android:id="@+id/description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/name_game"
+        android:layout_below="@id/name_game"
         android:layout_marginLeft="60dp"
         android:layout_marginTop="13dp"
         android:text="@string/description_game2"
