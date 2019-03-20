@@ -24,7 +24,7 @@
     android:id="@+id/image"
     android:layout_width="50dp"
     android:layout_height="50dp"
-    android:src="@drawable/mario"
+    android:src="@drawable/pacman"
     android:background="@drawable/back"
        android:layout_below="@id/game_page"
     android:layout_marginLeft="5dp"
@@ -37,6 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="60dp"
         android:layout_marginTop="25dp"
+        android:layout_below="@id/game_page"
         android:hint="@string/name_game2"
         android:textSize="15dp" />
 
@@ -55,7 +56,7 @@
         android:id="@+id/stars"
         android:layout_width="25dp"
         android:layout_height="25dp"
-        android:layout_below="@id/description"
+        android:layout_below="@id/game_page"
         android:layout_marginLeft="120dp"
         android:layout_alignParentLeft="true"
         android:layout_marginTop="22dp"
@@ -67,7 +68,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="150dp"
         android:layout_marginTop="25dp"
-        android:layout_below="@id/stars"
+        android:layout_below="@id/game_page"
         android:textSize="12dp"
         android:text="@string/date2"/>
 
@@ -77,7 +78,7 @@
         android:layout_height="35dp"
         android:layout_marginTop="15dp"
         android:layout_marginLeft="265dp"
-        android:layout_below="@id/date"
+        android:layout_below="@id/game_page"
         android:text="@string/delete"/>
 
     <Button
