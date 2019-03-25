@@ -67,6 +67,7 @@ public class GameActivity extends AppCompatActivity{
                 mDescription.setEnabled(false);
                 mStars.setEnabled(false);
                 mDate.setEnabled(false);
+
             }
         }
 
