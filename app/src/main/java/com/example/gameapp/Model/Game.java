@@ -19,12 +19,12 @@ public class Game
     private int mIdComment;
 
     //Constructor
-    public Game(String nameGame, String descriptionGame, int numberStars, String genderStars, String pathImage, int date)
+    public Game(String nameGame, String descriptionGame, int numberStars, String genderGame, String pathImage, int date)
     {
         mNameGame = nameGame;
         mDescriptionGame = descriptionGame;
         mNumberStars = numberStars;
-        mGenderGame = genderStars;
+        mGenderGame = genderGame;
         mPathImage = pathImage;
         mDate = date;
     }

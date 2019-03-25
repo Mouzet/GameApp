@@ -16,6 +16,7 @@ import java.util.ArrayList;
 public class GameActivity extends AppCompatActivity{
 
     private String nameGame;
+    private String nameButton;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,35 +37,56 @@ public class GameActivity extends AppCompatActivity{
             {
                 nameGame = intent.getStringExtra("nameGame");
             }
-        }
 
-        String [] arrayList = getResources().getStringArray(R.array.gamesList);
-        boolean test = true;
-
-        for(int i = 0; i < arrayList.length; i++)
-        {
-            if(nameGame.equals(arrayList[i]))
+            if(intent.hasExtra("nameButton"))
             {
-                test = false;
-                mNameGame.setText(nameGame);
+                nameButton = intent.getStringExtra("nameButton");
             }
         }
 
-        //Si le jeu n'est pas dans la tableau, on affiche null
-        //Et on désactive le reste
-        if(test)
+        //Si l'activité est demarré pour une recherche (par le bouton validate)
+        if(nameButton.equals("validate")) {
+            String[] arrayList = getResources().getStringArray(R.array.gamesList);
+            boolean test = true;
+
+            for (int i = 0; i < arrayList.length; i++)
+            {
+                if (nameGame.equals(arrayList[i]))
+                {
+                    test = false;
+                    mNameGame.setText(nameGame);
+                }
+            }
+
+            //Si le jeu n'est pas dans la tableau, on affiche null
+            //Et on désactive le reste
+            if (test) {
+                mPageTitle.setText("No result found");
+                mNameGame.setText("Sorry, but we don't found anything with the research : " + nameGame);
+                mImage.setEnabled(false);
+                mDescription.setEnabled(false);
+                mStars.setEnabled(false);
+                mDate.setEnabled(false);
+            }
+        }
+
+        //Si on clique sur "Game" dans la navBar
+        if(nameButton.equals("navBar"))
         {
-            mPageTitle.setText("No result found");
-            mNameGame.setText("Sorry, but we don't found anything with the research : " + nameGame);
-            mImage.setEnabled(false);
-            mDescription.setEnabled(false);
-            mStars.setEnabled(false);
-            mDate.setEnabled(false);
+            String[] arrayList = getResources().getStringArray(R.array.gamesList);
+
+            for (int i = 0; i < arrayList.length; i++)
+            {
+                if (nameGame.equals(arrayList[i]))
+                {
+                    mNameGame.setText(nameGame);
+                }
+            }
         }
     }
 
-    public void modifyGame(View view){
-
+    public void modifyGame(View view)
+    {
         Intent intent = new Intent(this, DetailsActivity.class);
         startActivity(intent);
     }

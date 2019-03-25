@@ -95,12 +95,14 @@ public class CommentRepository {
     {
         private CommentDAO commentDao;
 
-        private DeleteAllCommentAsyncTask(CommentDAO commentDao){
+        private DeleteAllCommentAsyncTask(CommentDAO commentDao)
+        {
             this.commentDao = commentDao;
         }
 
         @Override
-        protected Void doInBackground(Void... voids) {
+        protected Void doInBackground(Void... voids)
+        {
             commentDao.deleteAllComments();
             return null;
         }

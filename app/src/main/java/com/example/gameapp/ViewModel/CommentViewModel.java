@@ -1,0 +1,49 @@
+package com.example.gameapp.ViewModel;
+
+import android.app.Application;
+import android.arch.lifecycle.AndroidViewModel;
+import android.arch.lifecycle.LiveData;
+import android.support.annotation.NonNull;
+
+import com.example.gameapp.Model.Comment;
+import com.example.gameapp.Repositories.CommentRepository;
+
+import java.util.List;
+
+public class CommentViewModel extends AndroidViewModel
+{
+    private CommentRepository repository;
+    private LiveData<List<Comment>> allComments;
+
+    public CommentViewModel(@NonNull Application application)
+    {
+        super(application);
+        repository = new CommentRepository(application);
+        allComments = repository.getAllComments();
+    }
+
+    public void insert(Comment comment)
+    {
+        repository.insert(comment);
+    }
+
+    public void update(Comment comment)
+    {
+        repository.update(comment);
+    }
+
+    public void delete(Comment comment)
+    {
+        repository.delete(comment);
+    }
+
+    public void deleteAllComments()
+    {
+        repository.deleteAllComments();
+    }
+
+    public LiveData<List<Comment>> getAllComments()
+    {
+        return allComments;
+    }
+}

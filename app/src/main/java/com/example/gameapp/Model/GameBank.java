@@ -10,7 +10,6 @@ public class GameBank
     public GameBank(List<Game> resultList)
     {
         mResultList = resultList;
-
         mNextGameIndex = 0;
     }
 

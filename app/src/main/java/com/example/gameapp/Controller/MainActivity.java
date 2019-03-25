@@ -1,6 +1,10 @@
 package com.example.gameapp.Controller;
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProvider;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -10,16 +14,42 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Button;
+import android.widget.Toast;
 
+import com.example.gameapp.Model.Comment;
+import com.example.gameapp.Model.Game;
 import com.example.gameapp.R;
+import com.example.gameapp.ViewModel.CommentViewModel;
+import com.example.gameapp.ViewModel.GameViewModel;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    //Déclaration des viewmodels
+    private GameViewModel gameViewModel;
+    private CommentViewModel commentViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        gameViewModel = ViewModelProviders.of(this).get(GameViewModel.class);
+        gameViewModel.getAllGames().observe(this, new Observer<List<Game>>() {
+            @Override
+            public void onChanged(@Nullable List<Game> games) {
+                //update RecyclerView
+            }
+        });
+
+        commentViewModel = ViewModelProviders.of(this).get(CommentViewModel.class);
+        commentViewModel.getAllComments().observe(this, new Observer<List<Comment>>() {
+            @Override
+            public void onChanged(@Nullable List<Comment> comments) {
+                //update RecyclerView
+            }
+        });
 
         // Coding the first spinner (genre)
         Spinner spinner1 = (Spinner) findViewById(R.id.genre);
@@ -81,9 +111,11 @@ public class MainActivity extends AppCompatActivity {
         EditText name = (EditText)findViewById(R.id.name_typed);
         String nameGame = name.getText().toString();
         String nameButton = ((Button)view).getText().toString();
+
         //Passe dans la méthode GameName
         intent.putExtra("nameButton", nameButton);
         intent.putExtra("nameGame",  nameGame);
+
         startActivity(intent);
     }
 
