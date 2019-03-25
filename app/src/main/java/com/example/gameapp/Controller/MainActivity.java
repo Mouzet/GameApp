@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Button;
 
 import com.example.gameapp.R;
 
@@ -46,23 +47,26 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //Adding the intent for the button on the navbar
-    public boolean onOptionsItemSelected(MenuItem item){
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
         Intent intent = getIntent();
 
 
         switch(item.getItemId()){
             case R.id.action_games:
                 intent = new Intent(MainActivity.this, GameActivity.class);
-                MainActivity.this.startActivity(intent);
-                break;
-
-            case R.id.action_about:
-                intent = new Intent(MainActivity.this, AboutActivity.class);
+                String nameButton = "navBar";
+                intent.putExtra("nameButton", nameButton);
                 MainActivity.this.startActivity(intent);
                 break;
 
             case R.id.action_genre:
                 intent = new Intent(MainActivity.this, GenreActivity.class);
+                MainActivity.this.startActivity(intent);
+                break;
+
+            case R.id.action_about:
+                intent = new Intent(MainActivity.this, AboutActivity.class);
                 MainActivity.this.startActivity(intent);
                 break;
         }
@@ -76,6 +80,9 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, GameActivity.class);
         EditText name = (EditText)findViewById(R.id.name_typed);
         String nameGame = name.getText().toString();
+        String nameButton = ((Button)view).getText().toString();
+        //Passe dans la méthode GameName
+        intent.putExtra("nameButton", nameButton);
         intent.putExtra("nameGame",  nameGame);
         startActivity(intent);
     }

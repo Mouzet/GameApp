@@ -48,8 +48,6 @@ class ResultGameActivity extends AppCompatActivity
                 startActivity(specialGameActivity);
             }
         });
-
-
     }
 
     private GameBank generateGames()

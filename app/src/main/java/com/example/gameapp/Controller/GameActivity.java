@@ -1,5 +1,5 @@
 package com.example.gameapp.Controller;
-
+;
 import android.content.Intent;
 import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
@@ -66,7 +66,6 @@ public class GameActivity extends AppCompatActivity{
     public void modifyGame(View view){
 
         Intent intent = new Intent(this, DetailsActivity.class);
-
         startActivity(intent);
     }
 
