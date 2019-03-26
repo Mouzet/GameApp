@@ -1,5 +1,6 @@
 package com.example.gameapp.Adapter;
 
+import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -31,9 +32,13 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.GameHolder>
     @Override
     public void onBindViewHolder(@NonNull GameHolder gameHolder, int position)
     {
+        //???? Comment faire les images?
+
         Game currentGame = games.get(position);
+        //gameHolder.imageViewPicture.setImageDrawable(currentGame.getPathImage());
         gameHolder.textViewName.setText(currentGame.getNameGame());
         gameHolder.textViewDescription.setText(currentGame.getDescriptionGame());
+        //gameHolder.imageViewStars.setImageDrawable(currentGame.getPathImage());
         gameHolder.textViewDate.setText(String.valueOf(currentGame.getDate()));
 
     }

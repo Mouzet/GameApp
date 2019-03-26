@@ -24,8 +24,8 @@ import com.example.gameapp.ViewModel.GameViewModel;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GameActivity extends AppCompatActivity{
-
+public class GameActivity extends AppCompatActivity
+{
     //Déclaration des viewmodels
     private GameViewModel gameViewModel;
     private CommentViewModel commentViewModel;
@@ -34,32 +34,59 @@ public class GameActivity extends AppCompatActivity{
     private String nameButton;
 
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result_games);
 
-        RecyclerView recyclerView = findViewById(R.id.recycler_view_game);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setHasFixedSize(true);
+        Intent intent = getIntent();
 
-        final GameAdapter adapter = new GameAdapter();
-        recyclerView.setAdapter(adapter);
-
-        gameViewModel = ViewModelProviders.of(this).get(GameViewModel.class);
-        gameViewModel.getAllGames().observe(this, new Observer<List<Game>>() {
-            @Override
-            public void onChanged(@Nullable List<Game> games) {
-                adapter.setGames(games);
+        if (intent != null)
+        {
+            if(intent.hasExtra("nameGame"))
+            {
+                nameGame = intent.getStringExtra("nameGame");
             }
-        });
 
+            if(intent.hasExtra("nameButton"))
+            {
+                nameButton = intent.getStringExtra("nameButton");
+            }
+        }
+
+        //Si l'activité est demarré pour une recherche (par le bouton validate)
+        //On effectue donc une recherche
+        if(nameButton.equals("validate"))
+        {
+            //A remplir
+        }
+
+        //Si on veut afficher tous les jeux de la base de données
+        if(nameButton.equals("navBar"))
+        {
+            RecyclerView recyclerView = findViewById(R.id.recycler_view_game);
+            recyclerView.setLayoutManager(new LinearLayoutManager(this));
+            recyclerView.setHasFixedSize(true);
+
+            final GameAdapter adapter = new GameAdapter();
+            recyclerView.setAdapter(adapter);
+
+            gameViewModel = ViewModelProviders.of(this).get(GameViewModel.class);
+            gameViewModel.getAllGames().observe(this, new Observer<List<Game>>() {
+                @Override
+                public void onChanged(@Nullable List<Game> games) {
+                    adapter.setGames(games);
+                }
+            });
+
+        /*
         commentViewModel = ViewModelProviders.of(this).get(CommentViewModel.class);
         commentViewModel.getAllComments().observe(this, new Observer<List<Comment>>() {
             @Override
             public void onChanged(@Nullable List<Comment> comments) {
 
             }
-        });
-
+        });     */
+        }
     }
 
     public void modifyGame(View view)
