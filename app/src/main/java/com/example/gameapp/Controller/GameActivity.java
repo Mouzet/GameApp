@@ -1,7 +1,10 @@
 package com.example.gameapp.Controller;
 ;
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.media.Image;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,82 +15,51 @@ import android.widget.TextView;
 
 import com.example.gameapp.Adapter.GameAdapter;
 import com.example.gameapp.Controller.DetailsActivity;
+import com.example.gameapp.Model.Comment;
+import com.example.gameapp.Model.Game;
 import com.example.gameapp.R;
+import com.example.gameapp.ViewModel.CommentViewModel;
+import com.example.gameapp.ViewModel.GameViewModel;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class GameActivity extends AppCompatActivity{
+
+    //Déclaration des viewmodels
+    private GameViewModel gameViewModel;
+    private CommentViewModel commentViewModel;
 
     private String nameGame;
     private String nameButton;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.games);
+        setContentView(R.layout.activity_result_games);
 
+        RecyclerView recyclerView = findViewById(R.id.recycler_view_game);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setHasFixedSize(true);
 
-     //   TextView mPageTitle = (TextView) findViewById(R.id.game_page);
-        ImageView mImage = (ImageView) findViewById(R.id.image);
-        TextView mNameGame = (TextView) findViewById(R.id.name_game);
-        TextView mDescription = (TextView) findViewById(R.id.description);
-        ImageView mStars = (ImageView) findViewById(R.id.stars);
-        TextView mDate = (TextView) findViewById(R.id.date);
+        final GameAdapter adapter = new GameAdapter();
+        recyclerView.setAdapter(adapter);
 
-        Intent intent = getIntent();
-
-        if (intent != null)
-        {
-            if(intent.hasExtra("nameGame"))
-            {
-                nameGame = intent.getStringExtra("nameGame");
+        gameViewModel = ViewModelProviders.of(this).get(GameViewModel.class);
+        gameViewModel.getAllGames().observe(this, new Observer<List<Game>>() {
+            @Override
+            public void onChanged(@Nullable List<Game> games) {
+                adapter.setGames(games);
             }
+        });
 
-            if(intent.hasExtra("nameButton"))
-            {
-                nameButton = intent.getStringExtra("nameButton");
-            }
-        }
-
-        //Si l'activité est demarré pour une recherche (par le bouton validate)
-        if(nameButton.equals("validate")) {
-            String[] arrayList = getResources().getStringArray(R.array.gamesList);
-            boolean test = true;
-
-            for (int i = 0; i < arrayList.length; i++)
-            {
-                if (nameGame.equals(arrayList[i]))
-                {
-                    test = false;
-                    mNameGame.setText(nameGame);
-                }
-            }
-
-            //Si le jeu n'est pas dans la tableau, on affiche null
-            //Et on désactive le reste
-            if (test) {
-                //mPageTitle.setText("No result found");
-                mNameGame.setText("Sorry, but we don't found anything with the research : " + nameGame);
-                mImage.setEnabled(false);
-                mDescription.setEnabled(false);
-                mStars.setEnabled(false);
-                mDate.setEnabled(false);
+        commentViewModel = ViewModelProviders.of(this).get(CommentViewModel.class);
+        commentViewModel.getAllComments().observe(this, new Observer<List<Comment>>() {
+            @Override
+            public void onChanged(@Nullable List<Comment> comments) {
 
             }
-        }
+        });
 
-        //Si on clique sur "Game" dans la navBar
-        if(nameButton.equals("navBar"))
-        {
-            String[] arrayList = getResources().getStringArray(R.array.gamesList);
-
-            for (int i = 0; i < arrayList.length; i++)
-            {
-                if (nameGame.equals(arrayList[i]))
-                {
-                    mNameGame.setText(nameGame);
-                }
-            }
-        }
     }
 
     public void modifyGame(View view)

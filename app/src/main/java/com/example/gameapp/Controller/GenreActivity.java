@@ -49,7 +49,7 @@ public class GenreActivity extends AppCompatActivity implements AdapterView.OnIt
             public void onClick(View v)
             {
                 //Démarre la nouvelle activité
-                Intent resultGameActivity = new Intent(GenreActivity.this, ResultGameActivity.class);
+                Intent resultGameActivity = new Intent(GenreActivity.this, GameActivity.class);
                 startActivity(resultGameActivity);
             }
         });

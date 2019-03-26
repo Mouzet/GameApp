@@ -29,37 +29,10 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    //Déclaration des viewmodels
-    private GameViewModel gameViewModel;
-    private CommentViewModel commentViewModel;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        RecyclerView recyclerView = findViewById(R.id.recycler_view_game);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setHasFixedSize(true);
-
-        final GameAdapter adapter = new GameAdapter();
-        recyclerView.setAdapter(adapter);
-
-        gameViewModel = ViewModelProviders.of(this).get(GameViewModel.class);
-        gameViewModel.getAllGames().observe(this, new Observer<List<Game>>() {
-            @Override
-            public void onChanged(@Nullable List<Game> games) {
-                adapter.setGames(games);
-            }
-        });
-
-        commentViewModel = ViewModelProviders.of(this).get(CommentViewModel.class);
-        commentViewModel.getAllComments().observe(this, new Observer<List<Comment>>() {
-            @Override
-            public void onChanged(@Nullable List<Comment> comments) {
-
-            }
-        });
 
         // Coding the first spinner (genre)
         Spinner spinner1 = (Spinner) findViewById(R.id.genre);
@@ -69,15 +42,8 @@ public class MainActivity extends AppCompatActivity {
 
         spinner1.setAdapter(adapter1);
 
-        //Coding the second spinner (nb_etoile)
-        Spinner spinner2 = (Spinner) findViewById(R.id.nb_etoile);
-        ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this,
-                R.array.nb_etoile, android.R.layout.simple_spinner_item);
-        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        spinner2.setAdapter(adapter2);
-
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -90,7 +56,6 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item)
     {
         Intent intent = getIntent();
-
 
         switch(item.getItemId()){
             case R.id.action_games:
