@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,6 +18,7 @@ import android.widget.Spinner;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.gameapp.Adapter.GameAdapter;
 import com.example.gameapp.Model.Comment;
 import com.example.gameapp.Model.Game;
 import com.example.gameapp.R;
@@ -35,11 +38,18 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        RecyclerView recyclerView = findViewById(R.id.recycler_view_game);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setHasFixedSize(true);
+
+        final GameAdapter adapter = new GameAdapter();
+        recyclerView.setAdapter(adapter);
+
         gameViewModel = ViewModelProviders.of(this).get(GameViewModel.class);
         gameViewModel.getAllGames().observe(this, new Observer<List<Game>>() {
             @Override
             public void onChanged(@Nullable List<Game> games) {
-                //update RecyclerView
+                adapter.setGames(games);
             }
         });
 
@@ -47,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         commentViewModel.getAllComments().observe(this, new Observer<List<Comment>>() {
             @Override
             public void onChanged(@Nullable List<Comment> comments) {
-                //update RecyclerView
+
             }
         });
 

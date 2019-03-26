@@ -4,10 +4,13 @@ import android.content.Intent;
 import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.gameapp.Adapter.GameAdapter;
 import com.example.gameapp.Controller.DetailsActivity;
 import com.example.gameapp.R;
 
@@ -22,7 +25,8 @@ public class GameActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.games);
 
-        TextView mPageTitle = (TextView) findViewById(R.id.game_page);
+
+     //   TextView mPageTitle = (TextView) findViewById(R.id.game_page);
         ImageView mImage = (ImageView) findViewById(R.id.image);
         TextView mNameGame = (TextView) findViewById(R.id.name_game);
         TextView mDescription = (TextView) findViewById(R.id.description);
@@ -61,7 +65,7 @@ public class GameActivity extends AppCompatActivity{
             //Si le jeu n'est pas dans la tableau, on affiche null
             //Et on désactive le reste
             if (test) {
-                mPageTitle.setText("No result found");
+                //mPageTitle.setText("No result found");
                 mNameGame.setText("Sorry, but we don't found anything with the research : " + nameGame);
                 mImage.setEnabled(false);
                 mDescription.setEnabled(false);

@@ -1,23 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@drawable/back">
 
     <!--Titre-->
-    <TextView
-        android:id="@+id/result_game_page"
+    <!--
+<TextView
+    android:id="@+id/game_page"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentTop="true"
+    android:layout_centerVertical="true"
+    android:layout_marginLeft="159dp"
+    android:layout_marginTop="23dp"
+    android:text="Games"
+    android:textAppearance="?android:attr/textAppearanceLarge"
+    android:textSize="28dp"
+    android:textStyle="bold"/>
+
+    -->
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view_game"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="159dp"
-        android:layout_marginTop="23dp"
-        android:text="Research results"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textSize="28dp"
-        android:textStyle="bold"/>
+        android:layout_height="match_parent"
+        tools:listitem="@layout/games"/>
 
 </RelativeLayout>
