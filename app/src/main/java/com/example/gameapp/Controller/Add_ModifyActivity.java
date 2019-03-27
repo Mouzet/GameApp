@@ -42,6 +42,9 @@ public class Add_ModifyActivity extends AppCompatActivity implements AdapterView
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_modify);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
         editname = findViewById(R.id.name_game);
         editimage = findViewById(R.id.image);
         editdate = findViewById(R.id.date);
@@ -96,7 +99,7 @@ public class Add_ModifyActivity extends AppCompatActivity implements AdapterView
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.main2, menu);
+        menuInflater.inflate(R.menu.add_menu, menu);
         return true;
     }
 

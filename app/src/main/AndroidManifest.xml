@@ -9,11 +9,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Controller.DetailsActivity"></activity>
-        <activity android:name=".Controller.AboutActivity"></activity>
-        <activity android:name=".Controller.GenreActivity"></activity>
-        <activity android:name=".Controller.Add_ModifyActivity"></activity>
-        <activity android:name=".Controller.GameActivity"></activity>
+        <activity android:name=".Controller.DetailsActivity"
+                   android:parentActivityName=".Controller.MainActivity"></activity>
+        <activity android:name=".Controller.AboutActivity"
+            android:parentActivityName=".Controller.MainActivity"></activity>
+        <activity android:name=".Controller.GenreActivity"
+            android:parentActivityName=".Controller.MainActivity"></activity>
+        <activity android:name=".Controller.Add_ModifyActivity"
+            android:parentActivityName=".Controller.MainActivity"></activity>
+        <activity android:name=".Controller.GameActivity"
+            android:parentActivityName=".Controller.MainActivity"></activity>
         <activity android:name=".Controller.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

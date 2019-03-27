@@ -25,6 +25,8 @@ public class GenreActivity extends AppCompatActivity implements AdapterView.OnIt
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gender);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         mGenderTitle = (TextView) findViewById(R.id.gender_title_txt);
         mGenderSelect = (TextView) findViewById(R.id.gender_select_txt);
         mSelectGender = (Button) findViewById(R.id.select_gender_btn);
@@ -68,4 +70,6 @@ public class GenreActivity extends AppCompatActivity implements AdapterView.OnIt
     {
 
     }
+
+
 }

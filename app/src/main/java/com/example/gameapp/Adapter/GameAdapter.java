@@ -26,7 +26,10 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.GameHolder>
                 .inflate(R.layout.activity_games, parent, false);
         return new GameHolder(itemView);
     }
-
+    // Method utilisé pour le delete //Yannick
+    public Game getGameAt(int position){
+        return games.get(position);
+    }
     //Get the data into the view GameHolder
     @Override
     public void onBindViewHolder(@NonNull GameHolder gameHolder, int position)
