@@ -78,8 +78,19 @@ public class MainActivity extends AppCompatActivity {
 
         //Passe dans l'intent les 2 variables nameButton + nameGame
         intent.putExtra("nameButton", nameButton);
-        intent.putExtra("nameSearch",  nameSearch);
-        intent.putExtra("gender", gender);
+
+        //Si le nameSearch contient quelque chose
+        if(!"null".equals(nameSearch))
+        {
+            intent.putExtra("nameSearch",  nameSearch);
+        }
+
+        //Si on choisit un genre en particulier, et pas "All genders"
+        if(!"All genders".equals(gender))
+        {
+            //On transmet l'information du genre
+            intent.putExtra("gender",  gender);
+        }
 
         startActivity(intent);
     }

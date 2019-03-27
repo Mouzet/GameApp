@@ -21,7 +21,6 @@ public class GameRepository {
 
         gameDao = database.gameDao();
         allGames = gameDao.getAllGames();
-       // researchGames = gameDao.getResearchGames();
     }
 
     //Insert d'un nouveau jeu
@@ -51,7 +50,14 @@ public class GameRepository {
     }
 
     //Obtiens les jeux qui correspondent a la recherche
-    public LiveData<List<Game>> getResearchGames() { return researchGames; }
+    public LiveData<List<Game>> getGamesByName(String nameSearch) {return gameDao.getGamesByName(nameSearch);}
+
+    public LiveData<List<Game>> getGamesByGender(String gender){return gameDao.getGamesByGender(gender);}
+
+    public LiveData<List<Game>> getGamesByNameAndGender(String nameSearch, String gender)
+    {
+        return gameDao.getGamesByNameAndGender(nameSearch, gender);
+    }
 
     private static class InsertGameAsyncTask extends AsyncTask<Game, Void, Void>
     {
@@ -62,7 +68,8 @@ public class GameRepository {
         }
 
         @Override
-        protected Void doInBackground(Game... games) {
+        protected Void doInBackground(Game... games)
+        {
             gameDao.insert(games[0]);
             return null;
         }

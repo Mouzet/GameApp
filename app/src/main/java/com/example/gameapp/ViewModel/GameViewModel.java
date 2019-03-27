@@ -21,7 +21,6 @@ public class GameViewModel extends AndroidViewModel
         super(application);
         repository = new GameRepository(application);
         allGames = repository.getAllGames();
-        researchGame = repository.getResearchGames();
     }
 
     public void insert(Game game)
@@ -49,9 +48,22 @@ public class GameViewModel extends AndroidViewModel
         return allGames;
     }
 
-    public LiveData<List<Game>> getResearchGames()
+    //Retourne le jeu par NOM
+    public LiveData<List<Game>> getGamesByName(String nameSearch)
     {
-        return researchGame;
+        return repository.getGamesByName(nameSearch);
+    }
+
+    //Retourne le jeu par GENRE
+    public LiveData<List<Game>> getGamesByGender(String gender)
+    {
+        return repository.getGamesByGender(gender);
+    }
+
+    //Retourne le jeu par NOM + GENRE
+    public LiveData<List<Game>> getGamesByNameAndGender(String nameSearch, String gender)
+    {
+        return repository.getGamesByNameAndGender(nameSearch, gender);
     }
 
 }

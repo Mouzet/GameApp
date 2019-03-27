@@ -47,7 +47,7 @@
         android:paddingTop="20dp"
         android:paddingLeft="10dp"
         android:layout_below="@id/details_page"
-        android:src="@drawable/star3"/>
+        android:src="@drawable/star4"/>     <!--A remplacer par 3-->
 
     <ImageView
         android:id="@+id/image"

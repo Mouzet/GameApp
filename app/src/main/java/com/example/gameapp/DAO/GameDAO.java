@@ -33,8 +33,17 @@ public interface GameDAO {
     @Query("SELECT * FROM game_table")
     LiveData<List<Game>> getAllGames();
 
-    //Requête pour la recherche
-    //@Query("SELECT * FROM game_table WHERE mNameGame = nameSearch")
-  //  LiveData<List<Game>> getResearchGames();
+    //Requête pour la recherche avec seulement le NOM
+    @Query("SELECT * FROM game_table WHERE mNameGame =:nameSearch")
+    LiveData<List<Game>> getGamesByName(String nameSearch);
+
+    //Requête pour la recherche avec seulement le GENRE
+    @Query("SELECT * FROM game_table WHERE mGenderGame =:gender")
+    LiveData<List<Game>> getGamesByGender(String gender);
+
+    //Requête pour la recherche avec le NOM + le GENRE
+    @Query("SELECT * FROM game_table WHERE mNameGame =:nameSearch AND mGenderGame =:gender")
+    LiveData<List<Game>> getGamesByNameAndGender(String nameSearch, String gender);
+
 
 }

@@ -13,6 +13,8 @@ import com.example.gameapp.DAO.GameDAO;
 import com.example.gameapp.Model.Comment;
 import com.example.gameapp.Model.Game;
 
+import javax.sql.CommonDataSource;
+
 @Database(entities = {Game.class, Comment.class}, version = 1)
 public abstract class GameDatabase extends RoomDatabase {
 
@@ -69,10 +71,6 @@ public abstract class GameDatabase extends RoomDatabase {
             gameDao.insert(new Game("Pac-man", "Description 1", 3, "Action", "@drawable/pacman", 20100325));
             gameDao.insert(new Game("Mario Kart", "Description 2", 2, "Action", "@drawable/mario", 20110325));
             gameDao.insert(new Game("Pokemon", "Description 3", 1, "Action", "@drawable/pikachu", 20120325));
-            gameDao.insert(new Game("Roller", "Description 4", 5, "Adventure", "@drawable/roller", 20120401));
-            gameDao.insert(new Game("Wow", "Description 5", 1, "Action", "@drawable/wow", 20120303));
-            gameDao.insert(new Game("Arc", "Description 6", 1, "Action", "@drawable/arc", 20121123));
-
 
             //Données table Comments
             commentDao.insert(new Comment("Good Game !", "Valentine"));
