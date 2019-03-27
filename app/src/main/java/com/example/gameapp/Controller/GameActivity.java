@@ -76,7 +76,7 @@ public class GameActivity extends AppCompatActivity
             recyclerView.setAdapter(adapter);
 
             gameViewModel = ViewModelProviders.of(this).get(GameViewModel.class);
-            gameViewModel.getResearchGames().observe(this, new Observer<List<Game>>() {
+            gameViewModel.getGamesByName(nameSearch).observe(this, new Observer<List<Game>>() {
                 @Override
                 public void onChanged(@Nullable List<Game> games) {
                     adapter.setGames(games);
