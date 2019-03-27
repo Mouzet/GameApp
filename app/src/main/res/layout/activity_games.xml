@@ -74,23 +74,7 @@
             android:layout_marginTop="-6dp"
             android:text="@string/modify"
             android:onClick="modifyGame" />
-        <!--
-            <Button
-                android:id="@+id/add"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="159dp"
-                android:layout_marginTop="100dp"
-                android:layout_below="@id/modify"
-                android:text="@string/add"/>
-                -->
-
 
     </RelativeLayout>
-
-
-
-
-
 
 </android.support.v7.widget.CardView>

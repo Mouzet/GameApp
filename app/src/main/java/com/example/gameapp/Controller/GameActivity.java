@@ -12,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.gameapp.Adapter.GameAdapter;
 import com.example.gameapp.Controller.DetailsActivity;
@@ -28,25 +29,30 @@ public class GameActivity extends AppCompatActivity
 {
     //Déclaration des viewmodels
     private GameViewModel gameViewModel;
-    private CommentViewModel commentViewModel;
 
     private String nameGame;
     private String nameButton;
+    private String nameSearch;
+    private String gender;
 
-    protected void onCreate(Bundle savedInstanceState) {
-
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result_games);
 
         Intent intent = getIntent();
 
+        //Si l'intent contient des variables
         if (intent != null)
         {
+            //Si elle contient un nameGame
             if(intent.hasExtra("nameGame"))
             {
+                //Prend la valeur
                 nameGame = intent.getStringExtra("nameGame");
             }
 
+            //Si elle contient un nameButton
             if(intent.hasExtra("nameButton"))
             {
                 nameButton = intent.getStringExtra("nameButton");
@@ -57,7 +63,25 @@ public class GameActivity extends AppCompatActivity
         //On effectue donc une recherche
         if(nameButton.equals("validate"))
         {
-            //A remplir
+            nameSearch = intent.getStringExtra("nameSearch");
+            gender = intent.getStringExtra("gender");
+
+            //Toast.makeText(this, nameSearch, Toast.LENGTH_SHORT).show();
+            RecyclerView recyclerView = findViewById(R.id.recycler_view_game);
+            recyclerView.setLayoutManager(new LinearLayoutManager(this));
+            recyclerView.setHasFixedSize(true);
+
+            //permet d'afficher tant qu'on a la place a l'écran
+            final GameAdapter adapter = new GameAdapter();
+            recyclerView.setAdapter(adapter);
+
+            gameViewModel = ViewModelProviders.of(this).get(GameViewModel.class);
+            gameViewModel.getResearchGames().observe(this, new Observer<List<Game>>() {
+                @Override
+                public void onChanged(@Nullable List<Game> games) {
+                    adapter.setGames(games);
+                }
+            });
         }
 
         //Si on veut afficher tous les jeux de la base de données
@@ -77,15 +101,6 @@ public class GameActivity extends AppCompatActivity
                     adapter.setGames(games);
                 }
             });
-
-        /*
-        commentViewModel = ViewModelProviders.of(this).get(CommentViewModel.class);
-        commentViewModel.getAllComments().observe(this, new Observer<List<Comment>>() {
-            @Override
-            public void onChanged(@Nullable List<Comment> comments) {
-
-            }
-        });     */
         }
     }
 

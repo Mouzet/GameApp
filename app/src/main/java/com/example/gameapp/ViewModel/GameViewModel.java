@@ -14,12 +14,14 @@ public class GameViewModel extends AndroidViewModel
 {
     private GameRepository repository;
     private LiveData<List<Game>> allGames;
+    private LiveData<List<Game>> researchGame;
 
     public GameViewModel(@NonNull Application application)
     {
         super(application);
         repository = new GameRepository(application);
         allGames = repository.getAllGames();
+        researchGame = repository.getResearchGames();
     }
 
     public void insert(Game game)
@@ -46,4 +48,10 @@ public class GameViewModel extends AndroidViewModel
     {
         return allGames;
     }
+
+    public LiveData<List<Game>> getResearchGames()
+    {
+        return researchGame;
+    }
+
 }

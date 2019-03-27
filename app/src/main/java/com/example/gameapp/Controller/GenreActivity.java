@@ -23,7 +23,7 @@ public class GenreActivity extends AppCompatActivity implements AdapterView.OnIt
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.genre);
+        setContentView(R.layout.activity_gender);
 
         mGenderTitle = (TextView) findViewById(R.id.gender_title_txt);
         mGenderSelect = (TextView) findViewById(R.id.gender_select_txt);
@@ -32,15 +32,12 @@ public class GenreActivity extends AppCompatActivity implements AdapterView.OnIt
 
         //Spinner for the gender
         ArrayAdapter<CharSequence> mAdapter = ArrayAdapter.createFromResource(this,
-                R.array.genre, android.R.layout.simple_spinner_item);
+                R.array.gender, android.R.layout.simple_spinner_item);
         mAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
         mGenderSpinner.setAdapter(mAdapter);
-
         mGenderSpinner.setOnItemSelectedListener(this);
 
         Intent intent = getIntent();
-
 
         //Methode lorsqu'on clique sur le bouton search
         mSelectGender.setOnClickListener(new View.OnClickListener()
@@ -48,7 +45,7 @@ public class GenreActivity extends AppCompatActivity implements AdapterView.OnIt
             @Override
             public void onClick(View v)
             {
-                //Démarre la nouvelle activité
+                //Démarre la nouvelle activité lorsqu'on clic
                 Intent resultGameActivity = new Intent(GenreActivity.this, GameActivity.class);
                 startActivity(resultGameActivity);
             }

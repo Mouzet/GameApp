@@ -15,7 +15,7 @@ import java.util.List;
 @Dao
 public interface GameDAO {
 
-    @Insert
+        @Insert
     void insert(Game game);
 
     @Update
@@ -32,4 +32,9 @@ public interface GameDAO {
     //mise a jour lors d'un changement dans la BDD
     @Query("SELECT * FROM game_table")
     LiveData<List<Game>> getAllGames();
+
+    //Requête pour la recherche
+    //@Query("SELECT * FROM game_table WHERE mNameGame = nameSearch")
+  //  LiveData<List<Game>> getResearchGames();
+
 }

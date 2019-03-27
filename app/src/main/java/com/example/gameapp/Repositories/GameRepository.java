@@ -13,6 +13,7 @@ import java.util.List;
 public class GameRepository {
     private GameDAO gameDao;
     private LiveData<List<Game>> allGames;
+    private LiveData<List<Game>> researchGames;
 
 
     public GameRepository(Application application){
@@ -20,31 +21,37 @@ public class GameRepository {
 
         gameDao = database.gameDao();
         allGames = gameDao.getAllGames();
+       // researchGames = gameDao.getResearchGames();
     }
 
+    //Insert d'un nouveau jeu
     public void insert(Game game)
     {
         new InsertGameAsyncTask(gameDao).execute(game);
     }
 
+    //Modifier le jeu
     public void update(Game game)
     {
         new UpdateGameAsyncTask(gameDao).execute(game);
     }
 
+    //Supprime le jeu
     public void delete(Game game)
     {
         new DeleteGameAsyncTask(gameDao).execute(game);
     }
 
-    public void deleteAllGames()
-    {
-        new DeleteAllGameAsyncTask(gameDao).execute();
-    }
+    //Supprime tous les jeux
+    public void deleteAllGames()  {new DeleteAllGamesAsyncTask(gameDao).execute();}
 
+    //Obtiens tous les jeux de la BDD
     public LiveData<List<Game>> getAllGames(){
         return allGames;
     }
+
+    //Obtiens les jeux qui correspondent a la recherche
+    public LiveData<List<Game>> getResearchGames() { return researchGames; }
 
     private static class InsertGameAsyncTask extends AsyncTask<Game, Void, Void>
     {
@@ -91,11 +98,11 @@ public class GameRepository {
         }
     }
 
-    private static class DeleteAllGameAsyncTask extends AsyncTask<Void, Void, Void>
+    private static class DeleteAllGamesAsyncTask extends AsyncTask<Void, Void, Void>
     {
         private GameDAO gameDao;
 
-        private DeleteAllGameAsyncTask(GameDAO gameDao){
+        private DeleteAllGamesAsyncTask(GameDAO gameDao){
             this.gameDao = gameDao;
         }
 

@@ -1,51 +1,39 @@
 package com.example.gameapp.Controller;
 
-import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModelProvider;
-import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Button;
-import android.widget.Toast;
 
-import com.example.gameapp.Adapter.GameAdapter;
-import com.example.gameapp.Model.Comment;
-import com.example.gameapp.Model.Game;
 import com.example.gameapp.R;
-import com.example.gameapp.ViewModel.CommentViewModel;
-import com.example.gameapp.ViewModel.GameViewModel;
-
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    private Spinner spinner_gender;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Coding the first spinner (genre)
-        Spinner spinner1 = (Spinner) findViewById(R.id.genre);
+        //Spinner pour choisir le genre
+        spinner_gender = (Spinner) findViewById(R.id.gender);
         ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(this,
-                R.array.genre, android.R.layout.simple_spinner_item);
+                R.array.gender, android.R.layout.simple_spinner_item);
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        spinner1.setAdapter(adapter1);
-
+        spinner_gender.setAdapter(adapter1);
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
 
@@ -84,20 +72,22 @@ public class MainActivity extends AppCompatActivity {
     {
         Intent intent = new Intent(this, GameActivity.class);
         EditText name = (EditText)findViewById(R.id.name_typed);
-        String nameGame = name.getText().toString();
-        String nameButton = ((Button)view).getText().toString();
+        String nameSearch = name.getText().toString();
+        String gender = spinner_gender.getSelectedItem().toString();
+        String nameButton = "validate";
 
-        //Passe dans la méthode GameName
+        //Passe dans l'intent les 2 variables nameButton + nameGame
         intent.putExtra("nameButton", nameButton);
-        intent.putExtra("nameGame",  nameGame);
+        intent.putExtra("nameSearch",  nameSearch);
+        intent.putExtra("gender", gender);
 
         startActivity(intent);
     }
 
 
-    public void modifyGame(View view){
+    public void modifyGame(View view)
+    {
         Intent intent = new Intent(this, DetailsActivity.class);
-
         startActivity(intent);
     }
 

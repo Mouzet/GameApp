@@ -1,6 +1,5 @@
 package com.example.gameapp.Adapter;
 
-import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -24,7 +23,7 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.GameHolder>
     @Override
     public GameHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.games, parent, false);
+                .inflate(R.layout.activity_games, parent, false);
         return new GameHolder(itemView);
     }
 
@@ -33,14 +32,12 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.GameHolder>
     public void onBindViewHolder(@NonNull GameHolder gameHolder, int position)
     {
         //???? Comment faire les images?
-
         Game currentGame = games.get(position);
         //gameHolder.imageViewPicture.setImageDrawable(currentGame.getPathImage());
         gameHolder.textViewName.setText(currentGame.getNameGame());
         gameHolder.textViewDescription.setText(currentGame.getDescriptionGame());
-        //gameHolder.imageViewStars.setImageDrawable(currentGame.getPathImage());
+        //gameHolder.imageViewStars.setImageDrawable(currentGame.getNumberStars());
         gameHolder.textViewDate.setText(String.valueOf(currentGame.getDate()));
-
     }
 
     //Return how many item we want to display in our recycle view
@@ -57,21 +54,23 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.GameHolder>
         notifyDataSetChanged();
     }
 
-    class GameHolder extends RecyclerView.ViewHolder{
+    class GameHolder extends RecyclerView.ViewHolder
+    {
         private ImageView imageViewPicture;
         private TextView textViewName;
         private TextView textViewDescription;
         private ImageView imageViewStars;
         private TextView textViewDate;
 
-        public GameHolder(@NonNull View itemView) {
+        public GameHolder(@NonNull View itemView)
+        {
             super(itemView);
+
             imageViewPicture = itemView.findViewById(R.id.image);
             textViewName = itemView.findViewById(R.id.name_game);
             textViewDescription = itemView.findViewById(R.id.description);
             imageViewStars = itemView.findViewById(R.id.stars);
             textViewDate = itemView.findViewById(R.id.date);
-
         }
     }
 }
