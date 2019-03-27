@@ -12,6 +12,7 @@
         <activity android:name=".Controller.DetailsActivity"></activity>
         <activity android:name=".Controller.AboutActivity"></activity>
         <activity android:name=".Controller.GenreActivity"></activity>
+        <activity android:name=".Controller.Add_ModifyActivity"></activity>
         <activity android:name=".Controller.GameActivity"></activity>
         <activity android:name=".Controller.MainActivity">
             <intent-filter>

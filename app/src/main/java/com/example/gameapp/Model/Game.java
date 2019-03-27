@@ -3,8 +3,6 @@ package com.example.gameapp.Model;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 
-import java.util.List;
-
 @Entity(tableName = "game_table")
 public class Game
 {
@@ -70,9 +68,7 @@ public class Game
         mGenderGame = genderGame;
     }
 
-    public String getPathImage() {
-        return mPathImage;
-    }
+    public String getPathImage() { return mPathImage; }
 
     public void setPathImage(String pathImage) {
         mPathImage = pathImage;

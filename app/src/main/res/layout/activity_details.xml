@@ -14,12 +14,114 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="159dp"
+        android:layout_marginLeft="125dp"
         android:layout_marginTop="23dp"
         android:text="Game Details"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textSize="28dp"
         android:textStyle="bold"/>
+    <TextView
+        android:id="@+id/name_game"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/details_page"
+        android:paddingLeft="20dp"
+        android:paddingTop="20dp"
+        android:textSize="20dp"
+        android:text="@string/name_game1"/>
+
+    <TextView
+        android:id="@+id/genre"
+        android:layout_below="@id/name_game"
+        android:paddingTop="5dp"
+        android:paddingLeft="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Adventure"/>
+
+    <ImageView
+        android:id="@+id/stars"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/name_game"
+        android:paddingTop="20dp"
+        android:paddingLeft="10dp"
+        android:layout_below="@id/details_page"
+        android:src="@drawable/star3"/>
+
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:layout_toRightOf="@id/description"
+        android:layout_below="@id/details_page"
+        android:layout_marginLeft="50dp"
+        android:paddingTop="20dp"
+        android:src="@drawable/pacman"/>
+
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/genre"
+        android:paddingLeft="20dp"
+        android:paddingTop="5dp"
+        android:text="@string/date2"
+        android:textStyle="italic"/>
+
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/date"
+        android:paddingLeft="20dp"
+        android:paddingTop="5dp"
+        android:text="@string/description_game1"
+       />
+
+    <Button
+        android:id="@+id/commentaire"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/description"
+        android:layout_marginLeft="125dp"
+        android:layout_marginTop="100dp"
+        android:text="Commentaires"
+       />
+    <!-- Ajouter le onClick sur le bouton -->
+    
+    <TextView
+        android:id="@+id/facebook"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/commentaire"
+        android:layout_marginTop="200dp"
+        android:paddingLeft="95dp"
+        android:autoLink="web"
+        android:textColor="@color/link"/>
+
+    <TextView
+        android:id="@+id/twitter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/commentaire"
+        android:layout_toRightOf="@id/facebook"
+        android:layout_marginTop="200dp"
+        android:layout_marginLeft="15dp"
+        android:autoLink="web"
+        android:textColor="@color/link"/>
+
+    <TextView
+        android:id="@+id/instagram"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/commentaire"
+        android:layout_toRightOf="@id/twitter"
+        android:layout_marginTop="200dp"
+        android:layout_marginLeft="15dp"
+        android:autoLink="web"
+        android:textColor="@color/link"/>
+
 
 </RelativeLayout>
 

@@ -55,4 +55,11 @@
         <item>4</item>
         <item>5</item>
     </string-array>
+
+<!-- string page d'ajout/modification de jeu -->
+    <string name="name">Name of the Game</string>
+    <string name="description">Description of the Game</string>
+    <string name="image">Path of the image</string>
+    <string name="date">Date of the Game</string>
+
 </resources>

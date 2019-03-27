@@ -12,4 +12,12 @@
         android:layout_height="match_parent"
         tools:listitem="@layout/activity_games"/>
 
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/add_game"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="350dp"
+        android:layout_marginTop="550dp"
+
+        android:src="@drawable/ic_add" />
 </RelativeLayout>
