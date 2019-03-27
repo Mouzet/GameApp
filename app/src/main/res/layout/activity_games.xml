@@ -65,7 +65,8 @@
             android:layout_marginTop="15dp"
             android:layout_toRightOf="@id/date"
             android:layout_marginLeft="50dp"
-            android:text="@string/delete"/>
+            android:text="@string/delete"
+            />
 
         <Button
             android:id="@+id/modify"

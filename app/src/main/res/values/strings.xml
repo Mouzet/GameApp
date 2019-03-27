@@ -35,9 +35,14 @@
     <string name="delete">Delete</string>
     <string name="modify">Modify</string>
     <string name="add">Add</string>
+
     <!-- String page activity_about -->
     <string name="infos">Informations Page</string>
 
+    <!-- String page detail -->
+    <string name="facebook"><a href='http://www.facebook.com/'>Facebook</a></string>
+    <string name="twitter"><a href='https://www.twitter.com/'>Twitter</a></string>
+    <string name="instagram"><a href='https://www.instagram.com/'>Instagram</a></string>
     <!-- liste de valeur pour la recherche par activity_gender-->
     <string-array name="gender">
         <item>All genders</item>

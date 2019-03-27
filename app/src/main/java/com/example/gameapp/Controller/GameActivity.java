@@ -45,6 +45,9 @@ public class GameActivity extends AppCompatActivity
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         FloatingActionButton buttonAdd = findViewById(R.id.add_game);
+
+
+
         buttonAdd.setOnClickListener(new View.OnClickListener(){
 
             @Override
@@ -83,6 +86,7 @@ public class GameActivity extends AppCompatActivity
             RecyclerView recyclerView = findViewById(R.id.recycler_view_game);
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
             recyclerView.setHasFixedSize(true);
+
 
             //permet d'afficher tant qu'on a la place a l'écran
             final GameAdapter adapter = new GameAdapter();
@@ -179,6 +183,8 @@ public class GameActivity extends AppCompatActivity
         }
 
     }
+
+
 }
 
 

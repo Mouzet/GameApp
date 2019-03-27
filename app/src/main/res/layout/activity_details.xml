@@ -98,6 +98,7 @@
         android:layout_marginTop="200dp"
         android:paddingLeft="95dp"
         android:autoLink="web"
+        android:text="@string/facebook"
         android:textColor="@color/link"/>
 
     <TextView
@@ -109,6 +110,7 @@
         android:layout_marginTop="200dp"
         android:layout_marginLeft="15dp"
         android:autoLink="web"
+        android:text="@string/twitter"
         android:textColor="@color/link"/>
 
     <TextView
@@ -120,6 +122,7 @@
         android:layout_marginTop="200dp"
         android:layout_marginLeft="15dp"
         android:autoLink="web"
+        android:text="@string/instagram"
         android:textColor="@color/link"/>
 
 
