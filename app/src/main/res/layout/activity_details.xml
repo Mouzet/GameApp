@@ -28,7 +28,7 @@
         android:paddingLeft="20dp"
         android:paddingTop="20dp"
         android:textSize="20dp"
-        android:text="@string/name_game1"/>
+        />
 
     <TextView
         android:id="@+id/genre"
@@ -37,7 +37,7 @@
         android:paddingLeft="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Adventure"/>
+        />
 
     <ImageView
         android:id="@+id/stars"
@@ -66,7 +66,6 @@
         android:layout_below="@id/genre"
         android:paddingLeft="20dp"
         android:paddingTop="5dp"
-        android:text="@string/date2"
         android:textStyle="italic"/>
 
     <TextView
@@ -76,19 +75,28 @@
         android:layout_below="@id/date"
         android:paddingLeft="20dp"
         android:paddingTop="5dp"
-        android:text="@string/description_game1"
        />
 
+    <Button
+        android:id="@+id/modify"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/description"
+        android:layout_marginTop="100dp"
+        android:layout_marginLeft="132dp"
+        android:text="Modify"
+        android:onClick="modifyGame"/>
     <Button
         android:id="@+id/commentaire"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/description"
+        android:layout_below="@id/modify"
         android:layout_marginLeft="125dp"
-        android:layout_marginTop="100dp"
-        android:text="Commentaires"
+        android:layout_marginTop="5dp"
+        android:text="Comments"
         android:onClick="seeComments"
        />
+
     <!-- Ajouter le onClick sur le bouton -->
     
     <TextView

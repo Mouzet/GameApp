@@ -30,6 +30,7 @@ public class Add_ModifyActivity extends AppCompatActivity implements AdapterView
             "com.example.gameapp.Controller.EXTRA_STARS";
     public static final String EXTRA_GENDER =
             "com.example.gameapp.Controller.EXTRA_GENDER";
+
     private EditText editname;
     private EditText editimage;
     private EditText editdate;
@@ -37,12 +38,15 @@ public class Add_ModifyActivity extends AppCompatActivity implements AdapterView
     private NumberPicker editstars;
     private Spinner editGender;
 
+    String nameButton;
+
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_modify);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 
 
         editname = findViewById(R.id.name_game);
@@ -67,6 +71,13 @@ public class Add_ModifyActivity extends AppCompatActivity implements AdapterView
         setTitle("Add Game");
 
         //Intent intent = getIntent();
+
+        nameButton= getIntent().getStringExtra("nameButton");
+        if(nameButton.equals("modify")){
+            editname.setText(getIntent().getStringExtra("name"));
+            editdate.setText(getIntent().getStringExtra("date"));
+            editdescription.setText(getIntent().getStringExtra("description"));
+        }
     }
 
     private void Save(){
@@ -125,4 +136,52 @@ public class Add_ModifyActivity extends AppCompatActivity implements AdapterView
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
+
+   /*
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent imageReturnedIntent) {
+        super.onActivityResult(requestCode, resultCode, imageReturnedIntent);
+        // Permission is not granted
+
+
+
+        switch(requestCode) {
+            case SELECT_PHOTO:
+
+                if (resultCode == RESULT_OK) try {
+                    final Uri imageUri = imageReturnedIntent.getData();
+                    final InputStream imageStream = getContentResolver().openInputStream(imageUri);
+                    final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
+
+                    imageView.setImageBitmap(selectedImage);
+
+                    Uri tempUri = imageUri;
+
+                    // CALL THIS METHOD TO GET THE ACTUAL PATH
+                    File finalFile = new File(getRealPathFromURI(tempUri));
+                    imagePath = finalFile.getAbsoluteFile().toString();
+                    newBeverage.setImagepath(finalFile.getAbsoluteFile().toString());
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+                // CALL THIS METHOD TO GET THE URI FROM THE BITMAP
+
+        }
+
+    }
+
+    public Uri getImageUri(Context inContext, Bitmap inImage) {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
+        return Uri.parse(path);
+    }
+
+    public String getRealPathFromURI(Uri uri) {
+        Cursor cursor = getContentResolver().query(uri, null, null, null, null);
+        cursor.moveToFirst();
+        int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+        return cursor.getString(idx);
+    }
+    */
 }

@@ -7,6 +7,7 @@
     >
 
     <!--Affichage pour un jeu-->
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view_game"
         android:foregroundTint="@color/list"
@@ -14,6 +15,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:listitem="@layout/activity_games"/>
+
+
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/add_game"

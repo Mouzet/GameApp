@@ -29,7 +29,7 @@
         android:background="@drawable/back"
         android:ems="10"
         android:hint="@string/game_top5_1"
-        android:onClick="modifyGame"></ImageButton>
+        android:onClick="openGame"></ImageButton>
 
     <ImageButton
         android:id="@+id/game_top5_2"
@@ -43,7 +43,7 @@
         android:background="@drawable/back"
         android:ems="10"
         android:hint="@string/game_top5_2"
-        android:onClick="modifyGame"></ImageButton>
+        android:onClick="openGame"></ImageButton>
 
     <ImageButton
         android:id="@+id/game_top5_3"
@@ -57,7 +57,7 @@
         android:background="@drawable/back"
         android:ems="10"
         android:hint="@string/game_top5_3"
-        android:onClick="modifyGame"></ImageButton>
+        android:onClick="openGame"></ImageButton>
 
     <ImageButton
         android:id="@+id/game_top5_4"
@@ -71,7 +71,7 @@
         android:background="@drawable/back"
         android:ems="10"
         android:hint="@string/game_top5_4"
-        android:onClick="modifyGame"></ImageButton>
+        android:onClick="openGame"></ImageButton>
 
     <ImageButton
         android:id="@+id/game_top5_5"
@@ -84,7 +84,7 @@
         android:src="@drawable/wow"
         android:background="@drawable/back"
         android:hint="@string/game_top5_5"
-        android:onClick="modifyGame"></ImageButton>
+        android:onClick="openGame"></ImageButton>
 
     <TextView
         android:id="@+id/search"

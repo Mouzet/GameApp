@@ -15,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.gameapp.Adapter.GameAdapter;
@@ -153,10 +154,32 @@ public class GameActivity extends AppCompatActivity
         }
     }
 
-    public void modifyGame(View view)
-    {
-        Intent intent = new Intent(this, Add_ModifyActivity.class);
+
+
+    public void showGame(View view){
+        Intent intent = new Intent(this, DetailsActivity.class);
+
+        TextView tname = (TextView)  findViewById(R.id.name_game);
+        TextView tgender = (TextView) findViewById(R.id.genre);
+        TextView tdate = (TextView) findViewById(R.id.date);
+        TextView tdescription = (TextView) findViewById(R.id.description);
+
+        String name = tname.getText().toString();
+        //String gender = tgender.getText().toString();
+        String date = tdate.getText().toString();
+        String description = tdescription.getText().toString();
+
+        intent.putExtra("name",name);
+        //intent.putExtra("genre",gender);
+        intent.putExtra("date",date);
+        intent.putExtra("description",description);
+        //intent.putExtra(EXTRA_IMAGE2,image);
+        //intent.putExtra(EXTRA_NAME2,name);
+
         startActivity(intent);
+
+
+
     }
 
     @Override
