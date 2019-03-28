@@ -39,14 +39,4 @@
         android:textSize="18dp"
         android:prompt="@string/genre"/>
 
-    <Button
-        android:id="@+id/gender_btn"
-        android:layout_width="100dp"
-        android:layout_height="60dp"
-        android:layout_below="@+id/gender_select_spinner"
-        android:layout_marginLeft="159dp"
-        android:layout_marginTop="100dp"
-        android:text="@string/search"
-        android:onClick="genderSearch"/>
-
 </RelativeLayout>

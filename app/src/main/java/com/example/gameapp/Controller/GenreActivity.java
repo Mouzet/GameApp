@@ -30,7 +30,6 @@ public class GenreActivity extends AppCompatActivity implements AdapterView.OnIt
 
         mGenderTitle = (TextView) findViewById(R.id.gender_title_txt);
         mGenderSelect = (TextView) findViewById(R.id.gender_select_txt);
-        mSelectGender = (Button) findViewById(R.id.gender_btn);
         mGenderSpinner = (Spinner) findViewById(R.id.gender_select_spinner);
 
         //Spinner for the gender
@@ -46,12 +45,6 @@ public class GenreActivity extends AppCompatActivity implements AdapterView.OnIt
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
-    {
-        //Quand on sélectionne l'item
-    }
-
-    // creating the intent for the gender button
-    public void genderSearch(View view)
     {
         Intent intent = new Intent(this, GameActivity.class);
         String gender = mGenderSpinner.getSelectedItem().toString();
