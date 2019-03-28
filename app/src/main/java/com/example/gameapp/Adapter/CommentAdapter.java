@@ -5,11 +5,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.gameapp.Model.Comment;
-import com.example.gameapp.Model.Game;
 import com.example.gameapp.R;
 
 import java.util.ArrayList;
@@ -17,7 +15,7 @@ import java.util.List;
 
 public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentHolder>
 {
-    //Nouvelle liste de jeux
+    //Nouvelle liste de commentaires
     private List<Comment> comments = new ArrayList<>();
 
     @NonNull
@@ -38,7 +36,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentH
         //???? Comment faire les images?
 
         Comment currentComment = comments.get(position);
-        commentHolder.textViewUser.setText(currentComment.getNameAuthorComment());
+        commentHolder.textViewUser.setText(currentComment.getUserComment());
         commentHolder.textViewText.setText(currentComment.getTextComment());
 
     }

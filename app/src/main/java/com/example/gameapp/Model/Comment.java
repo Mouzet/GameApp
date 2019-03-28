@@ -8,15 +8,14 @@ public class Comment
 {
     @PrimaryKey(autoGenerate = true)
     private int mIdComment;
-
     private String mTextComment;
-    private String mNameAuthorComment;
+    private String mUserComment;
 
     //Constructor
-    public Comment(String textComment, String nameAuthorComment)
+    public Comment(String textComment, String userComment)
     {
         mTextComment = textComment;
-        mNameAuthorComment = nameAuthorComment;
+        mUserComment = userComment;
     }
 
     //Getters and Setters
@@ -36,11 +35,11 @@ public class Comment
         mTextComment = textComment;
     }
 
-    public String getNameAuthorComment() {
-        return mNameAuthorComment;
+    public String getUserComment() {
+        return mUserComment;
     }
 
-    public void setNameAuthorComment(String nameAuthorComment) {
-        mNameAuthorComment = nameAuthorComment;
+    public void setUserComment(String userComment) {
+        mUserComment = userComment;
     }
 }
