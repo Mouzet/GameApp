@@ -69,6 +69,7 @@ public class DetailsActivity extends AppCompatActivity
         TextView tgender = (TextView) findViewById(R.id.genre);
         TextView tdate = (TextView) findViewById(R.id.date);
         TextView tdescription = (TextView) findViewById(R.id.description);
+        Button bimage = (Button) findViewById(R.id.buttonimage);
         //ImageView tstars = (ImageView) findViewById(R.id.stars);*/
 
         nameButton="modify";
@@ -77,12 +78,14 @@ public class DetailsActivity extends AppCompatActivity
         String gender = tgender.getText().toString();
         String date = tdate.getText().toString();
         String description = tdescription.getText().toString();
+        String button = bimage.getText().toString();
 
         intent.putExtra("nameButton",nameButton);
         intent.putExtra("name",name);
         intent.putExtra("genre",gender);
         intent.putExtra("date",date);
         intent.putExtra("description",description);
+        intent.putExtra("pathimage",button);
         //intent.putExtra(EXTRA_NAME2,name);
 
         startActivity(intent);
