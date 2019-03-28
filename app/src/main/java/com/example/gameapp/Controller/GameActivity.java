@@ -3,6 +3,8 @@ package com.example.gameapp.Controller;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
+import android.graphics.Canvas;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -37,10 +39,13 @@ public class GameActivity extends AppCompatActivity
 
     protected void onCreate(Bundle savedInstanceState)
     {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result_games);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
 
         FloatingActionButton buttonAdd = findViewById(R.id.add_game);
 
@@ -57,6 +62,11 @@ public class GameActivity extends AppCompatActivity
 
         nameButton = intent.getStringExtra("nameButton");
 
+        /*RecyclerView.addItemDecoration(
+                new DividerItemDecoration(ContextCompat.getDrawable(getApplicationContext(),
+                        R.drawable.item_decorator)));*/
+
+
         //Si l'activité est demarré pour une recherche (par le bouton validate)
         //On effectue donc une recherche
         if(nameButton.equals("validate"))
@@ -64,6 +74,7 @@ public class GameActivity extends AppCompatActivity
             RecyclerView recyclerView = findViewById(R.id.recycler_view_game);
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
             recyclerView.setHasFixedSize(true);
+
 
             //permet d'afficher tant qu'on a la place a l'écran
             final GameAdapter adapter = new GameAdapter();
@@ -229,7 +240,30 @@ public class GameActivity extends AppCompatActivity
 
     }
 
+    public class DividerItemDecoration extends RecyclerView.ItemDecoration {
 
+        private Drawable mDivider;
+
+        public DividerItemDecoration(Drawable divider) {
+            this.mDivider = divider;
+        }
+
+        @Override
+        public void onDrawOver(Canvas canvas, RecyclerView parent, RecyclerView.State state) {
+            final int left = parent.getPaddingLeft();
+            final int right = parent.getWidth() - parent.getPaddingRight();
+
+            final int childCount = parent.getChildCount();
+            for (int i = 0; i < childCount; i++) {
+                final View child = parent.getChildAt(i);
+                final RecyclerView.LayoutParams params = (RecyclerView.LayoutParams)
+                        child.getLayoutParams();
+                final int top = child.getBottom() + params.bottomMargin;
+                final int bottom = top + mDivider.getIntrinsicHeight();
+                mDivider.setBounds(left, top, right, bottom);
+                mDivider.draw(canvas);
+            }
+        }}
 }
 
 
