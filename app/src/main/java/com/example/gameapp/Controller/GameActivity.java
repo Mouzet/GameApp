@@ -56,49 +56,72 @@ public class GameActivity extends AppCompatActivity
                 startActivityForResult(intent, ADD_GAME);
             }
         });
+
         Intent intent = getIntent();
 
-        //Si l'intent contient des variables
-        if (intent != null)
-        {
-            //Si elle contient un nameGame
-            if(intent.hasExtra("nameGame"))
-            {
-                //Prend la valeur
-                nameGame = intent.getStringExtra("nameGame");
-            }
-
-            //Si elle contient un nameButton
-            if(intent.hasExtra("nameButton"))
-            {
-                nameButton = intent.getStringExtra("nameButton");
-            }
-        }
+        nameButton = intent.getStringExtra("nameButton");
 
         //Si l'activité est demarré pour une recherche (par le bouton validate)
         //On effectue donc une recherche
         if(nameButton.equals("validate"))
         {
-            nameSearch = intent.getStringExtra("nameSearch");
-            gender = intent.getStringExtra("gender");
-
-            //Toast.makeText(this, nameSearch, Toast.LENGTH_SHORT).show();
             RecyclerView recyclerView = findViewById(R.id.recycler_view_game);
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
             recyclerView.setHasFixedSize(true);
-
 
             //permet d'afficher tant qu'on a la place a l'écran
             final GameAdapter adapter = new GameAdapter();
             recyclerView.setAdapter(adapter);
 
-            gameViewModel = ViewModelProviders.of(this).get(GameViewModel.class);
-            gameViewModel.getGamesByName(nameSearch).observe(this, new Observer<List<Game>>() {
-                @Override
-                public void onChanged(@Nullable List<Game> games) {
-                    adapter.setGames(games);
+            //Si on a entré un nom dans la recherche
+            if(intent.hasExtra("nameSearch"))
+            {
+                nameSearch = intent.getStringExtra("nameSearch");
+                Toast.makeText(this, nameSearch, Toast.LENGTH_SHORT).show();
+
+                //Si on a entré un NOM + un GENRE
+                if(intent.hasExtra("gender"))
+                {
+                    gender = intent.getStringExtra("gender");
+                    Toast.makeText(this, nameSearch + " " + gender, Toast.LENGTH_SHORT).show();
+
+                    //Si on recherche par NOM + GENRE
+                    gameViewModel = ViewModelProviders.of(this).get(GameViewModel.class);
+                    gameViewModel.getGamesByNameAndGender(nameSearch, gender).observe(this, new Observer<List<Game>>() {
+                        @Override
+                        public void onChanged(@Nullable List<Game> games) {
+                            adapter.setGames(games);
+                        }
+                    });
                 }
-            });
+
+                //Si on a pas de genre, donc qu'un nom
+                else
+                {
+                    gameViewModel = ViewModelProviders.of(this).get(GameViewModel.class);
+                    gameViewModel.getGamesByName(nameSearch).observe(this, new Observer<List<Game>>() {
+                        @Override
+                        public void onChanged(@Nullable List<Game> games) {
+                            adapter.setGames(games);
+                        }
+                    });
+                }
+            }
+
+            //Si on a entré seulement un genre
+            else if(intent.hasExtra("gender"))
+            {
+                gender = intent.getStringExtra("gender");
+                Toast.makeText(this, gender, Toast.LENGTH_SHORT).show();
+
+                gameViewModel = ViewModelProviders.of(this).get(GameViewModel.class);
+                gameViewModel.getGamesByGender(gender).observe(this, new Observer<List<Game>>() {
+                    @Override
+                    public void onChanged(@Nullable List<Game> games) {
+                        adapter.setGames(games);
+                    }
+                });
+            }
         }
 
         //Si on veut afficher tous les jeux de la base de données

@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.gameapp.R;
 
@@ -76,23 +77,34 @@ public class MainActivity extends AppCompatActivity {
         String gender = spinner_gender.getSelectedItem().toString();
         String nameButton = "validate";
 
+        Toast.makeText(this, "NameSearch : " + nameSearch, Toast.LENGTH_SHORT).show();
+
         //Passe dans l'intent les 2 variables nameButton + nameGame
         intent.putExtra("nameButton", nameButton);
 
-        //Si le nameSearch contient quelque chose
-        if(!"null".equals(nameSearch))
+        if(nameSearch.equals("") && gender.equals("All genders"))
         {
-            intent.putExtra("nameSearch",  nameSearch);
+            Toast.makeText(this, "Please enter a research", Toast.LENGTH_SHORT).show();
         }
 
-        //Si on choisit un genre en particulier, et pas "All genders"
-        if(!"All genders".equals(gender))
+        else
         {
-            //On transmet l'information du genre
-            intent.putExtra("gender",  gender);
+            //Si le nameSearch contient quelque chose
+            if(!"null".equals(nameSearch))
+            {
+                intent.putExtra("nameSearch",  nameSearch);
+            }
+
+            //Si on choisit un genre en particulier, et pas "All genders"
+            if(!"All genders".equals(gender))
+            {
+                //On transmet l'information du genre
+                intent.putExtra("gender",  gender);
+            }
+
+            startActivity(intent);
         }
 
-        startActivity(intent);
     }
 
 
