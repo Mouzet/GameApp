@@ -176,6 +176,7 @@ public class GameActivity extends AppCompatActivity
         Game game = new Game(name,description,stars,gender,image,date);
         //GameViewModel.insert(game);
 
+
         Toast.makeText(this, "Game added", Toast.LENGTH_SHORT).show();
 
     }

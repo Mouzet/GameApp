@@ -17,6 +17,8 @@
             android:parentActivityName=".Controller.MainActivity"></activity>
         <activity android:name=".Controller.Add_ModifyActivity"
             android:parentActivityName=".Controller.MainActivity"></activity>
+        <activity android:name=".Controller.CommentsActivity"
+            android:parentActivityName=".Controller.MainActivity"/>
         <activity android:name=".Controller.GameActivity"
             android:parentActivityName=".Controller.MainActivity"></activity>
         <activity android:name=".Controller.MainActivity">

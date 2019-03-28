@@ -3,13 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@drawable/back"
+
     >
 
     <!--Affichage pour un jeu-->
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view_game"
-        android:background="@color/list"
+        android:foregroundTint="@color/list"
 
         android:layout_width="match_parent"
         android:layout_height="match_parent"

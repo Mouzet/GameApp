@@ -87,6 +87,7 @@
         android:layout_marginLeft="125dp"
         android:layout_marginTop="100dp"
         android:text="Commentaires"
+        android:onClick="seeComments"
        />
     <!-- Ajouter le onClick sur le bouton -->
     
