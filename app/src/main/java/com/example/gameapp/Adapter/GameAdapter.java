@@ -37,10 +37,8 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.GameHolder>
         //???? Comment faire les images?
 
         Game currentGame = games.get(position);
-        //gameHolder.imageViewPicture.setImageDrawable(currentGame.getPathImage());
         gameHolder.textViewName.setText(currentGame.getNameGame());
         gameHolder.textViewDescription.setText(currentGame.getDescriptionGame());
-        //gameHolder.imageViewStars.setImageDrawable(currentGame.getPathImage());
         gameHolder.textViewDate.setText(String.valueOf(currentGame.getDate()));
 
     }

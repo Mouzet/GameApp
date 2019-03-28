@@ -24,8 +24,6 @@ import com.example.gameapp.ViewModel.GameViewModel;
 
 import java.util.List;
 
-;
-
 public class GameActivity extends AppCompatActivity
 {
     public static final int ADD_GAME =1;
