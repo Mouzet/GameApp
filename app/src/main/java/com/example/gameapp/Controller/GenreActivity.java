@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Button;
@@ -29,7 +30,7 @@ public class GenreActivity extends AppCompatActivity implements AdapterView.OnIt
 
         mGenderTitle = (TextView) findViewById(R.id.gender_title_txt);
         mGenderSelect = (TextView) findViewById(R.id.gender_select_txt);
-        mSelectGender = (Button) findViewById(R.id.select_gender_btn);
+        mSelectGender = (Button) findViewById(R.id.gender_btn);
         mGenderSpinner = (Spinner) findViewById(R.id.gender_select_spinner);
 
         //Spinner for the gender
@@ -41,28 +42,41 @@ public class GenreActivity extends AppCompatActivity implements AdapterView.OnIt
 
         Intent intent = getIntent();
 
-        //Methode lorsqu'on clique sur le bouton search
-        mSelectGender.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                //Démarre la nouvelle activité lorsqu'on clic
-                Intent resultGameActivity = new Intent(GenreActivity.this, GameActivity.class);
-                startActivity(resultGameActivity);
-            }
-        });
-
     }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
     {
-        //On selecting a spinner item
-        String item = parent.getItemAtPosition(position).toString();
+        //Quand on sélectionne l'item
+    }
 
-        //Showing selected spinner item in toast message for a short time
-        Toast.makeText(parent.getContext(), "Selected: " + item, Toast.LENGTH_SHORT).show();
+    // creating the intent for the gender button
+    public void genderSearch(View view)
+    {
+        Intent intent = new Intent(this, GameActivity.class);
+        String gender = mGenderSpinner.getSelectedItem().toString();
+        String nameButton = "validate";
+
+        //Passe dans l'intent les 2 variables nameButton + nameGame
+        intent.putExtra("nameButton", nameButton);
+
+        //Il faut sélectionner un genre
+        if(gender.equals("All genders"))
+        {
+            Toast.makeText(this, "Please enter a research", Toast.LENGTH_SHORT).show();
+        }
+
+        else
+        {
+            //Si on choisit un genre en particulier, et pas "All genders"
+            if(!"All genders".equals(gender))
+            {
+                //On transmet l'information du genre
+                intent.putExtra("gender",  gender);
+            }
+
+            startActivity(intent);
+        }
     }
 
     @Override
@@ -70,6 +84,4 @@ public class GenreActivity extends AppCompatActivity implements AdapterView.OnIt
     {
 
     }
-
-
 }

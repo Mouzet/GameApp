@@ -75,13 +75,11 @@ public class GameActivity extends AppCompatActivity
             if(intent.hasExtra("nameSearch"))
             {
                 nameSearch = intent.getStringExtra("nameSearch");
-                Toast.makeText(this, nameSearch, Toast.LENGTH_SHORT).show();
 
                 //Si on a entré un NOM + un GENRE
                 if(intent.hasExtra("gender"))
                 {
                     gender = intent.getStringExtra("gender");
-                    Toast.makeText(this, nameSearch + " " + gender, Toast.LENGTH_SHORT).show();
 
                     //Si on recherche par NOM + GENRE
                     gameViewModel = ViewModelProviders.of(this).get(GameViewModel.class);
@@ -97,7 +95,6 @@ public class GameActivity extends AppCompatActivity
                 else
                 {
                     nameSearch = intent.getStringExtra("nameSearch");
-                    Toast.makeText(this, nameSearch, Toast.LENGTH_SHORT).show();
 
                     gameViewModel = ViewModelProviders.of(this).get(GameViewModel.class);
                     gameViewModel.getGamesByName(nameSearch).observe(this, new Observer<List<Game>>() {
@@ -113,7 +110,6 @@ public class GameActivity extends AppCompatActivity
             else if(intent.hasExtra("gender"))
             {
                 gender = intent.getStringExtra("gender");
-                Toast.makeText(this, "SPU " + gender, Toast.LENGTH_SHORT).show();
 
                 gameViewModel = ViewModelProviders.of(this).get(GameViewModel.class);
                 gameViewModel.getGamesByGender(gender).observe(this, new Observer<List<Game>>() {
