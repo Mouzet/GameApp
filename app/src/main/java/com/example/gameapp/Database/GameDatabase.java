@@ -63,7 +63,6 @@ public abstract class GameDatabase extends RoomDatabase {
             commentDao = db.commentDao();
         }
 
-
         @Override
         protected Void doInBackground(Void... voids)
         {

@@ -46,8 +46,6 @@ public class GameActivity extends AppCompatActivity
 
         FloatingActionButton buttonAdd = findViewById(R.id.add_game);
 
-
-
         buttonAdd.setOnClickListener(new View.OnClickListener(){
 
             @Override
@@ -98,6 +96,9 @@ public class GameActivity extends AppCompatActivity
                 //Si on a pas de genre, donc qu'un nom
                 else
                 {
+                    nameSearch = intent.getStringExtra("nameSearch");
+                    Toast.makeText(this, nameSearch, Toast.LENGTH_SHORT).show();
+
                     gameViewModel = ViewModelProviders.of(this).get(GameViewModel.class);
                     gameViewModel.getGamesByName(nameSearch).observe(this, new Observer<List<Game>>() {
                         @Override
@@ -112,12 +113,13 @@ public class GameActivity extends AppCompatActivity
             else if(intent.hasExtra("gender"))
             {
                 gender = intent.getStringExtra("gender");
-                Toast.makeText(this, gender, Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "SPU " + gender, Toast.LENGTH_SHORT).show();
 
                 gameViewModel = ViewModelProviders.of(this).get(GameViewModel.class);
                 gameViewModel.getGamesByGender(gender).observe(this, new Observer<List<Game>>() {
                     @Override
                     public void onChanged(@Nullable List<Game> games) {
+
                         adapter.setGames(games);
                     }
                 });

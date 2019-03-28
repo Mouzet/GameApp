@@ -77,8 +77,6 @@ public class MainActivity extends AppCompatActivity {
         String gender = spinner_gender.getSelectedItem().toString();
         String nameButton = "validate";
 
-        Toast.makeText(this, "NameSearch : " + nameSearch, Toast.LENGTH_SHORT).show();
-
         //Passe dans l'intent les 2 variables nameButton + nameGame
         intent.putExtra("nameButton", nameButton);
 
@@ -90,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
         else
         {
             //Si le nameSearch contient quelque chose
-            if(!"null".equals(nameSearch))
+            if(!"".equals(nameSearch))
             {
                 intent.putExtra("nameSearch",  nameSearch);
             }
