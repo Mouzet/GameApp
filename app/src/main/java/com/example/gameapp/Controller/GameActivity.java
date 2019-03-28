@@ -15,7 +15,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.gameapp.Adapter.GameAdapter;
@@ -157,24 +156,27 @@ public class GameActivity extends AppCompatActivity
 
 
     public void showGame(View view){
+
         Intent intent = new Intent(this, DetailsActivity.class);
 
-        TextView tname = (TextView)  findViewById(R.id.name_game);
+        /*TextView tname = (TextView)  findViewById(R.id.name_game);
         TextView tgender = (TextView) findViewById(R.id.genre);
         TextView tdate = (TextView) findViewById(R.id.date);
         TextView tdescription = (TextView) findViewById(R.id.description);
+        Button bimage = (Button) findViewById(R.id.buttonimage);*/
 
-        String name = tname.getText().toString();
-        //String gender = tgender.getText().toString();
+        /*String name = tname.getText().toString();
+        String gender = tgender.getText().toString();
         String date = tdate.getText().toString();
         String description = tdescription.getText().toString();
+        String button = bimage.getText().toString();*/
 
-        intent.putExtra("name",name);
-        //intent.putExtra("genre",gender);
+        /*intent.putExtra("name",name);
+        intent.putExtra("genre",gender);
         intent.putExtra("date",date);
         intent.putExtra("description",description);
-        //intent.putExtra(EXTRA_IMAGE2,image);
-        //intent.putExtra(EXTRA_NAME2,name);
+        intent.putExtra("imagepath",button);
+        //intent.putExtra(EXTRA_NAME2,name);*/
 
         startActivity(intent);
 

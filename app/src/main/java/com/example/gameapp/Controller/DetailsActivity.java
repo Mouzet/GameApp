@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.method.LinkMovementMethod;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,12 +17,12 @@ public class DetailsActivity extends AppCompatActivity
 
     String nameButton;
 
-    TextView tname;
-    TextView tgenre;
-    TextView tdate;
-    TextView tdescription;
-    ImageView timage;
-    ImageView tstars;
+    private TextView tname;
+  private   TextView tgenre;
+    private TextView tdate;
+    private TextView tdescription;
+    private Button bimage;
+    private ImageView tstars;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,7 +30,12 @@ public class DetailsActivity extends AppCompatActivity
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-
+        /*tname.setText(getIntent().getStringExtra("name"));
+        tgenre.setText(getIntent().getStringExtra("genre"));
+        tdate.setText(getIntent().getStringExtra("date"));
+        tdescription.setText(getIntent().getStringExtra("description"));
+        bimage.setText(getIntent().getStringExtra("imagepath"));*/
+        //tstars.
 
 
 
@@ -47,12 +53,7 @@ public class DetailsActivity extends AppCompatActivity
 
         Intent intent = getIntent();
 
-        tname.setText(getIntent().getStringExtra("name"));
-        //tgenre.setText(getIntent().getStringExtra("genre"));
-        tdate.setText(getIntent().getStringExtra("date"));
-        tdescription.setText(getIntent().getStringExtra("description"));
-        //timage.
-        //tstars.
+
     }
 
     public void seeComments(View view){
@@ -68,8 +69,7 @@ public class DetailsActivity extends AppCompatActivity
         TextView tgender = (TextView) findViewById(R.id.genre);
         TextView tdate = (TextView) findViewById(R.id.date);
         TextView tdescription = (TextView) findViewById(R.id.description);
-        ImageView timage = (ImageView) findViewById(R.id.image);
-        ImageView tstars = (ImageView) findViewById(R.id.stars);
+        //ImageView tstars = (ImageView) findViewById(R.id.stars);*/
 
         nameButton="modify";
 
@@ -83,7 +83,6 @@ public class DetailsActivity extends AppCompatActivity
         intent.putExtra("genre",gender);
         intent.putExtra("date",date);
         intent.putExtra("description",description);
-        //intent.putExtra(EXTRA_IMAGE2,image);
         //intent.putExtra(EXTRA_NAME2,name);
 
         startActivity(intent);

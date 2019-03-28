@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:padding="8dp">
 
-        <ImageButton
+        <!--ImageButton
             android:id="@+id/image"
             android:layout_width="30dp"
             android:layout_height="30dp"
@@ -17,6 +17,15 @@
             android:src="@drawable/pacman"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="25dp"
+            android:onClick="showGame"-->
+
+        <Button
+            android:id="@+id/buttonimage"
+            android:layout_width="120dp"
+            android:layout_height="52dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="25dp"
+            android:textSize="12dp"
             android:onClick="showGame"/>
 
 
@@ -24,7 +33,7 @@
             android:id="@+id/name_game"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/image"
+            android:layout_toRightOf="@id/buttonimage"
             android:layout_marginTop="25dp"
             android:textSize="15dp" />
 
@@ -33,7 +42,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/name_game"
-            android:layout_toRightOf="@id/image"
+            android:layout_toRightOf="@id/buttonimage"
             android:layout_marginTop="13dp"
             android:textSize="12dp"
             android:textStyle="italic" />

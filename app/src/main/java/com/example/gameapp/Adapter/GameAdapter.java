@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -39,6 +40,7 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.GameHolder>
         Game currentGame = games.get(position);
         gameHolder.textViewName.setText(currentGame.getNameGame());
         gameHolder.textViewDescription.setText(currentGame.getDescriptionGame());
+        gameHolder.buttonImage.setText(currentGame.getPathImage());
         gameHolder.textViewDate.setText(String.valueOf(currentGame.getDate()));
 
     }
@@ -58,7 +60,8 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.GameHolder>
     }
 
     class GameHolder extends RecyclerView.ViewHolder{
-        private ImageView imageViewPicture;
+        //private ImageView imageViewPicture;
+        private Button buttonImage;
         private TextView textViewName;
         private TextView textViewDescription;
         private ImageView imageViewStars;
@@ -66,7 +69,8 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.GameHolder>
 
         public GameHolder(@NonNull View itemView) {
             super(itemView);
-            imageViewPicture = itemView.findViewById(R.id.image);
+            //imageViewPicture = itemView.findViewById(R.id.image);
+            buttonImage = itemView.findViewById(R.id.buttonimage);
             textViewName = itemView.findViewById(R.id.name_game);
             textViewDescription = itemView.findViewById(R.id.description);
             imageViewStars = itemView.findViewById(R.id.stars);
