@@ -34,7 +34,6 @@
             android:layout_width="120dp"
             android:layout_height="52dp"
             android:layout_marginLeft="5dp"
-
             android:textSize="12dp"
             android:onClick="showGame"/>
 
@@ -57,14 +56,14 @@
             android:textSize="12dp"
             android:textStyle="italic" />
 
-        <ImageView
+        <Button
             android:id="@+id/stars"
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_toRightOf="@id/name_game"
             android:paddingLeft="12dp"
-
-            android:src="@drawable/star4" />
+            android:textSize="15dp"
+            />
 
         <TextView
             android:id="@+id/date"
@@ -77,8 +76,12 @@
             android:textStyle="italic"
            />
 
-
-
+        <TextView
+            android:id="@+id/genre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/date"
+            android:paddingLeft="12dp"/>
 
 
 

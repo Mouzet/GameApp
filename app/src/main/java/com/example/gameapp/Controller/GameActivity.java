@@ -49,6 +49,7 @@ public class GameActivity extends AppCompatActivity
 
         FloatingActionButton buttonAdd = findViewById(R.id.add_game);
 
+
         buttonAdd.setOnClickListener(new View.OnClickListener(){
 
             @Override
@@ -64,10 +65,6 @@ public class GameActivity extends AppCompatActivity
         Intent intent = getIntent();
 
         nameButton = intent.getStringExtra("nameButton");
-
-        /*RecyclerView.addItemDecoration(
-                new DividerItemDecoration(ContextCompat.getDrawable(getApplicationContext(),
-                        R.drawable.item_decorator)));*/
 
 
         //Si l'activité est demarré pour une recherche (par le bouton validate)
@@ -176,18 +173,24 @@ public class GameActivity extends AppCompatActivity
         TextView tname = (TextView)  findViewById(R.id.name_game);
         TextView tdate = (TextView) findViewById(R.id.date);
         TextView tdescription = (TextView) findViewById(R.id.description);
+        TextView tgenre = (TextView) findViewById(R.id.genre);
         Button bimage = (Button) findViewById(R.id.buttonimage);
+        Button bstars = (Button) findViewById(R.id.stars);
 
         String name = tname.getText().toString();
         String date = tdate.getText().toString();
         String description = tdescription.getText().toString();
+        String genre = tgenre.getText().toString();
         String button = bimage.getText().toString();
+        String stars = bstars.getText().toString();
 
         intent.putExtra("name",name);
         intent.putExtra("date",date);
         intent.putExtra("description",description);
         intent.putExtra("imagepath",button);
-        //intent.putExtra(EXTRA_NAME2,name);
+        intent.putExtra("genre",genre);
+        intent.putExtra("stars",stars);
+
 
         startActivity(intent);
 
@@ -199,7 +202,7 @@ public class GameActivity extends AppCompatActivity
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-    if(requestCode == ADD_GAME && resultCode == RESULT_OK){
+    if(requestCode == ADD_GAME  && resultCode == RESULT_OK){
         String name = data.getStringExtra(Add_ModifyActivity.EXTRA_NAME);
         String gender = data.getStringExtra((Add_ModifyActivity.EXTRA_GENDER));
         String image = data.getStringExtra(Add_ModifyActivity.EXTRA_IMAGE);
@@ -240,30 +243,6 @@ public class GameActivity extends AppCompatActivity
 
     }
 
-   /* public class DividerItemDecoration extends RecyclerView.ItemDecoration {
-
-        private Drawable mDivider;
-
-        public DividerItemDecoration(Drawable divider) {
-            this.mDivider = divider;
-        }
-
-        @Override
-        public void onDrawOver(Canvas canvas, RecyclerView parent, RecyclerView.State state) {
-            final int left = parent.getPaddingLeft();
-            final int right = parent.getWidth() - parent.getPaddingRight();
-
-            final int childCount = parent.getChildCount();
-            for (int i = 0; i < childCount; i++) {
-                final View child = parent.getChildAt(i);
-                final RecyclerView.LayoutParams params = (RecyclerView.LayoutParams)
-                        child.getLayoutParams();
-                final int top = child.getBottom() + params.bottomMargin;
-                final int bottom = top + mDivider.getIntrinsicHeight();
-                mDivider.setBounds(left, top, right, bottom);
-                mDivider.draw(canvas);
-            }
-        }}*/
 }
 
 

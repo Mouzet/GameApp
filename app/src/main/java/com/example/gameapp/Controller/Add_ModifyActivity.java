@@ -80,6 +80,11 @@ public class Add_ModifyActivity extends AppCompatActivity implements AdapterView
             editname.setText(getIntent().getStringExtra("name"));
             editdate.setText(getIntent().getStringExtra("date"));
             editdescription.setText(getIntent().getStringExtra("description"));
+            editimage.setText(getIntent().getStringExtra("pathimage"));
+            String gender = editGender.getSelectedItem().toString();
+            int a = mAdapter.getPosition(gender);
+            editGender.setSelection(a);
+             setTitle("Modify Game");
         }
 
     }
@@ -90,7 +95,7 @@ public class Add_ModifyActivity extends AppCompatActivity implements AdapterView
         String date = editdate.getText().toString();
         String description = editdescription.getText().toString();
         int stars = editstars.getValue();
-        String gender = editGender.toString();
+        String gender = editGender.getSelectedItem().toString();
 
         if(name.trim().isEmpty() || image.trim().isEmpty() || date.trim().isEmpty() || description.trim().isEmpty()){
 

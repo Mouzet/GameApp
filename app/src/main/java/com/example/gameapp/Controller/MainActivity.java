@@ -106,16 +106,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void openGame(View view)
-    {
-        Intent intent = new Intent(this, DetailsActivity.class);
-
-       /* ImageButton button = (ImageButton) findViewById(R.id.game_top5_1);
-        String gamenamebutton = String.valueOf(button);
-        intent.putExtra("gamenamebutton",gamenamebutton);*/
-
-        startActivity(intent);
-    }
 
 }
 
