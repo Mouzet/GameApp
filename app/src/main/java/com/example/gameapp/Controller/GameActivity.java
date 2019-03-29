@@ -3,8 +3,6 @@ package com.example.gameapp.Controller;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
-import android.graphics.Canvas;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -17,6 +15,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.gameapp.Adapter.GameAdapter;
@@ -53,7 +53,10 @@ public class GameActivity extends AppCompatActivity
 
             @Override
             public void onClick(View v) {
+
                 Intent intent = new Intent(GameActivity.this,Add_ModifyActivity.class);
+                String nameButton = "Add";
+                intent.putExtra("nameButton",nameButton);
                 startActivityForResult(intent, ADD_GAME);
             }
         });
@@ -170,24 +173,21 @@ public class GameActivity extends AppCompatActivity
 
         Intent intent = new Intent(this, DetailsActivity.class);
 
-        /*TextView tname = (TextView)  findViewById(R.id.name_game);
-        TextView tgender = (TextView) findViewById(R.id.genre);
+        TextView tname = (TextView)  findViewById(R.id.name_game);
         TextView tdate = (TextView) findViewById(R.id.date);
         TextView tdescription = (TextView) findViewById(R.id.description);
-        Button bimage = (Button) findViewById(R.id.buttonimage);*/
+        Button bimage = (Button) findViewById(R.id.buttonimage);
 
-        /*String name = tname.getText().toString();
-        String gender = tgender.getText().toString();
+        String name = tname.getText().toString();
         String date = tdate.getText().toString();
         String description = tdescription.getText().toString();
-        String button = bimage.getText().toString();*/
+        String button = bimage.getText().toString();
 
-        /*intent.putExtra("name",name);
-        intent.putExtra("genre",gender);
+        intent.putExtra("name",name);
         intent.putExtra("date",date);
         intent.putExtra("description",description);
         intent.putExtra("imagepath",button);
-        //intent.putExtra(EXTRA_NAME2,name);*/
+        //intent.putExtra(EXTRA_NAME2,name);
 
         startActivity(intent);
 
@@ -208,7 +208,7 @@ public class GameActivity extends AppCompatActivity
         int stars = data.getIntExtra(Add_ModifyActivity.EXTRA_STARS,1);
 
         Game game = new Game(name,description,stars,gender,image,date);
-        //GameViewModel.insert(game);
+        gameViewModel.insert(game);
 
 
         Toast.makeText(this, "Game added", Toast.LENGTH_SHORT).show();
@@ -240,7 +240,7 @@ public class GameActivity extends AppCompatActivity
 
     }
 
-    public class DividerItemDecoration extends RecyclerView.ItemDecoration {
+   /* public class DividerItemDecoration extends RecyclerView.ItemDecoration {
 
         private Drawable mDivider;
 
@@ -263,7 +263,7 @@ public class GameActivity extends AppCompatActivity
                 mDivider.setBounds(left, top, right, bottom);
                 mDivider.draw(canvas);
             }
-        }}
+        }}*/
 }
 
 

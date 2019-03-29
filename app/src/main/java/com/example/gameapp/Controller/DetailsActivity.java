@@ -30,11 +30,15 @@ public class DetailsActivity extends AppCompatActivity
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        /*tname.setText(getIntent().getStringExtra("name"));
-        tgenre.setText(getIntent().getStringExtra("genre"));
+        tname = (TextView) findViewById(R.id.name_game);
+        tdate = (TextView) findViewById(R.id.date);
+        tdescription = (TextView) findViewById(R.id.description);
+        bimage = (Button) findViewById(R.id.image);
+
+        tname.setText(getIntent().getStringExtra("name"));
         tdate.setText(getIntent().getStringExtra("date"));
         tdescription.setText(getIntent().getStringExtra("description"));
-        bimage.setText(getIntent().getStringExtra("imagepath"));*/
+        bimage.setText(getIntent().getStringExtra("imagepath"));
         //tstars.
 
 
@@ -69,10 +73,10 @@ public class DetailsActivity extends AppCompatActivity
         TextView tgender = (TextView) findViewById(R.id.genre);
         TextView tdate = (TextView) findViewById(R.id.date);
         TextView tdescription = (TextView) findViewById(R.id.description);
-        Button bimage = (Button) findViewById(R.id.buttonimage);
+        Button bimage = (Button) findViewById(R.id.image);
         //ImageView tstars = (ImageView) findViewById(R.id.stars);*/
 
-        nameButton="modify";
+        nameButton="Modify";
 
         String name = tname.getText().toString();
         String gender = tgender.getText().toString();

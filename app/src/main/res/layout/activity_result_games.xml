@@ -10,8 +10,6 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view_game"
-        android:foregroundTint="@color/list"
-
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:listitem="@layout/activity_games"/>
@@ -24,7 +22,6 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="350dp"
         android:layout_marginTop="550dp"
-
         android:src="@drawable/ic_add" />
 
 </RelativeLayout>

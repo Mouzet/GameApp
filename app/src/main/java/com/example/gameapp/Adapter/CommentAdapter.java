@@ -33,7 +33,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentH
     @Override
     public void onBindViewHolder(@NonNull CommentAdapter.CommentHolder commentHolder, int position)
     {
-        //???? Comment faire les images?
+
 
         Comment currentComment = comments.get(position);
         commentHolder.textViewUser.setText(currentComment.getUserComment());

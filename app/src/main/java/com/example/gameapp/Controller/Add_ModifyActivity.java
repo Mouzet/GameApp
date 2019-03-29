@@ -42,6 +42,7 @@ public class Add_ModifyActivity extends AppCompatActivity implements AdapterView
 
 
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_modify);
 
@@ -72,12 +73,15 @@ public class Add_ModifyActivity extends AppCompatActivity implements AdapterView
 
         //Intent intent = getIntent();
 
-        nameButton= getIntent().getStringExtra("nameButton");
-        if(nameButton.equals("modify")){
+        nameButton = getIntent().getStringExtra("nameButton");
+
+
+        if(nameButton.equals("Modify")){
             editname.setText(getIntent().getStringExtra("name"));
             editdate.setText(getIntent().getStringExtra("date"));
             editdescription.setText(getIntent().getStringExtra("description"));
         }
+
     }
 
     private void Save(){
