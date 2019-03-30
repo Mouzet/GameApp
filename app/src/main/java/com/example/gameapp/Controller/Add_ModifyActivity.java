@@ -143,7 +143,12 @@ public class Add_ModifyActivity extends AppCompatActivity implements AdapterView
         return;
         }
 
+
         Intent data = new Intent();
+        /* if(nameButton.equals("Modify")) {
+            int namebuttonmodify = 2;
+            data.putExtra("activity",namebuttonmodify);
+        }*/
         data.putExtra(EXTRA_NAME, name);
         data.putExtra(EXTRA_IMAGE, imagePath);
         data.putExtra(EXTRA_DATE, date);

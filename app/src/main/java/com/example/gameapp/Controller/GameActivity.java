@@ -210,6 +210,10 @@ public class GameActivity extends AppCompatActivity
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+        int buttonmodify = data.getIntExtra("activity",2);
+
+
+
     if(requestCode == ADD_GAME  && resultCode == RESULT_OK){
         String name = data.getStringExtra(Add_ModifyActivity.EXTRA_NAME);
         String gender = data.getStringExtra((Add_ModifyActivity.EXTRA_GENDER));
@@ -219,13 +223,26 @@ public class GameActivity extends AppCompatActivity
         int stars = data.getIntExtra(Add_ModifyActivity.EXTRA_STARS,1);
 
         Game game = new Game(name,description,stars,gender,image,date);
-        gameViewModel.insert(game);
+
+            gameViewModel.insert(game);
 
         Log.i("***** PATHIMAGE *****", image);
 
         Toast.makeText(this, "Game added", Toast.LENGTH_SHORT).show();
 
     }
+    /*else if(requestCode == 2 && resultCode== RESULT_OK){
+        String name = data.getStringExtra(Add_ModifyActivity.EXTRA_NAME);
+        String gender = data.getStringExtra((Add_ModifyActivity.EXTRA_GENDER));
+        String image = data.getStringExtra(Add_ModifyActivity.EXTRA_IMAGE);
+        int date = data.getIntExtra(Add_ModifyActivity.EXTRA_DATE,20100101);
+        String description = data.getStringExtra(Add_ModifyActivity.EXTRA_DESCRIPTION);
+        int stars = data.getIntExtra(Add_ModifyActivity.EXTRA_STARS,1);
+
+        Game game = new Game(name,description,stars,gender,image,date);
+        gameViewModel.update(game);
+        Toast.makeText(this, "Game Updated", Toast.LENGTH_SHORT).show();
+    }*/
     else{
         Toast.makeText(this, "Error,Game not added", Toast.LENGTH_SHORT).show();
     }
