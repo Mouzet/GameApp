@@ -30,6 +30,7 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.GameHolder>
     public Game getGameAt(int position){
         return games.get(position);
     }
+
     //Get the data into the view GameHolder
     @Override
     public void onBindViewHolder(@NonNull GameHolder gameHolder, int position)
@@ -42,7 +43,7 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.GameHolder>
         gameHolder.buttonImage.setText(currentGame.getPathImage());
         gameHolder.textViewDate.setText(String.valueOf(currentGame.getDate()));
         gameHolder.textViewGender.setText(currentGame.getGenderGame());
-        //gameHolder.buttonStars.setText(String.valueOf(currentGame.getNumberStars()));
+        gameHolder.buttonStars.setText(String.valueOf(currentGame.getNumberStars()));
 
     }
 
@@ -61,23 +62,25 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.GameHolder>
     }
 
     class GameHolder extends RecyclerView.ViewHolder{
-        //private ImageView imageViewPicture;
+
         private Button buttonImage;
         private TextView textViewName;
         private TextView textViewDescription;
         private TextView textViewDate;
         private TextView textViewGender;
-        //private Button buttonStars;
+        private Button buttonStars;
 
         public GameHolder(@NonNull View itemView) {
+
             super(itemView);
 
-            //buttonStars = itemView.findViewById(R.id.stars);
+
             buttonImage = itemView.findViewById(R.id.buttonimage);
             textViewName = itemView.findViewById(R.id.name_game);
             textViewDescription = itemView.findViewById(R.id.description);
             textViewDate = itemView.findViewById(R.id.date);
             textViewGender = itemView.findViewById(R.id.genre);
+            buttonStars = itemView.findViewById(R.id.stars);
 
         }
     }

@@ -38,6 +38,7 @@ public class Add_ModifyActivity extends AppCompatActivity implements AdapterView
     private NumberPicker editstars;
     private Spinner editGender;
 
+
     String nameButton;
 
 
@@ -81,9 +82,13 @@ public class Add_ModifyActivity extends AppCompatActivity implements AdapterView
             editdate.setText(getIntent().getStringExtra("date"));
             editdescription.setText(getIntent().getStringExtra("description"));
             editimage.setText(getIntent().getStringExtra("pathimage"));
-            String gender = editGender.getSelectedItem().toString();
-            int a = mAdapter.getPosition(gender);
-            editGender.setSelection(a);
+            /*String gender = editGender.getSelectedItem().toString();
+            mAdapter = (ArrayAdapter) editGender.getAdapter(); //cast to an ArrayAdapter
+
+            int spinnerPosition = mAdapter.getPosition(gender);
+            editGender.setSelection(spinnerPosition);*/
+            editstars.setValue(Integer.parseInt(getIntent().getStringExtra("stars")));
+
              setTitle("Modify Game");
         }
 

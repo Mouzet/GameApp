@@ -79,6 +79,7 @@ public class DetailsActivity extends AppCompatActivity
         TextView tedate = (TextView) findViewById(R.id.date);
         TextView tedescription = (TextView) findViewById(R.id.description);
         Button buimage = (Button) findViewById(R.id.image);
+        Button bustars = (Button) findViewById(R.id.stars);
 
 
         nameButton="Modify";
@@ -88,6 +89,7 @@ public class DetailsActivity extends AppCompatActivity
         String date = tedate.getText().toString();
         String description = tedescription.getText().toString();
         String button = buimage.getText().toString();
+        String stars = bustars.getText().toString();
 
 
         intent.putExtra("nameButton",nameButton);
@@ -96,6 +98,7 @@ public class DetailsActivity extends AppCompatActivity
         intent.putExtra("date",date);
         intent.putExtra("description",description);
         intent.putExtra("pathimage",button);
+        intent.putExtra("stars",stars);
 
 
         startActivity(intent);
