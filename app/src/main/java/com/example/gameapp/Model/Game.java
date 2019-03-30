@@ -1,5 +1,6 @@
 package com.example.gameapp.Model;
 
+import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 
@@ -7,14 +8,29 @@ import android.arch.persistence.room.PrimaryKey;
 public class Game
 {
     @PrimaryKey(autoGenerate = true)
+    @ColumnInfo (name = "mIdGame")
     private int mIdGame;
+
+    @ColumnInfo (name = "mNameGame")
     private String mNameGame;
+
+    @ColumnInfo (name="mDescriptionGame")
     private String mDescriptionGame;
+
+    @ColumnInfo (name = "mNumberStars")
     private int mNumberStars;
+
+    @ColumnInfo (name = "mGenderGame")
     private String mGenderGame;
+
+    @ColumnInfo (name = "mPathImage")
     private String mPathImage;
+
+    @ColumnInfo (name = "mDate")
     private int mDate;  //Format : 20190325 -> 25 mars 2019
-    private int mIdComment;
+
+    @ColumnInfo (name = "idComment")
+    private int idComment;
 
     //Constructor
     public Game(String nameGame, String descriptionGame, int numberStars, String genderGame, String pathImage, int date)
@@ -83,10 +99,10 @@ public class Game
     }
 
     public int getIdComment() {
-        return mIdComment;
+        return idComment;
     }
 
     public void setIdComment(int idComment) {
-        mIdComment = idComment;
+        idComment = idComment;
     }
 }

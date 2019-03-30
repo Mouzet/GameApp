@@ -3,18 +3,15 @@
     android:layout_height="fill_parent"
     android:background="@drawable/back">
 
-    <!-- Layout de la page d'accueil -->
-    <ImageView
-        android:id="@+id/image_jeu"
-        android:layout_width="wrap_content"
-        android:layout_height="280dp"
-        android:src="@drawable/gameapp"/>
+
+
+
 
     <TextView
         android:id="@+id/search"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/image_jeu"
+
         android:layout_marginLeft="159dp"
         android:layout_marginTop="27dp"
         android:textSize="28dp"

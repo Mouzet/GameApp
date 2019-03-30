@@ -14,7 +14,6 @@ public class GameViewModel extends AndroidViewModel
 {
     private GameRepository repository;
     private LiveData<List<Game>> allGames;
-    private LiveData<List<Game>> researchGame;
 
     public GameViewModel(@NonNull Application application)
     {

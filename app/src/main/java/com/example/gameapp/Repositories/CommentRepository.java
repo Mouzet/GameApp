@@ -42,6 +42,8 @@ public class CommentRepository {
         new DeleteAllCommentAsyncTask(commentDao).execute();
     }
 
+    //Obtiens les jeux qui correspondent a la recherche
+    public LiveData<List<Comment>> getCommentById(int idComment) {return commentDao.getCommentById(idComment);}
     public LiveData<List<Comment>> getAllComments(){
         return allComments;
     }
@@ -55,7 +57,8 @@ public class CommentRepository {
         }
 
         @Override
-        protected Void doInBackground(Comment... comments) {
+        protected Void doInBackground(Comment... comments)
+        {
             commentDao.insert(comments[0]);
             return null;
         }

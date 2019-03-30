@@ -72,8 +72,8 @@ public abstract class GameDatabase extends RoomDatabase {
             gameDao.insert(new Game("Pokemon", "Description 3", 1, "Action", "@drawable/pikachu", 20120325));
 
             //Données table Comments
-            commentDao.insert(new Comment("Good Game !", "Valentine"));
-            commentDao.insert(new Comment("Very Good Game !", "Yannick"));
+            commentDao.insert(new Comment("Good Game !", "Valentine", 1));
+            commentDao.insert(new Comment("Very Good Game !", "Yannick", 2));
 
             return null;
         }

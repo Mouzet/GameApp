@@ -28,9 +28,9 @@ public class CommentsActivity extends AppCompatActivity {
 
     public final static int ADD_COMMENT_REQUEST =1;
 
-
     private String userComment;
     private String textComment;
+    private int idGame;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState)
@@ -90,7 +90,7 @@ public class CommentsActivity extends AppCompatActivity {
             String user = data.getStringExtra(Add_CommentActivity.EXTRA_USER);
             String comment = data.getStringExtra(Add_CommentActivity.EXTRA_COMMENT);
 
-            Comment c = new Comment(comment,user);
+            Comment c = new Comment(comment,user, idGame);
             commentViewModel.insert(c);
 
             Toast.makeText(this, "Comment saved", Toast.LENGTH_SHORT).show();
