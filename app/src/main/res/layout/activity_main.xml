@@ -4,16 +4,20 @@
     android:background="@drawable/back">
 
 
-
+<ImageView
+    android:id="@+id/jeu"
+    android:layout_width="400dp"
+    android:layout_height="340dp"
+    android:src="@drawable/gameapp"/>
 
 
     <TextView
         android:id="@+id/search"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
+        android:layout_below="@+id/jeu"
         android:layout_marginLeft="159dp"
-        android:layout_marginTop="27dp"
+        android:layout_marginTop="15dp"
         android:textSize="28dp"
         android:textStyle="bold"
         android:textAppearance="?android:attr/textAppearanceLarge"

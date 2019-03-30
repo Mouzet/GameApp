@@ -1,11 +1,12 @@
 package com.example.gameapp.Adapter;
 
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.gameapp.Model.Game;
@@ -35,15 +36,17 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.GameHolder>
     @Override
     public void onBindViewHolder(@NonNull GameHolder gameHolder, int position)
     {
-        //???? Comment faire les images?
+
 
         Game currentGame = games.get(position);
         gameHolder.textViewName.setText(currentGame.getNameGame());
         gameHolder.textViewDescription.setText(currentGame.getDescriptionGame());
-        gameHolder.buttonImage.setText(currentGame.getPathImage());
+
+        gameHolder.buttonImage.setImageURI(Uri.parse(currentGame.getPathImage()));
+        gameHolder.pathImage.setText(currentGame.getPathImage());
         gameHolder.textViewDate.setText(String.valueOf(currentGame.getDate()));
         gameHolder.textViewGender.setText(currentGame.getGenderGame());
-        gameHolder.buttonStars.setText(String.valueOf(currentGame.getNumberStars()));
+        gameHolder.textViewstars.setText(String.valueOf(currentGame.getNumberStars()));
 
     }
 
@@ -63,24 +66,25 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.GameHolder>
 
     class GameHolder extends RecyclerView.ViewHolder{
 
-        private Button buttonImage;
+        private ImageView buttonImage;
         private TextView textViewName;
         private TextView textViewDescription;
         private TextView textViewDate;
         private TextView textViewGender;
-        private Button buttonStars;
+        private TextView pathImage;
+        private TextView textViewstars;
 
         public GameHolder(@NonNull View itemView) {
 
             super(itemView);
 
-
+            pathImage= itemView.findViewById(R.id.pathiamge);
             buttonImage = itemView.findViewById(R.id.buttonimage);
             textViewName = itemView.findViewById(R.id.name_game);
             textViewDescription = itemView.findViewById(R.id.description);
             textViewDate = itemView.findViewById(R.id.date);
             textViewGender = itemView.findViewById(R.id.genre);
-            buttonStars = itemView.findViewById(R.id.stars);
+            textViewstars = itemView.findViewById(R.id.number);
 
         }
     }

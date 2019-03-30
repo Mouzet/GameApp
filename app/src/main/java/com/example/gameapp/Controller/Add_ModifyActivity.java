@@ -1,7 +1,17 @@
 package com.example.gameapp.Controller;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.support.annotation.RequiresApi;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -10,14 +20,19 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.NumberPicker;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.gameapp.R;
 
-public class Add_ModifyActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 
+public class Add_ModifyActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+    private final int SELECT_PHOTO = 1;
     public static final String EXTRA_NAME =
             "com.example.gameapp.Controller.EXTRA_NAME";
     public static final String EXTRA_IMAGE =
@@ -32,12 +47,12 @@ public class Add_ModifyActivity extends AppCompatActivity implements AdapterView
             "com.example.gameapp.Controller.EXTRA_GENDER";
 
     private EditText editname;
-    private EditText editimage;
+    private ImageView editimage;
     private EditText editdate;
     private EditText editdescription;
     private NumberPicker editstars;
     private Spinner editGender;
-
+    private static String imagePath;
 
     String nameButton;
 
@@ -68,6 +83,26 @@ public class Add_ModifyActivity extends AppCompatActivity implements AdapterView
         editGender.setAdapter(mAdapter);
           editGender.setOnItemSelectedListener(this);
 
+        editimage.setOnClickListener(new View.OnClickListener() {
+
+
+            @RequiresApi(api = Build.VERSION_CODES.M)
+            @Override
+            public void onClick(View view) {
+                requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
+                if (ContextCompat.checkSelfPermission(Add_ModifyActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE)
+                        == PackageManager.PERMISSION_GRANTED)
+                {
+                    Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
+                    photoPickerIntent.setType("image/*");
+                    startActivityForResult(photoPickerIntent, SELECT_PHOTO);
+                }
+
+            }
+        });
+
+
+
 
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close);
         setTitle("Add Game");
@@ -81,7 +116,7 @@ public class Add_ModifyActivity extends AppCompatActivity implements AdapterView
             editname.setText(getIntent().getStringExtra("name"));
             editdate.setText(getIntent().getStringExtra("date"));
             editdescription.setText(getIntent().getStringExtra("description"));
-            editimage.setText(getIntent().getStringExtra("pathimage"));
+            editimage.setImageURI(Uri.parse(getIntent().getStringExtra("pathimage")));
             /*String gender = editGender.getSelectedItem().toString();
             mAdapter = (ArrayAdapter) editGender.getAdapter(); //cast to an ArrayAdapter
 
@@ -96,13 +131,13 @@ public class Add_ModifyActivity extends AppCompatActivity implements AdapterView
 
     private void Save(){
         String name = editname.getText().toString();
-        String image = editimage.getText().toString();
+       // String image = textviewimage.getText().toString();
         String date = editdate.getText().toString();
         String description = editdescription.getText().toString();
         int stars = editstars.getValue();
         String gender = editGender.getSelectedItem().toString();
 
-        if(name.trim().isEmpty() || image.trim().isEmpty() || date.trim().isEmpty() || description.trim().isEmpty()){
+        if(name.trim().isEmpty() || imagePath.trim().isEmpty() || date.trim().isEmpty() || description.trim().isEmpty()){
 
             Toast.makeText(this, "Please fill all the gaps", Toast.LENGTH_SHORT).show();
         return;
@@ -110,7 +145,7 @@ public class Add_ModifyActivity extends AppCompatActivity implements AdapterView
 
         Intent data = new Intent();
         data.putExtra(EXTRA_NAME, name);
-        data.putExtra(EXTRA_IMAGE, image);
+        data.putExtra(EXTRA_IMAGE, imagePath);
         data.putExtra(EXTRA_DATE, date);
         data.putExtra(EXTRA_DESCRIPTION, description);
         data.putExtra(EXTRA_STARS, stars);
@@ -150,7 +185,40 @@ public class Add_ModifyActivity extends AppCompatActivity implements AdapterView
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent imageReturnedIntent) {
+        super.onActivityResult(requestCode, resultCode, imageReturnedIntent);
+        // Permission is not granted
 
+
+
+        switch(requestCode) {
+            case SELECT_PHOTO:
+
+                if (resultCode == RESULT_OK) try {
+                    final Uri imageUri = imageReturnedIntent.getData();
+                    final InputStream imageStream = getContentResolver().openInputStream(imageUri);
+                    final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
+                    editimage.setImageBitmap(selectedImage);
+
+                    Uri tempUri = imageUri;
+                    // CALL THIS METHOD TO GET THE ACTUAL PATH
+                    File finalFile = new File(getRealPathFromURI(tempUri));
+                    imagePath = finalFile.getAbsoluteFile().toString();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+
+
+        }
+
+    }
+    public String getRealPathFromURI(Uri uri) {
+        Cursor cursor = getContentResolver().query(uri, null, null, null, null);
+        cursor.moveToFirst();
+        int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+        return cursor.getString(idx);
+    }
    /*
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent imageReturnedIntent) {

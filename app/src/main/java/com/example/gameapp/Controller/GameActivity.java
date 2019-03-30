@@ -3,7 +3,10 @@ package com.example.gameapp.Controller;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -11,11 +14,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,7 +40,7 @@ public class GameActivity extends AppCompatActivity
     private String nameButton;
     private String nameSearch;
     private String gender;
-
+    private static String imagePath;
     protected void onCreate(Bundle savedInstanceState)
     {
 
@@ -174,20 +178,24 @@ public class GameActivity extends AppCompatActivity
         TextView tdate = (TextView) findViewById(R.id.date);
         TextView tdescription = (TextView) findViewById(R.id.description);
         TextView tgenre = (TextView) findViewById(R.id.genre);
-        Button bimage = (Button) findViewById(R.id.buttonimage);
-        Button bstars = (Button) findViewById(R.id.stars);
+        ImageView bimage =  findViewById(R.id.buttonimage);
+        TextView tstars = (TextView) findViewById(R.id.number);
+        TextView path=findViewById(R.id.pathiamge);
 
         String name = tname.getText().toString();
         String date = tdate.getText().toString();
         String description = tdescription.getText().toString();
         String genre = tgenre.getText().toString();
-        String button = bimage.getText().toString();
-        String stars = bstars.getText().toString();
+        String stars = tstars.getText().toString();
+        imagePath=path.getText().toString();
+
+
+
 
         intent.putExtra("name",name);
         intent.putExtra("date",date);
         intent.putExtra("description",description);
-        intent.putExtra("imagepath",button);
+        intent.putExtra("imagepath",imagePath);
         intent.putExtra("genre",genre);
         intent.putExtra("stars",stars);
 
@@ -213,6 +221,7 @@ public class GameActivity extends AppCompatActivity
         Game game = new Game(name,description,stars,gender,image,date);
         gameViewModel.insert(game);
 
+        Log.i("***** PATHIMAGE *****", image);
 
         Toast.makeText(this, "Game added", Toast.LENGTH_SHORT).show();
 
@@ -228,7 +237,12 @@ public class GameActivity extends AppCompatActivity
         menuinflater.inflate(R.menu.delete_menu,menu);
         return true;
     }
-
+    public String getRealPathFromURI(Uri uri) {
+        Cursor cursor = getContentResolver().query(uri, null, null, null, null);
+        cursor.moveToFirst();
+        int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+        return cursor.getString(idx);
+    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 

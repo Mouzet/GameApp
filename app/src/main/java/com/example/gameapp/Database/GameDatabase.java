@@ -13,8 +13,6 @@ import com.example.gameapp.DAO.GameDAO;
 import com.example.gameapp.Model.Comment;
 import com.example.gameapp.Model.Game;
 
-import javax.sql.CommonDataSource;
-
 @Database(entities = {Game.class, Comment.class}, version = 1)
 public abstract class GameDatabase extends RoomDatabase {
 
@@ -67,7 +65,7 @@ public abstract class GameDatabase extends RoomDatabase {
         protected Void doInBackground(Void... voids)
         {
             //Données table Jeux
-            gameDao.insert(new Game("Pac-man", "Description 1", 3, "Action", "@drawable/pacman", 20100325));
+            gameDao.insert(new Game("Pac-man", "Description 1", 3, "Action", "/storage/emulated/0/DCIM/Camera/IMG_20190330_102504.jpg", 20100325));
             gameDao.insert(new Game("Mario Kart", "Description 2", 2, "Action", "@drawable/mario", 20110325));
             gameDao.insert(new Game("Pokemon", "Description 3", 1, "Action", "@drawable/pikachu", 20120325));
 

@@ -2,11 +2,13 @@ package com.example.gameapp.Controller;
 
 import android.content.Intent;
 import android.graphics.Paint;
+import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.method.LinkMovementMethod;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.gameapp.R;
@@ -21,8 +23,9 @@ public class DetailsActivity extends AppCompatActivity
     private TextView tgenre;
     private TextView tdate;
     private TextView tdescription;
-    private Button bimage;
-    private Button bstars;
+    private TextView pathimage;
+    private ImageView bimage;
+    private TextView bstars;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,17 +38,22 @@ public class DetailsActivity extends AppCompatActivity
         tdate = (TextView) findViewById(R.id.date);
         tdescription = (TextView) findViewById(R.id.description);
         tgenre = (TextView) findViewById(R.id.genre);
-        bimage = (Button) findViewById(R.id.image);
-        bstars = (Button) findViewById(R.id.stars);
+        bimage = (ImageView) findViewById(R.id.image);
+        bstars = (TextView) findViewById(R.id.stars);
+        pathimage = (TextView) findViewById(R.id.imageuri);
 
         tname.setText(getIntent().getStringExtra("name"));
         tdate.setText(getIntent().getStringExtra("date"));
         tdescription.setText(getIntent().getStringExtra("description"));
         tgenre.setText(getIntent().getStringExtra("genre"));
-        bimage.setText(getIntent().getStringExtra("imagepath"));
+        bimage.setImageURI(Uri.parse(getIntent().getStringExtra("imagepath")));
         bstars.setText(getIntent().getStringExtra("stars"));
+        pathimage.setText(getIntent().getStringExtra("imagepath"));
 
 
+        Typeface blockFonts = Typeface.createFromAsset(getAssets(),"MAXWELL BOLD.ttf");
+        TextView txtSampleTxt = (TextView) findViewById(R.id.details_page);
+        txtSampleTxt.setTypeface(blockFonts);
 
 
         TextView textview4 = (TextView) findViewById(R.id.details_page);
@@ -78,8 +86,9 @@ public class DetailsActivity extends AppCompatActivity
         TextView tegender = (TextView) findViewById(R.id.genre);
         TextView tedate = (TextView) findViewById(R.id.date);
         TextView tedescription = (TextView) findViewById(R.id.description);
-        Button buimage = (Button) findViewById(R.id.image);
-        Button bustars = (Button) findViewById(R.id.stars);
+        ImageView buimage = (ImageView) findViewById(R.id.image);
+        TextView imagepath = (TextView) findViewById(R.id.imageuri);
+        TextView bustars = (TextView) findViewById(R.id.stars);
 
 
         nameButton="Modify";
@@ -88,7 +97,7 @@ public class DetailsActivity extends AppCompatActivity
         String gender = tegender.getText().toString();
         String date = tedate.getText().toString();
         String description = tedescription.getText().toString();
-        String button = buimage.getText().toString();
+        String button = imagepath.getText().toString();
         String stars = bustars.getText().toString();
 
 
@@ -106,5 +115,7 @@ public class DetailsActivity extends AppCompatActivity
 
 
     }
+
+
 
 }
