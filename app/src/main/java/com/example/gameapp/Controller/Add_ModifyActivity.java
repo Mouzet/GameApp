@@ -52,6 +52,7 @@ public class Add_ModifyActivity extends AppCompatActivity implements AdapterView
     private EditText editdescription;
     private NumberPicker editstars;
     private Spinner editGender;
+    //private TextView tidgame;
     private static String imagePath;
 
     String nameButton;
@@ -72,6 +73,8 @@ public class Add_ModifyActivity extends AppCompatActivity implements AdapterView
         editdescription = findViewById(R.id.description);
         editstars = findViewById(R.id.stars);
         editGender = findViewById(R.id.gender);
+        //tidgame = findViewById(R.id.id_game);
+
 
         editstars.setMinValue(1);
         editstars.setMaxValue(5);
@@ -117,6 +120,7 @@ public class Add_ModifyActivity extends AppCompatActivity implements AdapterView
             editdate.setText(getIntent().getStringExtra("date"));
             editdescription.setText(getIntent().getStringExtra("description"));
             editimage.setImageURI(Uri.parse(getIntent().getStringExtra("pathimage")));
+            //tidgame.setText(getIntent().getStringExtra("idgame"));
             /*String gender = editGender.getSelectedItem().toString();
             mAdapter = (ArrayAdapter) editGender.getAdapter(); //cast to an ArrayAdapter
 
@@ -136,6 +140,7 @@ public class Add_ModifyActivity extends AppCompatActivity implements AdapterView
         String description = editdescription.getText().toString();
         int stars = editstars.getValue();
         String gender = editGender.getSelectedItem().toString();
+        //String idgame = tidgame.getText().toString();
 
         if(name.trim().isEmpty() || imagePath.trim().isEmpty() || date.trim().isEmpty() || description.trim().isEmpty()){
 
@@ -145,16 +150,20 @@ public class Add_ModifyActivity extends AppCompatActivity implements AdapterView
 
 
         Intent data = new Intent();
-        /* if(nameButton.equals("Modify")) {
-            int namebuttonmodify = 2;
-            data.putExtra("activity",namebuttonmodify);
-        }*/
+
+        if (nameButton.equals("Modify")){
+            int test = -1;
+            data.putExtra("test",test);
+        }
+
         data.putExtra(EXTRA_NAME, name);
         data.putExtra(EXTRA_IMAGE, imagePath);
         data.putExtra(EXTRA_DATE, date);
         data.putExtra(EXTRA_DESCRIPTION, description);
         data.putExtra(EXTRA_STARS, stars);
         data.putExtra(EXTRA_GENDER, gender);
+        //data.putExtra("idgame", idgame);
+
 
         setResult(RESULT_OK,data);
         finish();

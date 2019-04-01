@@ -165,7 +165,7 @@ public class GameActivity extends AppCompatActivity
 
     public void showGame(View view){
 
-        Intent intent = new Intent(this, DetailsActivity.class);
+        Intent intent = new Intent(GameActivity.this, DetailsActivity.class);
 
         TextView tname = (TextView)findViewById(R.id.name_game);
         TextView tdate = (TextView)findViewById(R.id.date);
@@ -174,7 +174,7 @@ public class GameActivity extends AppCompatActivity
         ImageView bimage =  findViewById(R.id.buttonimage);
         TextView tstars = (TextView) findViewById(R.id.number);
         TextView path = findViewById(R.id.pathimage);
-        TextView tidgame = findViewById(R.id.id_game);
+        //TextView tidgame = findViewById(R.id.id_game);
 
 
         String name = tname.getText().toString();
@@ -183,7 +183,7 @@ public class GameActivity extends AppCompatActivity
         String genre = tgenre.getText().toString();
         String stars = tstars.getText().toString();
         String imagePath = path.getText().toString();
-        String idgame = tidgame.getText().toString();
+        //String idgame = tidgame.getText().toString();
 
         //Toast.makeText(this, name, Toast.LENGTH_SHORT).show();
 
@@ -193,8 +193,9 @@ public class GameActivity extends AppCompatActivity
         intent.putExtra("imagepath",imagePath);
         intent.putExtra("genre",genre);
         intent.putExtra("stars",stars);
-        intent.putExtra("idgame", idgame);
+        //intent.putExtra("idgame", idgame);
 
+        Log.i("****** name *******", name);
         startActivity(intent);
     }
 
@@ -202,37 +203,43 @@ public class GameActivity extends AppCompatActivity
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        int buttonmodify = data.getIntExtra("activity",2);
+        /*int buttonmodify = data.getIntExtra("test",-1);
+        int a=0;
+        if( a!=-1){*/
 
-    if(requestCode == ADD_GAME  && resultCode == RESULT_OK){
+    if(requestCode == ADD_GAME  && resultCode == RESULT_OK) {
         String name = data.getStringExtra(Add_ModifyActivity.EXTRA_NAME);
         String gender = data.getStringExtra((Add_ModifyActivity.EXTRA_GENDER));
         String image = data.getStringExtra(Add_ModifyActivity.EXTRA_IMAGE);
-        int date = data.getIntExtra(Add_ModifyActivity.EXTRA_DATE,20100101);
+        int date = data.getIntExtra(Add_ModifyActivity.EXTRA_DATE, 20100101);
         String description = data.getStringExtra(Add_ModifyActivity.EXTRA_DESCRIPTION);
-        int stars = data.getIntExtra(Add_ModifyActivity.EXTRA_STARS,1);
+        int stars = data.getIntExtra(Add_ModifyActivity.EXTRA_STARS, 1);
 
-        Game game = new Game(name,description,stars,gender,image,date);
+        Game game = new Game(name, description, stars, gender, image, date);
 
-            gameViewModel.insert(game);
+        gameViewModel.insert(game);
 
         Log.i("***** PATHIMAGE *****", image);
 
         Toast.makeText(this, "Game added", Toast.LENGTH_SHORT).show();
-
-    }
-    /*else if(requestCode == 2 && resultCode== RESULT_OK){
+    /*}
+    else if (a==-1){
         String name = data.getStringExtra(Add_ModifyActivity.EXTRA_NAME);
         String gender = data.getStringExtra((Add_ModifyActivity.EXTRA_GENDER));
         String image = data.getStringExtra(Add_ModifyActivity.EXTRA_IMAGE);
-        int date = data.getIntExtra(Add_ModifyActivity.EXTRA_DATE,20100101);
+        int date = data.getIntExtra(Add_ModifyActivity.EXTRA_DATE, 20100101);
         String description = data.getStringExtra(Add_ModifyActivity.EXTRA_DESCRIPTION);
-        int stars = data.getIntExtra(Add_ModifyActivity.EXTRA_STARS,1);
+        int stars = data.getIntExtra(Add_ModifyActivity.EXTRA_STARS, 1);
+        int id = Integer.parseInt(data.getStringExtra("idgame"));
 
         Game game = new Game(name,description,stars,gender,image,date);
+        game.setIdGame(id);
+
         gameViewModel.update(game);
-        Toast.makeText(this, "Game Updated", Toast.LENGTH_SHORT).show();
+
     }*/
+    }
+
     else{
         Toast.makeText(this, "Error,Game not added", Toast.LENGTH_SHORT).show();
     }
