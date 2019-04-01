@@ -10,6 +10,8 @@ import android.widget.TextView;
 import com.example.gameapp.Model.Comment;
 import com.example.gameapp.R;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,8 +25,9 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentH
     public CommentAdapter.CommentHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.activity_comments, parent, false);
-        return new CommentAdapter.CommentHolder(itemView);
+        return new CommentHolder(itemView);
     }
+
     // Method utilisé pour le delete //Yannick
     public Comment getCommentAt(int position){
         return comments.get(position);
@@ -33,12 +36,11 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentH
     @Override
     public void onBindViewHolder(@NonNull CommentAdapter.CommentHolder commentHolder, int position)
     {
-
-
         Comment currentComment = comments.get(position);
+
+        commentHolder.textViewIdComment.setText(String.valueOf(currentComment.getIdComment()));
         commentHolder.textViewUser.setText(currentComment.getUserComment());
         commentHolder.textViewText.setText(currentComment.getTextComment());
-
     }
 
     //Return how many item we want to display in our recycle view
@@ -55,13 +57,16 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentH
         notifyDataSetChanged();
     }
 
-    class CommentHolder extends RecyclerView.ViewHolder{
-
+    class CommentHolder extends RecyclerView.ViewHolder
+    {
+        private TextView textViewIdComment;
         private TextView textViewUser;
         private TextView textViewText;
 
         public CommentHolder(@NonNull View itemView) {
             super(itemView);
+
+            textViewIdComment = itemView.findViewById(R.id.id_comment);
             textViewUser = itemView.findViewById(R.id.user_comment);
             textViewText = itemView.findViewById(R.id.text_comment);
         }

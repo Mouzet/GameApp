@@ -70,8 +70,9 @@ public abstract class GameDatabase extends RoomDatabase {
             gameDao.insert(new Game("Pokemon", "Description 3", 1, "Action", "/storage/emulated/0/DCIM/Camera/IMG_20190330_102504.jpg", 20120325));
 
             //Données table Comments
-            commentDao.insert(new Comment("Good Game !", "Valentine", 1));
-            commentDao.insert(new Comment("Very Good Game !", "Yannick", 2));
+            commentDao.insert(new Comment("PacMan is a good game !", "Valentine", 1));
+            commentDao.insert(new Comment("I love Mario Kart", "Yannick", 2));
+            commentDao.insert(new Comment("Pokemon, Catch them all !", "David", 3));
 
             return null;
         }

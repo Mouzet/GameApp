@@ -5,11 +5,13 @@ import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
+import android.support.annotation.NonNull;
 
 @Entity(tableName = "comment_table", foreignKeys = @ForeignKey(entity =Game.class, parentColumns = "mIdGame",
-        childColumns = "idComment"), indices = {@Index("idComment")})
+        childColumns = "idGame"), indices = {@Index("idGame")})
 public class Comment
 {
+    @NonNull
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo (name="idComment")
     private int idComment;
@@ -23,16 +25,6 @@ public class Comment
     @ColumnInfo (name = "idGame")
     private int idGame;
 
-    @ColumnInfo (name = "name")
-    private String name;
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public int getIdGame() {
         return idGame;
@@ -42,12 +34,11 @@ public class Comment
         this.idGame = idGame;
     }
 
-    //Constructor
     public Comment(String textComment, String userComment, int idGame)
     {
         mTextComment = textComment;
         mUserComment = userComment;
-        idGame = idGame;
+        this.idGame = idGame;
     }
 
     //Getters and Setters

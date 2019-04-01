@@ -43,7 +43,7 @@ public class CommentRepository {
     }
 
     //Obtiens les jeux qui correspondent a la recherche
-    public LiveData<List<Comment>> getCommentById(String name) {return commentDao.getCommentById(name);}
+    public LiveData<List<Comment>> getCommentById(int idGame) {return commentDao.getCommentById(idGame);}
     public LiveData<List<Comment>> getAllComments(){
         return allComments;
     }

@@ -60,7 +60,7 @@ public class CommentsActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
         commentViewModel = ViewModelProviders.of(this).get(CommentViewModel.class);
-        commentViewModel.getCommentById(name).observe(this, new Observer<List<Comment>>() {
+        commentViewModel.getCommentById(idGame).observe(this, new Observer<List<Comment>>() {
             @Override
             public void onChanged(@Nullable List<Comment> comments) {
                 adapter.setComments(comments);
@@ -83,8 +83,6 @@ public class CommentsActivity extends AppCompatActivity {
                 Toast.makeText(CommentsActivity.this, "Comment deleted", Toast.LENGTH_SHORT).show();
             }
         }).attachToRecyclerView(recyclerView);
-
-
     }
 
     @Override
@@ -95,7 +93,7 @@ public class CommentsActivity extends AppCompatActivity {
             String user = data.getStringExtra(Add_CommentActivity.EXTRA_USER);
             String comment = data.getStringExtra(Add_CommentActivity.EXTRA_COMMENT);
 
-            Comment c = new Comment(comment,user, idGame);
+            Comment c = new Comment(textComment, userComment, idGame);
             commentViewModel.insert(c);
 
             Toast.makeText(this, "Comment saved", Toast.LENGTH_SHORT).show();

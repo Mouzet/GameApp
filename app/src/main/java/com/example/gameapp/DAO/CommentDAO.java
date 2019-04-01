@@ -29,8 +29,7 @@ public interface CommentDAO {
   @Query("SELECT * FROM comment_table")
     LiveData<List<Comment>> getAllComments();
 
-  // WHERE idComment =:idComment
-  //Requête pour la recherche avec le NOM + le GENRE
-  @Query("SELECT idComment FROM comment_table WHERE name = :name")
-  LiveData<List<Comment>> getCommentById(String name);
+  //Recherche de commentaire
+  @Query("SELECT idComment, mUserComment, mTextComment, idGame FROM comment_table ct, game_table gt WHERE idGame=:idGame AND ct.idGame = gt.mIdGame")
+  LiveData<List<Comment>> getCommentById(int idGame);
 }

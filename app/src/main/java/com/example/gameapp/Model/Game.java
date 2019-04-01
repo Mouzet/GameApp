@@ -3,10 +3,12 @@ package com.example.gameapp.Model;
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
+import android.support.annotation.NonNull;
 
 @Entity(tableName = "game_table")
 public class Game
 {
+    @NonNull
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo (name = "mIdGame")
     private int mIdGame;
@@ -29,8 +31,6 @@ public class Game
     @ColumnInfo (name = "mDate")
     private int mDate;  //Format : 20190325 -> 25 mars 2019
 
-    @ColumnInfo (name = "idComment")
-    private int idComment;
 
     //Constructor
     public Game(String nameGame, String descriptionGame, int numberStars, String genderGame, String pathImage, int date)
@@ -98,11 +98,4 @@ public class Game
         mDate = date;
     }
 
-    public int getIdComment() {
-        return idComment;
-    }
-
-    public void setIdComment(int idComment) {
-        idComment = idComment;
-    }
 }
