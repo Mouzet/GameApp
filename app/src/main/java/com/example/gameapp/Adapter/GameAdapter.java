@@ -47,6 +47,7 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.GameHolder>
         gameHolder.textViewDate.setText(String.valueOf(currentGame.getDate()));
         gameHolder.textViewGender.setText(currentGame.getGenderGame());
         gameHolder.textViewstars.setText(String.valueOf(currentGame.getNumberStars()));
+        gameHolder.textIdGame.setText((String.valueOf(currentGame.getIdGame())));
 
     }
 
@@ -73,6 +74,7 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.GameHolder>
         private TextView textViewGender;
         private TextView pathImage;
         private TextView textViewstars;
+        private TextView textIdGame;
 
         public GameHolder(@NonNull View itemView) {
 
@@ -85,6 +87,7 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.GameHolder>
             textViewDate = itemView.findViewById(R.id.date);
             textViewGender = itemView.findViewById(R.id.genre);
             textViewstars = itemView.findViewById(R.id.number);
+            textIdGame = itemView.findViewById(R.id.id_game);
 
         }
     }

@@ -42,8 +42,9 @@ public class CommentsActivity extends AppCompatActivity {
         Intent intent = getIntent();
 
         idGame = intent.getIntExtra("idGame", 0);
+        String id_Game = String.valueOf(idGame);
 
-        Toast.makeText(this, idGame, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, id_Game, Toast.LENGTH_SHORT).show();
 
         FloatingActionButton buttonAdd = findViewById(R.id.add_comment);
         buttonAdd.setOnClickListener(new View.OnClickListener() {
