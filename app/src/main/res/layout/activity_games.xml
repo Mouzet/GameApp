@@ -15,6 +15,11 @@
         android:padding="6dp"
         android:background="@color/list">
 
+        <TextView
+            android:id="@+id/id_game"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
 
         <ImageView
             android:id="@+id/buttonimage"

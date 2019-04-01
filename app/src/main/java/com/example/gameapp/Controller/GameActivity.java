@@ -183,7 +183,7 @@ public class GameActivity extends AppCompatActivity
         String stars = tstars.getText().toString();
         String imagePath = path.getText().toString();
 
-        Toast.makeText(this, name, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, name, Toast.LENGTH_SHORT).show();
 
         intent.putExtra("name", name);
         intent.putExtra("date",date);

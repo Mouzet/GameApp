@@ -55,7 +55,7 @@ public class DetailsActivity extends AppCompatActivity
 
         name = intent.getStringExtra("name");
 
-        Toast.makeText(this, name, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, name, Toast.LENGTH_SHORT).show();
 
         Typeface blockFonts = Typeface.createFromAsset(getAssets(),"MAXWELL BOLD.ttf");
         TextView txtSampleTxt = (TextView) findViewById(R.id.details_page);
@@ -78,11 +78,14 @@ public class DetailsActivity extends AppCompatActivity
 
     public void seeComments(View view){
         Intent intent = new Intent(this, CommentsActivity.class);
-        startActivity(intent);
-        TextView nameGame = (TextView)findViewById(R.id.name_game);
-        String name = nameGame.getText().toString();
 
-        intent.putExtra("name", name);
+        Toast.makeText(this, "spuTest123", Toast.LENGTH_SHORT).show();
+        TextView textViewIdGame = (TextView)findViewById(R.id.id_game);
+        int idGame = Integer.parseInt(textViewIdGame.getText().toString());
+
+        Toast.makeText(this, "idGame : " + idGame, Toast.LENGTH_SHORT).show();
+
+        intent.putExtra("idGame", idGame);
         startActivity(intent);
     }
 
