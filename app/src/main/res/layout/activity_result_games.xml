@@ -15,7 +15,6 @@
         tools:listitem="@layout/activity_games"/>
 
 
-
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/add_game"
         android:layout_width="wrap_content"

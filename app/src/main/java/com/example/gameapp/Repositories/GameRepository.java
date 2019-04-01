@@ -15,7 +15,6 @@ public class GameRepository {
     private LiveData<List<Game>> allGames;
     private LiveData<List<Game>> researchGames;
 
-
     public GameRepository(Application application){
         GameDatabase database = GameDatabase.getInstance(application);
 
@@ -48,6 +47,9 @@ public class GameRepository {
     public LiveData<List<Game>> getAllGames(){
         return allGames;
     }
+
+    //Retourne l'id du jeu
+    public int getIdGame(String nameGame) {return gameDao.getIdGame(nameGame);}
 
     //Obtiens les jeux qui correspondent a la recherche
     public LiveData<List<Game>> getGamesByName(String nameSearch) {return gameDao.getGamesByName(nameSearch);}

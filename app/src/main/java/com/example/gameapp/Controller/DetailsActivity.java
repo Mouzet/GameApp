@@ -10,12 +10,12 @@ import android.text.method.LinkMovementMethod;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.gameapp.R;
 
 public class DetailsActivity extends AppCompatActivity
 {
-
 
     String nameButton;
 
@@ -26,11 +26,14 @@ public class DetailsActivity extends AppCompatActivity
     private TextView pathimage;
     private ImageView bimage;
     private TextView bstars;
+    private String name;
 
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
+
+        Intent intent = getIntent();
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -50,6 +53,9 @@ public class DetailsActivity extends AppCompatActivity
         bstars.setText(getIntent().getStringExtra("stars"));
         pathimage.setText(getIntent().getStringExtra("imagepath"));
 
+        name = intent.getStringExtra("name");
+
+        Toast.makeText(this, name, Toast.LENGTH_SHORT).show();
 
         Typeface blockFonts = Typeface.createFromAsset(getAssets(),"MAXWELL BOLD.ttf");
         TextView txtSampleTxt = (TextView) findViewById(R.id.details_page);
@@ -68,15 +74,16 @@ public class DetailsActivity extends AppCompatActivity
         TextView link3 = (TextView) findViewById(R.id.instagram);
         link3.setMovementMethod(LinkMovementMethod.getInstance());
 
-        Intent intent = getIntent();
-
-
     }
 
     public void seeComments(View view){
         Intent intent = new Intent(this, CommentsActivity.class);
         startActivity(intent);
-        TextView idgame = (TextView) findViewById(R.id.name_game);
+        TextView nameGame = (TextView)findViewById(R.id.name_game);
+        String name = nameGame.getText().toString();
+
+        intent.putExtra("name", name);
+        startActivity(intent);
     }
 
     public void modifyGame(View view)
@@ -111,9 +118,6 @@ public class DetailsActivity extends AppCompatActivity
 
 
         startActivity(intent);
-
-
-
     }
 
 

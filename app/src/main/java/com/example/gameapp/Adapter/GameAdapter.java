@@ -78,7 +78,7 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.GameHolder>
 
             super(itemView);
 
-            pathImage= itemView.findViewById(R.id.pathiamge);
+            pathImage= itemView.findViewById(R.id.pathimage);
             buttonImage = itemView.findViewById(R.id.buttonimage);
             textViewName = itemView.findViewById(R.id.name_game);
             textViewDescription = itemView.findViewById(R.id.description);

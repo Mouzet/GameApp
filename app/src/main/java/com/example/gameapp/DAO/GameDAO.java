@@ -15,7 +15,7 @@ import java.util.List;
 @Dao
 public interface GameDAO {
 
-        @Insert
+    @Insert
     void insert(Game game);
 
     @Update
@@ -27,6 +27,10 @@ public interface GameDAO {
     //Supprime tous les jeux de la BDD
     @Query("DELETE FROM game_table")
     void deleteAllGames();
+
+    //Sélectionne l'id
+    @Query ("SELECT mIdGame FROM game_table WHERE mNameGame =:nameGame")
+    int getIdGame(String nameGame);
 
     //On utilise LiveData pour que les données soient automatiquement
     //mise a jour lors d'un changement dans la BDD

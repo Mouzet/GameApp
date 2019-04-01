@@ -42,9 +42,9 @@ public class CommentViewModel extends AndroidViewModel
         repository.deleteAllComments();
     }
 
-    public LiveData<List<Comment>> getCommentById(int idComment)
+    public LiveData<List<Comment>> getCommentById(String name)
     {
-        return repository.getCommentById(idComment);
+        return repository.getCommentById(name);
     }
 
     public LiveData<List<Comment>> getAllComments()

@@ -42,6 +42,8 @@ public class GameViewModel extends AndroidViewModel
         repository.deleteAllGames();
     }
 
+    public int getIdGame(String nameGame)  {return repository.getIdGame(nameGame);}
+
     public LiveData<List<Game>> getAllGames()
     {
         return allGames;

@@ -40,19 +40,15 @@ public class GameActivity extends AppCompatActivity
     private String nameButton;
     private String nameSearch;
     private String gender;
-    private static String imagePath;
+   // private static String imagePath;
     protected void onCreate(Bundle savedInstanceState)
     {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result_games);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-
-
         FloatingActionButton buttonAdd = findViewById(R.id.add_game);
-
 
         buttonAdd.setOnClickListener(new View.OnClickListener(){
 
@@ -70,7 +66,6 @@ public class GameActivity extends AppCompatActivity
 
         nameButton = intent.getStringExtra("nameButton");
 
-
         //Si l'activité est demarré pour une recherche (par le bouton validate)
         //On effectue donc une recherche
         if(nameButton.equals("validate"))
@@ -78,7 +73,6 @@ public class GameActivity extends AppCompatActivity
             RecyclerView recyclerView = findViewById(R.id.recycler_view_game);
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
             recyclerView.setHasFixedSize(true);
-
 
             //permet d'afficher tant qu'on a la place a l'écran
             final GameAdapter adapter = new GameAdapter();
@@ -169,41 +163,36 @@ public class GameActivity extends AppCompatActivity
     }
 
 
-
     public void showGame(View view){
 
         Intent intent = new Intent(this, DetailsActivity.class);
 
-        TextView tname = (TextView)  findViewById(R.id.name_game);
-        TextView tdate = (TextView) findViewById(R.id.date);
+        TextView tname = (TextView)findViewById(R.id.name_game);
+        TextView tdate = (TextView)findViewById(R.id.date);
         TextView tdescription = (TextView) findViewById(R.id.description);
         TextView tgenre = (TextView) findViewById(R.id.genre);
         ImageView bimage =  findViewById(R.id.buttonimage);
         TextView tstars = (TextView) findViewById(R.id.number);
-        TextView path=findViewById(R.id.pathiamge);
+        TextView path = findViewById(R.id.pathimage);
+
 
         String name = tname.getText().toString();
         String date = tdate.getText().toString();
         String description = tdescription.getText().toString();
         String genre = tgenre.getText().toString();
         String stars = tstars.getText().toString();
-        imagePath=path.getText().toString();
+        String imagePath = path.getText().toString();
 
+        Toast.makeText(this, name, Toast.LENGTH_SHORT).show();
 
-
-
-        intent.putExtra("name",name);
+        intent.putExtra("name", name);
         intent.putExtra("date",date);
         intent.putExtra("description",description);
         intent.putExtra("imagepath",imagePath);
         intent.putExtra("genre",genre);
         intent.putExtra("stars",stars);
 
-
         startActivity(intent);
-
-
-
     }
 
     @Override
@@ -211,8 +200,6 @@ public class GameActivity extends AppCompatActivity
         super.onActivityResult(requestCode, resultCode, data);
 
         int buttonmodify = data.getIntExtra("activity",2);
-
-
 
     if(requestCode == ADD_GAME  && resultCode == RESULT_OK){
         String name = data.getStringExtra(Add_ModifyActivity.EXTRA_NAME);
@@ -273,7 +260,6 @@ public class GameActivity extends AppCompatActivity
         }
 
     }
-
 }
 
 
