@@ -87,7 +87,6 @@
             android:layout_alignLeft="@+id/buttonimage"
             android:layout_marginStart="186dp"
             android:layout_marginLeft="186dp"
-            android:text="/storage/emulated/0/DCIM/Camera/IMG_20190330_102504.jpg"
             android:visibility="invisible"
             />
 

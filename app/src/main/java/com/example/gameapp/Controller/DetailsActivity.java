@@ -81,7 +81,8 @@ public class DetailsActivity extends AppCompatActivity
 
         Toast.makeText(this, "spuTest123", Toast.LENGTH_SHORT).show();
         TextView textViewIdGame = (TextView)findViewById(R.id.id_game);
-        int idGame = Integer.parseInt(textViewIdGame.getText().toString());
+       textViewIdGame.setText(getIntent().getStringExtra("idgame"));
+        int idGame =  Integer.parseInt(textViewIdGame.getText().toString());
 
         Toast.makeText(this, "idGame : " + idGame, Toast.LENGTH_SHORT).show();
 

@@ -224,51 +224,5 @@ public class Add_ModifyActivity extends AppCompatActivity implements AdapterView
         int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
         return cursor.getString(idx);
     }
-   /*
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent imageReturnedIntent) {
-        super.onActivityResult(requestCode, resultCode, imageReturnedIntent);
-        // Permission is not granted
 
-
-
-        switch(requestCode) {
-            case SELECT_PHOTO:
-
-                if (resultCode == RESULT_OK) try {
-                    final Uri imageUri = imageReturnedIntent.getData();
-                    final InputStream imageStream = getContentResolver().openInputStream(imageUri);
-                    final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
-
-                    imageView.setImageBitmap(selectedImage);
-
-                    Uri tempUri = imageUri;
-
-                    // CALL THIS METHOD TO GET THE ACTUAL PATH
-                    File finalFile = new File(getRealPathFromURI(tempUri));
-                    imagePath = finalFile.getAbsoluteFile().toString();
-                    newBeverage.setImagepath(finalFile.getAbsoluteFile().toString());
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                }
-                // CALL THIS METHOD TO GET THE URI FROM THE BITMAP
-
-        }
-
-    }
-
-    public Uri getImageUri(Context inContext, Bitmap inImage) {
-        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
-        return Uri.parse(path);
-    }
-
-    public String getRealPathFromURI(Uri uri) {
-        Cursor cursor = getContentResolver().query(uri, null, null, null, null);
-        cursor.moveToFirst();
-        int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
-        return cursor.getString(idx);
-    }
-    */
 }

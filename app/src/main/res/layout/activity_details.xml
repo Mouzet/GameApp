@@ -153,6 +153,12 @@
         android:text="TextView"
         android:visibility="invisible"/>
 
+    <TextView
+        android:id="@+id/id_game"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
+
 
 </RelativeLayout>
 

@@ -55,6 +55,7 @@ public class GameViewModel extends AndroidViewModel
         return repository.getGamesByName(nameSearch);
     }
 
+
     //Retourne le jeu par GENRE
     public LiveData<List<Game>> getGamesByGender(String gender)
     {
