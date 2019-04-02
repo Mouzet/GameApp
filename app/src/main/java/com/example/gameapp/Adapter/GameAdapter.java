@@ -19,6 +19,7 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.GameHolder>
 {
     //Nouvelle liste de jeux
     private List<Game> games = new ArrayList<>();
+    private onItemClickListener listener;
 
     @NonNull
     @Override
@@ -89,7 +90,24 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.GameHolder>
             textViewstars = itemView.findViewById(R.id.number);
             textIdGame = itemView.findViewById(R.id.id_game);
 
+            itemView.setOnClickListener(new View.OnClickListener(){
+
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    if(listener != null && position != RecyclerView.NO_POSITION)
+                        listener.onItemClick(games.get(position));
+                }
+            });
 
         }
+    }
+
+    public interface onItemClickListener{
+        void onItemClick(Game game);
+    }
+
+    public void setOnItemClickListener(onItemClickListener listener){
+        this.listener = listener;
     }
 }

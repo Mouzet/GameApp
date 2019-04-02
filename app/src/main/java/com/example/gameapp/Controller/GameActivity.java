@@ -19,8 +19,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.gameapp.Adapter.GameAdapter;
@@ -40,6 +38,7 @@ public class GameActivity extends AppCompatActivity
     private String nameButton;
     private String nameSearch;
     private String gender;
+
    // private static String imagePath;
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -47,6 +46,8 @@ public class GameActivity extends AppCompatActivity
         setContentView(R.layout.activity_result_games);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        final GameAdapter adapter = new GameAdapter();
 
         FloatingActionButton buttonAdd = findViewById(R.id.add_game);
 
@@ -62,7 +63,8 @@ public class GameActivity extends AppCompatActivity
             }
         });
 
-        Intent intent = getIntent();
+        final Intent intent = getIntent();
+        final Intent intent_details = new Intent(this, DetailsActivity.class);
 
         nameButton = intent.getStringExtra("nameButton");
 
@@ -75,7 +77,7 @@ public class GameActivity extends AppCompatActivity
             recyclerView.setHasFixedSize(true);
 
             //permet d'afficher tant qu'on a la place a l'écran
-            final GameAdapter adapter = new GameAdapter();
+
             recyclerView.setAdapter(adapter);
 
             //Si on a entré un nom dans la recherche
@@ -136,7 +138,7 @@ public class GameActivity extends AppCompatActivity
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
             recyclerView.setHasFixedSize(true);
 
-            final GameAdapter adapter = new GameAdapter();
+           // final GameAdapter adapter = new GameAdapter();
             recyclerView.setAdapter(adapter);
 
             gameViewModel = ViewModelProviders.of(this).get(GameViewModel.class);
@@ -160,9 +162,30 @@ public class GameActivity extends AppCompatActivity
                 }
             }).attachToRecyclerView(recyclerView);
         }
+
+            /***********TEST**************/
+            adapter.setOnItemClickListener(new GameAdapter.onItemClickListener() {
+                @Override
+                public void onItemClick(Game game)
+                {
+                    intent_details.putExtra(DetailsActivity.EXTRA_IDGAME, game.getIdGame());
+                    intent_details.putExtra(DetailsActivity.EXTRA_NAMEGAME, game.getNameGame());
+                    intent_details.putExtra(DetailsActivity.EXTRA_DESCRIPTIONGAME, game.getDescriptionGame());
+                    intent_details.putExtra(DetailsActivity.EXTRA_STARSGAME, game.getNumberStars());
+                    intent_details.putExtra(DetailsActivity.EXTRA_GENDERGAME, game.getGenderGame());
+                    intent_details.putExtra(DetailsActivity.EXTRA_PATHIMAGEGAME, game.getPathImage());
+                    intent_details.putExtra(DetailsActivity.EXTRA_DATEGAME, game.getDate());
+
+                    startActivity(intent_details);
+                }
+            });
     }
 
 
+
+
+
+    /*
     public void showGame(View view){
 
         Intent intent = new Intent(GameActivity.this, DetailsActivity.class);
@@ -197,7 +220,7 @@ public class GameActivity extends AppCompatActivity
 
         Log.i("****** name *******", name);
         startActivity(intent);
-    }
+    }*/
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {

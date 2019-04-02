@@ -17,9 +17,17 @@ import com.example.gameapp.R;
 public class DetailsActivity extends AppCompatActivity
 {
     public static final int MODIFY_GAME =-1;
+    public static final String EXTRA_IDGAME = "com.example.gameapp.EXTRA_IDGAME";
+    public static final String EXTRA_NAMEGAME = "com.example.gameapp.EXTRA_NAMEGAME";
+    public static final String EXTRA_DESCRIPTIONGAME = "com.example.gameapp.DESCRIPTIONGAME";
+    public static final String EXTRA_STARSGAME = "com.example.gameapp.EXTRA_STARSGAME";
+    public static final String EXTRA_GENDERGAME = "com.example.gameapp.EXTRA_GENDERGAME";
+    public static final String EXTRA_PATHIMAGEGAME = "com.example.gameapp.EXTRA_PATHIMAGEGAME";
+    public static final String EXTRA_DATEGAME = "com.example.gameapp.EXTRA_DATEGAME";
 
     String nameButton;
 
+    private TextView tidgame;
     private TextView tname;
     private TextView tgenre;
     private TextView tdate;
@@ -28,7 +36,6 @@ public class DetailsActivity extends AppCompatActivity
     private ImageView bimage;
     private TextView bstars;
 
-    private String name;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +46,7 @@ public class DetailsActivity extends AppCompatActivity
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        tidgame = (TextView) findViewById(R.id.id_game);
         tname = (TextView) findViewById(R.id.name_game);
         tdate = (TextView) findViewById(R.id.date);
         tdescription = (TextView) findViewById(R.id.description);
@@ -48,23 +56,18 @@ public class DetailsActivity extends AppCompatActivity
         pathimage = (TextView) findViewById(R.id.imageuri);
 
 
-        tname.setText(getIntent().getStringExtra("name"));
-        tdate.setText(getIntent().getStringExtra("date"));
-        tdescription.setText(getIntent().getStringExtra("description"));
-        tgenre.setText(getIntent().getStringExtra("genre"));
-        bimage.setImageURI(Uri.parse(getIntent().getStringExtra("imagepath")));
-        bstars.setText(getIntent().getStringExtra("stars"));
-        pathimage.setText(getIntent().getStringExtra("imagepath"));
-
-
-        name = intent.getStringExtra("name");
-
-        //Toast.makeText(this, name, Toast.LENGTH_SHORT).show();
+        tidgame.setText(intent.getStringExtra(EXTRA_IDGAME));
+        tname.setText(intent.getStringExtra(EXTRA_NAMEGAME));
+        tdescription.setText(intent.getStringExtra(EXTRA_DESCRIPTIONGAME));
+        bstars.setText(intent.getStringExtra(EXTRA_STARSGAME));
+        tgenre.setText(intent.getStringExtra(EXTRA_GENDERGAME));
+        tdate.setText(intent.getStringExtra(EXTRA_DATEGAME));
+        bimage.setImageURI(Uri.parse(intent.getStringExtra(EXTRA_PATHIMAGEGAME)));
+        pathimage.setText(intent.getStringExtra(EXTRA_PATHIMAGEGAME));
 
         Typeface blockFonts = Typeface.createFromAsset(getAssets(),"MAXWELL BOLD.ttf");
         TextView txtSampleTxt = (TextView) findViewById(R.id.details_page);
         txtSampleTxt.setTypeface(blockFonts);
-
 
         TextView textview4 = (TextView) findViewById(R.id.details_page);
         textview4.setPaintFlags(textview4.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
@@ -77,7 +80,6 @@ public class DetailsActivity extends AppCompatActivity
 
         TextView link3 = (TextView) findViewById(R.id.instagram);
         link3.setMovementMethod(LinkMovementMethod.getInstance());
-
     }
 
     public void seeComments(View view){
@@ -106,7 +108,6 @@ public class DetailsActivity extends AppCompatActivity
         TextView bustars = (TextView) findViewById(R.id.stars);
         //TextView tidgame = (TextView) findViewById(R.id.id_game);
 
-
         nameButton="Modify";
 
         String name = tename.getText().toString();
@@ -117,7 +118,6 @@ public class DetailsActivity extends AppCompatActivity
         String stars = bustars.getText().toString();
         //String idgame = tidgame.getText().toString();
 
-
         intent.putExtra("nameButton",nameButton);
         intent.putExtra("name",name);
         intent.putExtra("genre",gender);
@@ -126,7 +126,6 @@ public class DetailsActivity extends AppCompatActivity
         intent.putExtra("pathimage",button);
         intent.putExtra("stars",stars);
        // intent.putExtra("idgame",idgame);
-
 
         startActivity(intent);
         //startActivityForResult(intent, MODIFY_GAME);

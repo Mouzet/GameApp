@@ -49,5 +49,4 @@ public interface GameDAO {
     @Query("SELECT * FROM game_table WHERE mNameGame =:nameSearch AND mGenderGame =:gender")
     LiveData<List<Game>> getGamesByNameAndGender(String nameSearch, String gender);
 
-
 }

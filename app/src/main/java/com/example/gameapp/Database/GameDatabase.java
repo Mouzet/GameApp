@@ -71,6 +71,7 @@ public abstract class GameDatabase extends RoomDatabase {
 
             //Données table Comments
             commentDao.insert(new Comment("PacMan is a good game !", "Valentine", 1));
+            commentDao.insert(new Comment("Yeah Pac-Maaan", "Yannick", 1));
             commentDao.insert(new Comment("I love Mario Kart", "Yannick", 2));
             commentDao.insert(new Comment("Pokemon, Catch them all !", "David", 3));
 
