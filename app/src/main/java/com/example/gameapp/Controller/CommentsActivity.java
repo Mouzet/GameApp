@@ -30,7 +30,7 @@ public class CommentsActivity extends AppCompatActivity {
 
     private String userComment;
     private String textComment;
-    private int idGame;
+    private int id_game;
     private String name;
 
     @Override
@@ -41,10 +41,7 @@ public class CommentsActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        idGame = intent.getIntExtra("idGame", 0);
-        String id_Game = String.valueOf(idGame);
-
-        Toast.makeText(this, id_Game, Toast.LENGTH_SHORT).show();
+        id_game = Integer.parseInt(intent.getStringExtra("idGame"));
 
         FloatingActionButton buttonAdd = findViewById(R.id.add_comment);
         buttonAdd.setOnClickListener(new View.OnClickListener() {
@@ -63,7 +60,7 @@ public class CommentsActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
         commentViewModel = ViewModelProviders.of(this).get(CommentViewModel.class);
-        commentViewModel.getCommentById(idGame).observe(this, new Observer<List<Comment>>() {
+        commentViewModel.getCommentById(id_game).observe(this, new Observer<List<Comment>>() {
             @Override
             public void onChanged(@Nullable List<Comment> comments) {
                 adapter.setComments(comments);
@@ -96,7 +93,7 @@ public class CommentsActivity extends AppCompatActivity {
             String user = data.getStringExtra(Add_CommentActivity.EXTRA_USER);
             String comment = data.getStringExtra(Add_CommentActivity.EXTRA_COMMENT);
 
-            Comment c = new Comment(textComment, userComment, idGame);
+            Comment c = new Comment(textComment, userComment, id_game);
             commentViewModel.insert(c);
 
             Toast.makeText(this, "Comment saved", Toast.LENGTH_SHORT).show();

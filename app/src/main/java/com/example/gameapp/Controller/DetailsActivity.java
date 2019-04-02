@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.method.LinkMovementMethod;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -36,8 +37,6 @@ public class DetailsActivity extends AppCompatActivity
     private ImageView bimage;
     private TextView bstars;
 
-
-
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
@@ -46,7 +45,7 @@ public class DetailsActivity extends AppCompatActivity
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        tidgame = (TextView) findViewById(R.id.id_game);
+        tidgame = (TextView) findViewById(R.id.id_game_details);
         tname = (TextView) findViewById(R.id.name_game);
         tdate = (TextView) findViewById(R.id.date);
         tdescription = (TextView) findViewById(R.id.description);
@@ -55,8 +54,8 @@ public class DetailsActivity extends AppCompatActivity
         bstars = (TextView) findViewById(R.id.stars);
         pathimage = (TextView) findViewById(R.id.imageuri);
 
-
-        tidgame.setText(intent.getStringExtra(EXTRA_IDGAME));
+        int id = intent.getIntExtra(EXTRA_IDGAME, -1);
+        tidgame.setText(Integer.toString(id));
         tname.setText(intent.getStringExtra(EXTRA_NAMEGAME));
         tdescription.setText(intent.getStringExtra(EXTRA_DESCRIPTIONGAME));
         bstars.setText(intent.getStringExtra(EXTRA_STARSGAME));
@@ -82,18 +81,17 @@ public class DetailsActivity extends AppCompatActivity
         link3.setMovementMethod(LinkMovementMethod.getInstance());
     }
 
-    public void seeComments(View view){
-        Intent intent = new Intent(this, CommentsActivity.class);
+    public void seeComments(View view)
+    {
+        Intent intent = getIntent();
+        Intent intent_comment = new Intent(this, CommentsActivity.class);
 
-        Toast.makeText(this, "spuTest123", Toast.LENGTH_SHORT).show();
-        TextView textViewIdGame = (TextView)findViewById(R.id.id_game);
-       textViewIdGame.setText(getIntent().getStringExtra("idgame"));
-        int idGame =  Integer.parseInt(textViewIdGame.getText().toString());
+        TextView textViewIdGame = findViewById(R.id.id_game_details);
 
-        Toast.makeText(this, "idGame : " + idGame, Toast.LENGTH_SHORT).show();
+        String idGame =  textViewIdGame.getText().toString();
 
-        intent.putExtra("idGame", idGame);
-        startActivity(intent);
+        intent_comment.putExtra("idGame", idGame);
+        startActivity(intent_comment);
     }
 
     public void modifyGame(View view)
