@@ -24,6 +24,7 @@ import android.widget.Toast;
 import com.example.gameapp.Adapter.GameAdapter;
 import com.example.gameapp.Model.Game;
 import com.example.gameapp.R;
+import com.example.gameapp.ViewModel.CommentViewModel;
 import com.example.gameapp.ViewModel.GameViewModel;
 
 import java.util.List;
@@ -33,11 +34,13 @@ public class GameActivity extends AppCompatActivity
     public static final int ADD_GAME =1;
     //Déclaration des viewmodels
     private GameViewModel gameViewModel;
+    private CommentViewModel commentViewModel;
 
     private String nameGame;
     private String nameButton;
     private String nameSearch;
     private String gender;
+    private Game game;
 
    // private static String imagePath;
     protected void onCreate(Bundle savedInstanceState)
@@ -156,14 +159,14 @@ public class GameActivity extends AppCompatActivity
                 }
 
                 @Override
-                public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
-                gameViewModel.delete(adapter.getGameAt(viewHolder.getAdapterPosition()));
+                public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int i)
+                {
+                    gameViewModel.delete(adapter.getGameAt(viewHolder.getAdapterPosition()));
                     Toast.makeText(GameActivity.this, "Game deleted", Toast.LENGTH_SHORT).show();
                 }
             }).attachToRecyclerView(recyclerView);
         }
 
-            /***********TEST**************/
             adapter.setOnItemClickListener(new GameAdapter.onItemClickListener() {
                 @Override
                 public void onItemClick(Game game)
@@ -180,47 +183,6 @@ public class GameActivity extends AppCompatActivity
                 }
             });
     }
-
-
-
-
-
-    /*
-    public void showGame(View view){
-
-        Intent intent = new Intent(GameActivity.this, DetailsActivity.class);
-
-        TextView tname = (TextView)findViewById(R.id.name_game);
-        TextView tdate = (TextView)findViewById(R.id.date);
-        TextView tdescription = (TextView) findViewById(R.id.description);
-        TextView tgenre = (TextView) findViewById(R.id.genre);
-        ImageView bimage =  findViewById(R.id.buttonimage);
-        TextView tstars = (TextView) findViewById(R.id.number);
-        TextView path = findViewById(R.id.pathimage);
-        TextView tidgame = findViewById(R.id.id_game);
-
-
-        String name = tname.getText().toString();
-        String date = tdate.getText().toString();
-        String description = tdescription.getText().toString();
-        String genre = tgenre.getText().toString();
-        String stars = tstars.getText().toString();
-        String imagePath = path.getText().toString();
-        String idgame = tidgame.getText().toString();
-
-        //Toast.makeText(this, name, Toast.LENGTH_SHORT).show();
-
-        intent.putExtra("name", name);
-        intent.putExtra("date",date);
-        intent.putExtra("description",description);
-        intent.putExtra("imagepath",imagePath);
-        intent.putExtra("genre",genre);
-        intent.putExtra("stars",stars);
-        intent.putExtra("idgame", idgame);
-
-        Log.i("****** name *******", name);
-        startActivity(intent);
-    }*/
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {

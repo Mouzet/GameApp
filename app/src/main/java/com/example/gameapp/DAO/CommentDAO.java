@@ -32,4 +32,5 @@ public interface CommentDAO {
   //Recherche de commentaire
   @Query("SELECT idComment, mUserComment, mTextComment, idGame FROM comment_table ct, game_table gt WHERE idGame=:idGame AND ct.idGame = gt.mIdGame")
   LiveData<List<Comment>> getCommentById(int idGame);
+
 }

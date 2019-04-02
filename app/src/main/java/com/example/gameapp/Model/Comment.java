@@ -8,7 +8,7 @@ import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 
 @Entity(tableName = "comment_table", foreignKeys = @ForeignKey(entity =Game.class, parentColumns = "mIdGame",
-        childColumns = "idGame"), indices = {@Index("idGame")})
+        childColumns = "idGame", onDelete = ForeignKey.CASCADE), indices = {@Index("idGame")})
 public class Comment
 {
     @NonNull
