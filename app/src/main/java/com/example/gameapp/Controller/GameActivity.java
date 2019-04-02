@@ -174,7 +174,7 @@ public class GameActivity extends AppCompatActivity
         ImageView bimage =  findViewById(R.id.buttonimage);
         TextView tstars = (TextView) findViewById(R.id.number);
         TextView path = findViewById(R.id.pathimage);
-        //TextView tidgame = findViewById(R.id.id_game);
+        TextView tidgame = findViewById(R.id.id_game);
 
 
         String name = tname.getText().toString();
@@ -183,7 +183,7 @@ public class GameActivity extends AppCompatActivity
         String genre = tgenre.getText().toString();
         String stars = tstars.getText().toString();
         String imagePath = path.getText().toString();
-        //String idgame = tidgame.getText().toString();
+        String idgame = tidgame.getText().toString();
 
         //Toast.makeText(this, name, Toast.LENGTH_SHORT).show();
 
@@ -193,7 +193,7 @@ public class GameActivity extends AppCompatActivity
         intent.putExtra("imagepath",imagePath);
         intent.putExtra("genre",genre);
         intent.putExtra("stars",stars);
-        //intent.putExtra("idgame", idgame);
+        intent.putExtra("idgame", idgame);
 
         Log.i("****** name *******", name);
         startActivity(intent);

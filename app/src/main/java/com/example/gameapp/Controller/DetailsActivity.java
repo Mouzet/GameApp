@@ -27,6 +27,7 @@ public class DetailsActivity extends AppCompatActivity
     private TextView pathimage;
     private ImageView bimage;
     private TextView bstars;
+
     private String name;
 
 
@@ -46,6 +47,7 @@ public class DetailsActivity extends AppCompatActivity
         bstars = (TextView) findViewById(R.id.stars);
         pathimage = (TextView) findViewById(R.id.imageuri);
 
+
         tname.setText(getIntent().getStringExtra("name"));
         tdate.setText(getIntent().getStringExtra("date"));
         tdescription.setText(getIntent().getStringExtra("description"));
@@ -53,6 +55,7 @@ public class DetailsActivity extends AppCompatActivity
         bimage.setImageURI(Uri.parse(getIntent().getStringExtra("imagepath")));
         bstars.setText(getIntent().getStringExtra("stars"));
         pathimage.setText(getIntent().getStringExtra("imagepath"));
+
 
         name = intent.getStringExtra("name");
 

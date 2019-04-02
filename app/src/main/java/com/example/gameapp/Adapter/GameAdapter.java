@@ -47,7 +47,7 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.GameHolder>
         gameHolder.textViewDate.setText(String.valueOf(currentGame.getDate()));
         gameHolder.textViewGender.setText(currentGame.getGenderGame());
         gameHolder.textViewstars.setText(String.valueOf(currentGame.getNumberStars()));
-        //gameHolder.textIdGame.setText((String.valueOf(currentGame.getIdGame())));
+        gameHolder.textIdGame.setText((String.valueOf(currentGame.getIdGame())));
 
     }
 
