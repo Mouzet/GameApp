@@ -58,7 +58,8 @@ public class DetailsActivity extends AppCompatActivity
         tidgame.setText(Integer.toString(id));
         tname.setText(intent.getStringExtra(EXTRA_NAMEGAME));
         tdescription.setText(intent.getStringExtra(EXTRA_DESCRIPTIONGAME));
-        bstars.setText(intent.getStringExtra(EXTRA_STARSGAME));
+        int stars = intent.getIntExtra(EXTRA_STARSGAME, -1);
+        bstars.setText(Integer.toString(stars));
         tgenre.setText(intent.getStringExtra(EXTRA_GENDERGAME));
         tdate.setText(intent.getStringExtra(EXTRA_DATEGAME));
         bimage.setImageURI(Uri.parse(intent.getStringExtra(EXTRA_PATHIMAGEGAME)));
