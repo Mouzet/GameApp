@@ -65,9 +65,9 @@ public abstract class GameDatabase extends RoomDatabase {
         protected Void doInBackground(Void... voids)
         {
             //Données table Jeux
-            gameDao.insert(new Game("Pac-man", "Description 1", 3, "Action", "/storage/emulated/0/DCIM/Camera/IMG_20190330_102504.jpg", 20100325));
-            gameDao.insert(new Game("Mario Kart", "Description 2", 2, "Action", "/storage/emulated/0/DCIM/Camera/IMG_20190330_102504.jpg", 20110325));
-            gameDao.insert(new Game("Pokemon", "Description 3", 1, "Action", "/storage/emulated/0/DCIM/Camera/IMG_20190330_102504.jpg", 20120325));
+            gameDao.insert(new Game("Pac-man", "Description 1", 3, "Action", "/storage/emulated/0/Download/330737871eb6b5258ff38f4d441bfc1e.png", 20100325));
+            gameDao.insert(new Game("Mario Kart", "Description 2", 2, "Action", "/storage/emulated/0/Download/89006155613895.598b99813464f.png", 20110325));
+            gameDao.insert(new Game("Pokemon", "Description 3", 1, "Action", "/storage/emulated/0/Download/longico-23-512.png", 20120325));
 
             //Données table Comments
             commentDao.insert(new Comment("PacMan is a good game !", "Valentine", 1));

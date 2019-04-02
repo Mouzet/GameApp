@@ -179,6 +179,7 @@ public class GameActivity extends AppCompatActivity
                     intent_details.putExtra(DetailsActivity.EXTRA_PATHIMAGEGAME, game.getPathImage());
                     intent_details.putExtra(DetailsActivity.EXTRA_DATEGAME, game.getDate());
 
+
                     startActivity(intent_details);
                 }
             });
@@ -188,9 +189,7 @@ public class GameActivity extends AppCompatActivity
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        /*int buttonmodify = data.getIntExtra("test",-1);
-        int a=0;
-        if( a!=-1){*/
+
 
     if(requestCode == ADD_GAME  && resultCode == RESULT_OK) {
         String name = data.getStringExtra(Add_ModifyActivity.EXTRA_NAME);
@@ -248,6 +247,7 @@ public class GameActivity extends AppCompatActivity
         switch(item.getItemId()){
             case R.id.delete_games :
                 gameViewModel.deleteAllGames();
+                commentViewModel.deleteAllComments();
                 Toast.makeText(this, "All games deleted", Toast.LENGTH_SHORT).show();
                 return true;
             default :
