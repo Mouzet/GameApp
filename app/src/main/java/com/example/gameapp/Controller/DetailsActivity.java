@@ -70,6 +70,7 @@ public class DetailsActivity extends AppCompatActivity
         TextView txtSampleTxt = (TextView) findViewById(R.id.details_page);
         txtSampleTxt.setTypeface(blockFonts);
 
+
         TextView textview4 = (TextView) findViewById(R.id.details_page);
         textview4.setPaintFlags(textview4.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
 
