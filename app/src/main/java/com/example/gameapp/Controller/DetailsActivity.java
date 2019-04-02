@@ -61,7 +61,8 @@ public class DetailsActivity extends AppCompatActivity
         int stars = intent.getIntExtra(EXTRA_STARSGAME, -1);
         bstars.setText(Integer.toString(stars));
         tgenre.setText(intent.getStringExtra(EXTRA_GENDERGAME));
-        tdate.setText(intent.getStringExtra(EXTRA_DATEGAME));
+        int date = intent.getIntExtra(EXTRA_DATEGAME, -1);
+        tdate.setText(Integer.toString(date));
         bimage.setImageURI(Uri.parse(intent.getStringExtra(EXTRA_PATHIMAGEGAME)));
         pathimage.setText(intent.getStringExtra(EXTRA_PATHIMAGEGAME));
 
