@@ -89,6 +89,7 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.GameHolder>
             textViewstars = itemView.findViewById(R.id.number);
             textIdGame = itemView.findViewById(R.id.id_game);
 
+
         }
     }
 }
