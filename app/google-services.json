@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "967368991710",
+    "firebase_url": "https://gameapp-ad033.firebaseio.com",
+    "project_id": "gameapp-ad033",
+    "storage_bucket": "gameapp-ad033.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:967368991710:android:8d547495107b0ec2",
+        "android_client_info": {
+          "package_name": "com.example.gameapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "967368991710-u9namcgb0624n4mqii97jqf2l1eiugqr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCtkaKTorwLnsDkloNKYI7jwAs_rNhU-Vc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "967368991710-u9namcgb0624n4mqii97jqf2l1eiugqr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

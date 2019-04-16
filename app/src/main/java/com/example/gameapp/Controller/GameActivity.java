@@ -179,7 +179,6 @@ public class GameActivity extends AppCompatActivity
                     intent_details.putExtra(DetailsActivity.EXTRA_PATHIMAGEGAME, game.getPathImage());
                     intent_details.putExtra(DetailsActivity.EXTRA_DATEGAME, game.getDate());
 
-
                     startActivity(intent_details);
                 }
             });
@@ -188,8 +187,6 @@ public class GameActivity extends AppCompatActivity
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
-
 
     if(requestCode == ADD_GAME  && resultCode == RESULT_OK) {
         String name = data.getStringExtra(Add_ModifyActivity.EXTRA_NAME);
