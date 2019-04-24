@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.gameapp.Model.Game;
+import com.example.gameapp.database.database.Entity.Game;
 import com.example.gameapp.R;
 
 import java.util.ArrayList;

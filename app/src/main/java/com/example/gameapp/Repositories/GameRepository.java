@@ -1,124 +1,100 @@
 package com.example.gameapp.Repositories;
 
-import android.app.Application;
 import android.arch.lifecycle.LiveData;
-import android.os.AsyncTask;
+import android.util.Log;
 
-import com.example.gameapp.DAO.GameDAO;
-import com.example.gameapp.Database.GameDatabase;
-import com.example.gameapp.Model.Game;
+import com.example.gameapp.entity.Game;
+import com.example.gameapp.firebase.GameCommentsListLiveData;
+import com.example.gameapp.firebase.GameLiveData;
+import com.example.gameapp.pojo.GameWithComments;
+import com.example.gameapp.util.OnAsyncEventListener;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
 
 public class GameRepository {
-    private GameDAO gameDao;
-    private LiveData<List<Game>> allGames;
-    private LiveData<List<Game>> researchGames;
 
-    public GameRepository(Application application){
-        GameDatabase database = GameDatabase.getInstance(application);
 
-        gameDao = database.gameDao();
-        allGames = gameDao.getAllGames();
+    private static final String TAG = "GameRepository";
+
+    private static GameRepository instance;
+
+    private GameRepository() {
     }
 
-    //Insert d'un nouveau jeu
-    public void insert(Game game)
-    {
-        new InsertGameAsyncTask(gameDao).execute(game);
-    }
-
-    //Modifier le jeu
-    public void update(Game game)
-    {
-        new UpdateGameAsyncTask(gameDao).execute(game);
-    }
-
-    //Supprime le jeu
-    public void delete(Game game)
-    {
-        new DeleteGameAsyncTask(gameDao).execute(game);
-    }
-
-    //Supprime tous les jeux
-    public void deleteAllGames()  {new DeleteAllGamesAsyncTask(gameDao).execute();}
-
-    //Obtiens tous les jeux de la BDD
-    public LiveData<List<Game>> getAllGames(){
-        return allGames;
-    }
-
-    //Retourne l'id du jeu
-    public int getIdGame(String nameGame) {return gameDao.getIdGame(nameGame);}
-
-    //Obtiens les jeux qui correspondent a la recherche
-    public LiveData<List<Game>> getGamesByName(String nameSearch) {return gameDao.getGamesByName(nameSearch);}
-
-    public LiveData<List<Game>> getGamesByGender(String gender){return gameDao.getGamesByGender(gender);}
-
-    public LiveData<List<Game>> getGamesByNameAndGender(String nameSearch, String gender)
-    {
-        return gameDao.getGamesByNameAndGender(nameSearch, gender);
-    }
-
-    private static class InsertGameAsyncTask extends AsyncTask<Game, Void, Void>
-    {
-        private GameDAO gameDao;
-
-        private InsertGameAsyncTask(GameDAO gameDao){
-            this.gameDao = gameDao;
+    public static GameRepository getInstance() {
+        if (instance == null) {
+            synchronized (CommentRepository.class) {
+                if (instance == null) {
+                    instance = new GameRepository();
+                }
+            }
         }
-
-        @Override
-        protected Void doInBackground(Game... games)
-        {
-            gameDao.insert(games[0]);
-            return null;
-        }
+        return instance;
     }
 
-    private static class UpdateGameAsyncTask extends AsyncTask<Game, Void, Void>
-    {
-        private GameDAO gameDao;
-
-        private UpdateGameAsyncTask(GameDAO gameDao){
-            this.gameDao = gameDao;
-        }
-
-        @Override
-        protected Void doInBackground(Game... games) {
-            gameDao.update(games[0]);
-            return null;
-        }
+    public LiveData<Game> getIdGame(final String idGame) {
+        DatabaseReference reference = FirebaseDatabase.getInstance()
+                .getReference("games")
+                .child(idGame);
+        return new GameLiveData(reference);
     }
 
-    private static class DeleteGameAsyncTask extends AsyncTask<Game, Void, Void>
-    {
-        private GameDAO gameDao;
-
-        private DeleteGameAsyncTask(GameDAO gameDao){
-            this.gameDao = gameDao;
-        }
-
-        @Override
-        protected Void doInBackground(Game... games) {
-            gameDao.delete(games[0]);
-            return null;
-        }
+    public LiveData<List<GameWithComments>> getOtherClientsWithAccounts(final String owner) {
+        DatabaseReference reference = FirebaseDatabase.getInstance()
+                .getReference("games");
+        return new GameCommentsListLiveData(reference, mIdGame);
     }
 
-    private static class DeleteAllGamesAsyncTask extends AsyncTask<Void, Void, Void>
-    {
-        private GameDAO gameDao;
+    private void insert(final Game game, final OnAsyncEventListener callback) {
+        FirebaseDatabase.getInstance()
+                .getReference("clients")
+                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .setValue(game, (databaseError, databaseReference) -> {
+                    if (databaseError != null) {
+                        callback.onFailure(databaseError.toException());
+                        FirebaseAuth.getInstance().getCurrentUser().delete()
+                                .addOnCompleteListener(task -> {
+                                    if (task.isSuccessful()) {
+                                        callback.onFailure(null);
+                                        Log.d(TAG, "Rollback successful: User account deleted");
+                                    } else {
+                                        callback.onFailure(task.getException());
+                                        Log.d(TAG, "Rollback failed: signInWithEmail:failure",
+                                                task.getException());
+                                    }
+                                });
+                    } else {
+                        callback.onSuccess();
+                    }
+                });
+    }
 
-        private DeleteAllGamesAsyncTask(GameDAO gameDao){
-            this.gameDao = gameDao;
-        }
+    public void update(final Game game, final OnAsyncEventListener callback) {
+        FirebaseDatabase.getInstance()
+                .getReference("games")
+                .child(game.getIdGame())
+                .updateChildren(game.toMap(), (databaseError, databaseReference) -> {
+                    if (databaseError != null) {
+                        callback.onFailure(databaseError.toException());
+                    } else {
+                        callback.onSuccess();
+                    }
+                });
 
-        @Override
-        protected Void doInBackground(Void... voids) {
-            gameDao.deleteAllGames();
-            return null;
-        }
+    }
+
+    public void delete(final Game game, OnAsyncEventListener callback) {
+        FirebaseDatabase.getInstance()
+                .getReference("games")
+                .child(game.getIdGame())
+                .removeValue((databaseError, databaseReference) -> {
+                    if (databaseError != null) {
+                        callback.onFailure(databaseError.toException());
+                    } else {
+                        callback.onSuccess();
+                    }
+                });
     }
 }

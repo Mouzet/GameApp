@@ -4,11 +4,11 @@
     android:background="@drawable/back">
 
 
-<ImageView
-    android:id="@+id/jeu"
-    android:layout_width="400dp"
-    android:layout_height="340dp"
-    android:src="@drawable/gameapp"/>
+    <ImageView
+        android:id="@+id/jeu"
+        android:layout_width="400dp"
+        android:layout_height="340dp"
+        android:src="@drawable/gameapp" />
 
 
     <TextView

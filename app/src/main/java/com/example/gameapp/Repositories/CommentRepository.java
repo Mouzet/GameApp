@@ -1,113 +1,141 @@
 package com.example.gameapp.Repositories;
 
-import android.app.Application;
 import android.arch.lifecycle.LiveData;
-import android.os.AsyncTask;
 
-import com.example.gameapp.DAO.CommentDAO;
-import com.example.gameapp.Database.GameDatabase;
-import com.example.gameapp.Model.Comment;
+import com.example.gameapp.entity.Comment;
+import com.example.gameapp.firebase.CommentListLiveData;
+import com.example.gameapp.firebase.CommentLiveData;
+import com.example.gameapp.util.OnAsyncEventListener;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
 
 public class CommentRepository {
-    private CommentDAO commentDao;
-    private LiveData<List<Comment>> allComments;
 
 
-    public CommentRepository(Application application){
-        GameDatabase database = GameDatabase.getInstance(application);
+    private static CommentRepository instance;
 
-        commentDao = database.commentDao();
-        allComments = commentDao.getAllComments();
-    }
-
-    public void insert(Comment comment)
-    {
-        new InsertCommentAsyncTask(commentDao).execute(comment);
-    }
-
-    public void update(Comment comment)
-    {
-        new UpdateCommentAsyncTask(commentDao).execute(comment);
-    }
-
-    public void delete(Comment comment)
-    {
-        new DeleteCommentAsyncTask(commentDao).execute(comment);
-    }
-
-    public void deleteAllComments()
-    {
-        new DeleteAllCommentAsyncTask(commentDao).execute();
-    }
-
-    //Obtiens les jeux qui correspondent a la recherche
-    public LiveData<List<Comment>> getCommentById(int idGame) {return commentDao.getCommentById(idGame);}
-    public LiveData<List<Comment>> getAllComments(){
-        return allComments;
-    }
-
-    private static class InsertCommentAsyncTask extends AsyncTask<Comment, Void, Void>
-    {
-        private CommentDAO commentDao;
-
-        private InsertCommentAsyncTask(CommentDAO commentDao){
-            this.commentDao = commentDao;
+    public static CommentRepository getInstance() {
+        if (instance == null) {
+            synchronized (CommentRepository.class) {
+                if (instance == null) {
+                    instance = new CommentRepository();
+                }
+            }
         }
-
-        @Override
-        protected Void doInBackground(Comment... comments)
-        {
-            commentDao.insert(comments[0]);
-            return null;
-        }
+        return instance;
     }
 
-    private static class UpdateCommentAsyncTask extends AsyncTask<Comment, Void, Void>
-    {
-        private CommentDAO commentDao;
 
-        private UpdateCommentAsyncTask(CommentDAO commentDao){
-            this.commentDao = commentDao;
-        }
-
-        @Override
-        protected Void doInBackground(Comment... comments) {
-            commentDao.update(comments[0]);
-            return null;
-        }
+    public LiveData<Comment> getAccount(final String midComment) {
+        DatabaseReference reference = FirebaseDatabase.getInstance()
+                .getReference("games")
+                .child("comments")
+                .child(midComment);
+        return new CommentLiveData(reference);
     }
 
-    private static class DeleteCommentAsyncTask extends AsyncTask<Comment, Void, Void>
-    {
-        private CommentDAO commentDao;
-
-        private DeleteCommentAsyncTask(CommentDAO commentDao){
-            this.commentDao = commentDao;
-        }
-
-        @Override
-        protected Void doInBackground(Comment... comments) {
-            commentDao.delete(comments[0]);
-            return null;
-        }
+    public LiveData<List<Comment>> getByOwner(final String mIdGame) {
+        DatabaseReference reference = FirebaseDatabase.getInstance()
+                .getReference("games")
+                .child(mIdGame)
+                .child("comments");
+        return new CommentListLiveData(reference, mIdGame);
     }
 
-    private static class DeleteAllCommentAsyncTask extends AsyncTask<Void, Void, Void>
-    {
-        private CommentDAO commentDao;
+    public void insert(final Comment comment, final OnAsyncEventListener callback) {
+        DatabaseReference reference = FirebaseDatabase.getInstance()
+                .getReference("games")
+                .child(comment.getIdGame())
+                .child("comments");
+        String key = reference.push().getKey();
+        FirebaseDatabase.getInstance()
+                .getReference("games")
+                .child(comment.getIdGame())
+                .child("comments")
+                .child(key)
+                .setValue(comment, (databaseError, databaseReference) -> {
+                    if (databaseError != null) {
+                        callback.onFailure(databaseError.toException());
+                    } else {
+                        callback.onSuccess();
+                    }
+                });
+    }
 
-        private DeleteAllCommentAsyncTask(CommentDAO commentDao)
-        {
-            this.commentDao = commentDao;
-        }
+    public void update(final Comment comment, OnAsyncEventListener callback) {
+        FirebaseDatabase.getInstance()
+                .getReference("games")
+                .child(comment.getIdGame())
+                .child("comments")
+                .child(comment.getIdComment())
+                .updateChildren(comment.toMap(), (databaseError, databaseReference) -> {
+                    if (databaseError != null) {
+                        callback.onFailure(databaseError.toException());
+                    } else {
+                        callback.onSuccess();
+                    }
+                });
+    }
 
-        @Override
-        protected Void doInBackground(Void... voids)
-        {
-            commentDao.deleteAllComments();
-            return null;
-        }
+    public void delete(final Comment comment, OnAsyncEventListener callback) {
+        FirebaseDatabase.getInstance()
+                .getReference("games")
+                .child(comment.getIdGame())
+                .child("comments")
+                .child(comment.getIdComment())
+                .removeValue((databaseError, databaseReference) -> {
+                    if (databaseError != null) {
+                        callback.onFailure(databaseError.toException());
+                    } else {
+                        callback.onSuccess();
+                    }
+                });
     }
 }
+    /*
+    public void transaction(final AccountEntity sender, final AccountEntity recipient,
+                            OnAsyncEventListener callback) {
+        final DatabaseReference rootReference = FirebaseDatabase.getInstance().getReference();
+        rootReference.runTransaction(new Transaction.Handler() {
+            @NonNull
+            @Override
+            public Transaction.Result doTransaction(@NonNull MutableData mutableData) {
+                rootReference
+                        .child("clients")
+                        .child(sender.getOwner())
+                        .child("accounts")
+                        .child(sender.getId())
+                        .updateChildren(sender.toMap());
+
+                rootReference
+                        .child("clients")
+                        .child(recipient.getOwner())
+                        .child("accounts")
+                        .child(recipient.getId())
+                        .updateChildren(recipient.toMap());
+
+                return Transaction.success(mutableData);
+            }
+
+            @Override
+            public void onComplete(DatabaseError databaseError, boolean b,
+                                   DataSnapshot dataSnapshot) {
+                if (databaseError != null) {
+                    callback.onFailure(databaseError.toException());
+                } else {
+                    callback.onSuccess();
+                }
+            }
+        });
+    }
+*/
+
+
+
+
+
+
+
+

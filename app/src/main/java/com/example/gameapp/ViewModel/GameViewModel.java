@@ -5,7 +5,7 @@ import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
 import android.support.annotation.NonNull;
 
-import com.example.gameapp.Model.Game;
+import com.example.gameapp.database.database.Entity.Game;
 import com.example.gameapp.Repositories.GameRepository;
 
 import java.util.List;

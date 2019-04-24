@@ -5,7 +5,7 @@ import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
 import android.support.annotation.NonNull;
 
-import com.example.gameapp.Model.Comment;
+import com.example.gameapp.database.database.Entity.Comment;
 import com.example.gameapp.Repositories.CommentRepository;
 
 import java.util.List;

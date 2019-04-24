@@ -7,10 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.gameapp.Model.Comment;
+import com.example.gameapp.database.database.Entity.Comment;
 import com.example.gameapp.R;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
