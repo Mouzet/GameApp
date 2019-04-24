@@ -13,9 +13,9 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CommentListLiveData extends LiveData<Comment> {
+public class CommentListLiveData extends LiveData<List<Comment>> {
 
-    private static final String TAG = "AccountListLiveData";
+    private static final String TAG = "CommentListLiveData";
 
     private final DatabaseReference reference;
     private final String mIdGame;

@@ -21,7 +21,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import com.example.gameapp.Adapter.GameAdapter;
 import com.example.gameapp.database.database.Entity.Game;
 import com.example.gameapp.R;
 import com.example.gameapp.ViewModel.CommentViewModel;

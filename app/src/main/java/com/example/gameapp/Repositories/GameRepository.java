@@ -1,7 +1,6 @@
 package com.example.gameapp.Repositories;
 
 import android.arch.lifecycle.LiveData;
-import android.util.Log;
 
 import com.example.gameapp.entity.Game;
 import com.example.gameapp.firebase.GameCommentsListLiveData;
@@ -41,30 +40,26 @@ public class GameRepository {
         return new GameLiveData(reference);
     }
 
-    public LiveData<List<GameWithComments>> getOtherClientsWithAccounts(final String owner) {
+    public LiveData<List<GameWithComments>> getOtherGamesWithComments(final String mIdGame) {
         DatabaseReference reference = FirebaseDatabase.getInstance()
                 .getReference("games");
         return new GameCommentsListLiveData(reference, mIdGame);
     }
 
-    private void insert(final Game game, final OnAsyncEventListener callback) {
+    public void insert(final Game game, final OnAsyncEventListener callback) {
+        DatabaseReference reference = FirebaseDatabase.getInstance()
+                .getReference("games")
+                .child(game.getIdGame())
+                .child("games");
+        String key = reference.push().getKey();
         FirebaseDatabase.getInstance()
-                .getReference("clients")
-                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .getReference("games")
+                .child(game.getIdGame())
+                .child("games")
+                .child(key)
                 .setValue(game, (databaseError, databaseReference) -> {
                     if (databaseError != null) {
                         callback.onFailure(databaseError.toException());
-                        FirebaseAuth.getInstance().getCurrentUser().delete()
-                                .addOnCompleteListener(task -> {
-                                    if (task.isSuccessful()) {
-                                        callback.onFailure(null);
-                                        Log.d(TAG, "Rollback successful: User account deleted");
-                                    } else {
-                                        callback.onFailure(task.getException());
-                                        Log.d(TAG, "Rollback failed: signInWithEmail:failure",
-                                                task.getException());
-                                    }
-                                });
                     } else {
                         callback.onSuccess();
                     }

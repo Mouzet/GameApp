@@ -2,6 +2,8 @@ package com.example.gameapp.entity;
 
 import android.support.annotation.NonNull;
 
+import com.google.firebase.database.Exclude;
+
 import java.util.HashMap;
 import java.util.Map;
 

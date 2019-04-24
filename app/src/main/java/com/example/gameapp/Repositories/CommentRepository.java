@@ -36,7 +36,7 @@ public class CommentRepository {
         return new CommentLiveData(reference);
     }
 
-    public LiveData<List<Comment>> getByOwner(final String mIdGame) {
+    public LiveData<List<Comment>> getByIdGame(final String mIdGame) {
         DatabaseReference reference = FirebaseDatabase.getInstance()
                 .getReference("games")
                 .child(mIdGame)

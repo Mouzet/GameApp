@@ -15,7 +15,6 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 import android.widget.Toast;
 
-import com.example.gameapp.Adapter.CommentAdapter;
 import com.example.gameapp.database.database.Entity.Comment;
 import com.example.gameapp.R;
 import com.example.gameapp.ViewModel.CommentViewModel;

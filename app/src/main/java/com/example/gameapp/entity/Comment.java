@@ -1,5 +1,7 @@
 package com.example.gameapp.entity;
 
+import com.google.firebase.database.Exclude;
+
 import java.util.HashMap;
 import java.util.Map;
 
