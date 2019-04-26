@@ -94,12 +94,6 @@ public class CommentsActivity extends AppCompatActivity {
 
         recyclerView.setAdapter(commentAdapter);
 
-
-
-
-
-
-
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,
                 ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
 

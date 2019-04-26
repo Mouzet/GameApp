@@ -81,6 +81,12 @@ public class CommentViewModel extends AndroidViewModel {
                 .update(comment, callback);
     }
 
+    //Delete all the games of the bdd
+    public void deleteAllComments(OnAsyncEventListener callback) {
+        ((BaseApp) getApplication()).getCommentRepository()
+                .deleteAllComments(callback);
+    }
+
 
 }
 

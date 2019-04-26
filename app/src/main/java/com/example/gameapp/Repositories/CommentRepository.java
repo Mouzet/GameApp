@@ -83,6 +83,20 @@ public class CommentRepository {
                     }
                 });
     }
+
+    public void deleteAllComments(OnAsyncEventListener callback) {
+        FirebaseDatabase.getInstance()
+                .getReference("comments")
+                .removeValue((databaseError, databaseReference) -> {
+                    if (databaseError != null) {
+                        callback.onFailure(databaseError.toException());
+                    }
+
+                    else {
+                        callback.onSuccess();
+                    }
+                });
+    }
 }
 
 

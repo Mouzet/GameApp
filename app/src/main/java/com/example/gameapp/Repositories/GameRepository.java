@@ -119,4 +119,18 @@ public class GameRepository {
                     }
                 });
     }
+
+    public void deleteAllGames(OnAsyncEventListener callback) {
+        FirebaseDatabase.getInstance()
+                .getReference("games")
+                .removeValue((databaseError, databaseReference) -> {
+                    if (databaseError != null) {
+                        callback.onFailure(databaseError.toException());
+                    }
+
+                    else {
+                        callback.onSuccess();
+                    }
+                });
+    }
 }

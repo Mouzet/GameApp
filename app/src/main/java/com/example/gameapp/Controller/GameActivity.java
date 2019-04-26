@@ -1,5 +1,6 @@
 package com.example.gameapp.Controller;
 
+
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
@@ -19,31 +20,41 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.gameapp.Adapter.RecyclerAdapter;
 import com.example.gameapp.R;
 import com.example.gameapp.ViewModel.CommentViewModel;
+import com.example.gameapp.ViewModel.GameListViewModel;
 import com.example.gameapp.ViewModel.GameViewModel;
 import com.example.gameapp.entity.Game;
 import com.example.gameapp.util.OnAsyncEventListener;
+import com.example.gameapp.util.RecyclerViewItemClickListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class GameActivity extends AppCompatActivity
 {
     private static final String TAF = "GameActivity";
+
     public static final int ADD_GAME =1;
     public static final int UPDATE_GAME =1;
     public static final int DELETE_GAME =1;
 
-    //Déclaration des viewmodels
-    private GameViewModel gameViewModel;
-    private CommentViewModel commentViewModel;
-
+    private String idGame;
     private String nameGame;
     private String nameButton;
     private String nameSearch;
     private String gender;
+
+    private List<Game> games;
+    private RecyclerAdapter<Game> gameAdapter;
+    private GameListViewModel gameListViewModel;
+    private GameViewModel gameViewModel;
+    private CommentViewModel commentViewModel;
+
     private Game game;
 
    // private static String imagePath;
@@ -52,17 +63,54 @@ public class GameActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result_games);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Intent intent = getIntent();
 
-        //final GameAdapter adapter = new GameAdapter();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         FloatingActionButton buttonAdd = findViewById(R.id.add_game);
 
-        buttonAdd.setOnClickListener(new View.OnClickListener(){
+        games = new ArrayList<>();
 
+        RecyclerView recyclerView = findViewById(R.id.recycler_view_game);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setHasFixedSize(true);
+
+        final Intent intent_details = new Intent(this, DetailsActivity.class);
+
+        gameAdapter = new RecyclerAdapter<>(new RecyclerViewItemClickListener()
+        {
             @Override
-            public void onClick(View v) {
+            public void onItemClick(View v, int position)
+            {
+                intent_details.putExtra(DetailsActivity.EXTRA_IDGAME, games.get(position).getIdGame());
+                intent_details.putExtra(DetailsActivity.EXTRA_NAMEGAME, games.get(position).getNameGame());
+                intent_details.putExtra(DetailsActivity.EXTRA_DESCRIPTIONGAME, games.get(position).getDescriptionGame());
+                intent_details.putExtra(DetailsActivity.EXTRA_STARSGAME, games.get(position).getNumberStars());
+                intent_details.putExtra(DetailsActivity.EXTRA_GENDERGAME, games.get(position).getGenderGame());
+                intent_details.putExtra(DetailsActivity.EXTRA_PATHIMAGEGAME, games.get(position).getPathImage());
+                intent_details.putExtra(DetailsActivity.EXTRA_DATEGAME, games.get(position).getDate());
+            }
+        });
 
+        GameViewModel.Factory factory = new GameViewModel.Factory(
+                getApplication(),
+                idGame
+        );
+        gameViewModel = ViewModelProviders.of(this, factory).get(GameViewModel.class);
+        gameViewModel.getGame().observe(this, gameEntities -> {
+            if (gameEntities != null) {
+                game = gameEntities;
+                gameAdapter.setData(games);
+            }
+        });
+
+        recyclerView.setAdapter(gameAdapter);
+
+        buttonAdd.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
                 Intent intent = new Intent(GameActivity.this,Add_ModifyActivity.class);
                 String nameButton = "Add";
                 intent.putExtra("nameButton",nameButton);
@@ -70,19 +118,12 @@ public class GameActivity extends AppCompatActivity
             }
         });
 
-        final Intent intent = getIntent();
-        final Intent intent_details = new Intent(this, DetailsActivity.class);
-
         nameButton = intent.getStringExtra("nameButton");
 
         //Si l'activité est demarré pour une recherche (par le bouton validate)
         //On effectue donc une recherche
         if(nameButton.equals("validate"))
         {
-            RecyclerView recyclerView = findViewById(R.id.recycler_view_game);
-            recyclerView.setLayoutManager(new LinearLayoutManager(this));
-            recyclerView.setHasFixedSize(true);
-
             //permet d'afficher tant qu'on a la place a l'écran
             //recyclerView.setAdapter(adapter);
 
@@ -97,11 +138,11 @@ public class GameActivity extends AppCompatActivity
                     gender = intent.getStringExtra("gender");
 
                     //Si on recherche par NOM + GENRE
-                    gameViewModel = ViewModelProviders.of(this).get(GameViewModel.class);
+                    gameViewModel = ViewModelProviders.of(this, factory).get(GameViewModel.class);
                     gameViewModel.getGamesByNameAndGender(nameSearch, gender).observe(this, new Observer<List<Game>>() {
                         @Override
                         public void onChanged(@Nullable List<Game> games) {
-                            adapter.setGames(games);
+                            gameAdapter.setData(games);
                         }
                     });
                 }
@@ -115,7 +156,7 @@ public class GameActivity extends AppCompatActivity
                     gameViewModel.getGamesByName(nameSearch).observe(this, new Observer<List<Game>>() {
                         @Override
                         public void onChanged(@Nullable List<Game> games) {
-                            adapter.setGames(games);
+                            gameAdapter.setData(games);
                         }
                     });
                 }
@@ -131,7 +172,7 @@ public class GameActivity extends AppCompatActivity
                     @Override
                     public void onChanged(@Nullable List<Game> games) {
 
-                        adapter.setGames(games);
+                        gameAdapter.setData(games);
                     }
                 });
             }
@@ -140,18 +181,14 @@ public class GameActivity extends AppCompatActivity
         //Si on veut afficher tous les jeux de la base de données
         if(nameButton.equals("navBar"))
         {
-            RecyclerView recyclerView = findViewById(R.id.recycler_view_game);
-            recyclerView.setLayoutManager(new LinearLayoutManager(this));
-            recyclerView.setHasFixedSize(true);
-
            // final GameAdapter adapter = new GameAdapter();
-            recyclerView.setAdapter(adapter);
+            recyclerView.setAdapter(gameAdapter);
 
             gameViewModel = ViewModelProviders.of(this).get(GameViewModel.class);
             gameViewModel.getAllGames().observe(this, new Observer<List<Game>>() {
                 @Override
                 public void onChanged(@Nullable List<Game> games) {
-                    adapter.setGames(games);
+                    gameAdapter.setData(games);
                 }
             });
 
@@ -179,23 +216,8 @@ public class GameActivity extends AppCompatActivity
                 }
             }).attachToRecyclerView(recyclerView);
         }
-
-            adapter.setOnItemClickListener(new GameAdapter.onItemClickListener() {
-                @Override
-                public void onItemClick(Game game)
-                {
-                    intent_details.putExtra(DetailsActivity.EXTRA_IDGAME, game.getIdGame());
-                    intent_details.putExtra(DetailsActivity.EXTRA_NAMEGAME, game.getNameGame());
-                    intent_details.putExtra(DetailsActivity.EXTRA_DESCRIPTIONGAME, game.getDescriptionGame());
-                    intent_details.putExtra(DetailsActivity.EXTRA_STARSGAME, game.getNumberStars());
-                    intent_details.putExtra(DetailsActivity.EXTRA_GENDERGAME, game.getGenderGame());
-                    intent_details.putExtra(DetailsActivity.EXTRA_PATHIMAGEGAME, game.getPathImage());
-                    intent_details.putExtra(DetailsActivity.EXTRA_DATEGAME, game.getDate());
-
-                    startActivity(intent_details);
-                }
-            });
     }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -209,7 +231,7 @@ public class GameActivity extends AppCompatActivity
             String description = data.getStringExtra(Add_ModifyActivity.EXTRA_DESCRIPTION);
             int stars = data.getIntExtra(Add_ModifyActivity.EXTRA_STARS, 1);
 
-            Game game = new Game(name, description, stars, gender, image, date);
+            Game game = new Game();
 
             gameViewModel.insertGame(game, new OnAsyncEventListener() {
                 @Override
@@ -222,9 +244,6 @@ public class GameActivity extends AppCompatActivity
                     Toast.makeText(GameActivity.this, "Error Game not inserted", Toast.LENGTH_SHORT).show();
                 }
             });
-
-            Log.i("***** PATHIMAGE *****", image);
-
         }
     }
 
@@ -234,6 +253,7 @@ public class GameActivity extends AppCompatActivity
         menuinflater.inflate(R.menu.delete_menu,menu);
         return true;
     }
+
     public String getRealPathFromURI(Uri uri) {
         Cursor cursor = getContentResolver().query(uri, null, null, null, null);
         cursor.moveToFirst();
@@ -243,10 +263,25 @@ public class GameActivity extends AppCompatActivity
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        switch(item.getItemId()){
+        switch(item.getItemId())
+        {
             case R.id.delete_games :
-                gameViewModel.deleteAllGames();
-                commentViewModel.deleteAllComments();
+                gameViewModel.deleteAllGames(new OnAsyncEventListener() {
+                    @Override
+                    public void onSuccess() {}
+
+                    @Override
+                    public void onFailure(Exception e) {}
+                });
+
+                commentViewModel.deleteAllComments(new OnAsyncEventListener() {
+                    @Override
+                    public void onSuccess() {}
+
+                    @Override
+                    public void onFailure(Exception e) {}
+                });
+
                 Toast.makeText(this, "All games deleted", Toast.LENGTH_SHORT).show();
                 return true;
             default :

@@ -17,7 +17,7 @@ import com.example.gameapp.R;
 
 public class DetailsActivity extends AppCompatActivity
 {
-    public static final int MODIFY_GAME =-1;
+    public static final int MODIFY_GAME = -1;
     public static final String EXTRA_IDGAME = "com.example.gameapp.EXTRA_IDGAME";
     public static final String EXTRA_NAMEGAME = "com.example.gameapp.EXTRA_NAMEGAME";
     public static final String EXTRA_DESCRIPTIONGAME = "com.example.gameapp.DESCRIPTIONGAME";
@@ -69,7 +69,6 @@ public class DetailsActivity extends AppCompatActivity
         Typeface blockFonts = Typeface.createFromAsset(getAssets(),"MAXWELL BOLD.ttf");
         TextView txtSampleTxt = (TextView) findViewById(R.id.details_page);
         txtSampleTxt.setTypeface(blockFonts);
-
 
         TextView textview4 = (TextView) findViewById(R.id.details_page);
         textview4.setPaintFlags(textview4.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
@@ -127,7 +126,4 @@ public class DetailsActivity extends AppCompatActivity
 
         startActivity(intent);
     }
-
-
-
 }

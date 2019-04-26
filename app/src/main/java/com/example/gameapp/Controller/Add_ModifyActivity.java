@@ -65,8 +65,6 @@ public class Add_ModifyActivity extends AppCompatActivity implements AdapterView
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-
-
         editname = findViewById(R.id.name_game);
         editimage = findViewById(R.id.image);
         editdate = findViewById(R.id.date);
@@ -103,8 +101,6 @@ public class Add_ModifyActivity extends AppCompatActivity implements AdapterView
 
             }
         });
-
-
 
 
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close);

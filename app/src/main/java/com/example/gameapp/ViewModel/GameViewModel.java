@@ -38,9 +38,6 @@ public class GameViewModel extends AndroidViewModel
             mObservableGame.addSource(game, mObservableGame::setValue);
         }
 
-/**
- * A creator is used to inject the account id into the ViewModel
- */
 public static class Factory extends ViewModelProvider.NewInstanceFactory {
 
     @NonNull
@@ -99,6 +96,12 @@ public static class Factory extends ViewModelProvider.NewInstanceFactory {
     public void deleteGame(Game game, OnAsyncEventListener callback) {
         ((BaseApp) getApplication()).getGameRepository()
                 .delete(game, callback);
+    }
+
+    //Delete all the games of the bdd
+    public void deleteAllGames(OnAsyncEventListener callback) {
+        ((BaseApp) getApplication()).getGameRepository()
+                .deleteAllGames(callback);
     }
 
 }
