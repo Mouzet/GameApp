@@ -32,10 +32,10 @@ public class GameViewModel extends AndroidViewModel
             // set by default null, until we get data from the database.
             mObservableGame.setValue(null);
 
-            LiveData<Game> comment = repository.getIdGame(gameId);
+            LiveData<Game> game = repository.getGame(gameId);
 
             // observe the changes of the client entity from the database and forward them
-            mObservableGame.addSource(comment, mObservableGame::setValue);
+            mObservableGame.addSource(game, mObservableGame::setValue);
         }
 
 /**
@@ -63,14 +63,30 @@ public static class Factory extends ViewModelProvider.NewInstanceFactory {
     }
 }
 
-    /**
-     * Expose the LiveData ClientEntity query so the UI can observe it.
-     */
-    public LiveData<Game> getClient() {
+    //Different method that we used
+    public LiveData<Game> getGame() {
         return mObservableGame;
     }
 
-    public void createGame(Game game, OnAsyncEventListener callback) {
+    public void getAllGames() {
+        ((BaseApp) getApplication()).getGameRepository()
+                .getAllGames();
+    }
+
+    public void getGamesByNameAndGender(String name, String gender) {
+        ((BaseApp) getApplication()).getGameRepository()
+                .getGamesByNameAndGender(name, gender);
+    }
+    public void getGamesByName(String name) {
+        ((BaseApp) getApplication()).getGameRepository()
+                .getGamesByName(name);
+    }
+    public void getGamesByGender(String gender) {
+        ((BaseApp) getApplication()).getGameRepository()
+                .getGamesByGender(gender);
+    }
+
+    public void insertGame(Game game, OnAsyncEventListener callback) {
         ((BaseApp) getApplication()).getGameRepository()
                 .insert(game, callback);
     }

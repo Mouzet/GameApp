@@ -107,7 +107,6 @@ public class DetailsActivity extends AppCompatActivity
         ImageView buimage = (ImageView) findViewById(R.id.image);
         TextView imagepath = (TextView) findViewById(R.id.imageuri);
         TextView bustars = (TextView) findViewById(R.id.stars);
-        //TextView tidgame = (TextView) findViewById(R.id.id_game);
 
         nameButton="Modify";
 
@@ -117,7 +116,6 @@ public class DetailsActivity extends AppCompatActivity
         String description = tedescription.getText().toString();
         String button = imagepath.getText().toString();
         String stars = bustars.getText().toString();
-        //String idgame = tidgame.getText().toString();
 
         intent.putExtra("nameButton",nameButton);
         intent.putExtra("name",name);
@@ -126,10 +124,8 @@ public class DetailsActivity extends AppCompatActivity
         intent.putExtra("description",description);
         intent.putExtra("pathimage",button);
         intent.putExtra("stars",stars);
-       // intent.putExtra("idgame",idgame);
 
         startActivity(intent);
-        //startActivityForResult(intent, MODIFY_GAME);
     }
 
 

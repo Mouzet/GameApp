@@ -25,12 +25,16 @@ import com.example.gameapp.R;
 import com.example.gameapp.ViewModel.CommentViewModel;
 import com.example.gameapp.ViewModel.GameViewModel;
 import com.example.gameapp.entity.Game;
+import com.example.gameapp.util.OnAsyncEventListener;
 
 import java.util.List;
 
 public class GameActivity extends AppCompatActivity
 {
+    private static final String TAF = "GameActivity";
     public static final int ADD_GAME =1;
+    public static final int UPDATE_GAME =1;
+    public static final int DELETE_GAME =1;
 
     //Déclaration des viewmodels
     private GameViewModel gameViewModel;
@@ -50,7 +54,7 @@ public class GameActivity extends AppCompatActivity
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        final GameAdapter adapter = new GameAdapter();
+        //final GameAdapter adapter = new GameAdapter();
 
         FloatingActionButton buttonAdd = findViewById(R.id.add_game);
 
@@ -80,8 +84,7 @@ public class GameActivity extends AppCompatActivity
             recyclerView.setHasFixedSize(true);
 
             //permet d'afficher tant qu'on a la place a l'écran
-
-            recyclerView.setAdapter(adapter);
+            //recyclerView.setAdapter(adapter);
 
             //Si on a entré un nom dans la recherche
             if(intent.hasExtra("nameSearch"))
@@ -161,7 +164,17 @@ public class GameActivity extends AppCompatActivity
                 @Override
                 public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int i)
                 {
-                    gameViewModel.delete(adapter.getGameAt(viewHolder.getAdapterPosition()));
+                    gameViewModel.deleteGame(game, new OnAsyncEventListener() {
+                        @Override
+                        public void onSuccess() {
+                            Toast.makeText(GameActivity.this, "Game deleted", Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void onFailure(Exception e) {
+                            Toast.makeText(GameActivity.this, "ERROR : Game not deleted", Toast.LENGTH_SHORT).show();
+                        }
+                    });
                     Toast.makeText(GameActivity.this, "Game deleted", Toast.LENGTH_SHORT).show();
                 }
             }).attachToRecyclerView(recyclerView);
@@ -188,42 +201,31 @@ public class GameActivity extends AppCompatActivity
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-    if(requestCode == ADD_GAME  && resultCode == RESULT_OK) {
-        String name = data.getStringExtra(Add_ModifyActivity.EXTRA_NAME);
-        String gender = data.getStringExtra((Add_ModifyActivity.EXTRA_GENDER));
-        String image = data.getStringExtra(Add_ModifyActivity.EXTRA_IMAGE);
-        int date = data.getIntExtra(Add_ModifyActivity.EXTRA_DATE, 20100101);
-        String description = data.getStringExtra(Add_ModifyActivity.EXTRA_DESCRIPTION);
-        int stars = data.getIntExtra(Add_ModifyActivity.EXTRA_STARS, 1);
+        if (requestCode == ADD_GAME && resultCode == RESULT_OK) {
+            String name = data.getStringExtra(Add_ModifyActivity.EXTRA_NAME);
+            String gender = data.getStringExtra((Add_ModifyActivity.EXTRA_GENDER));
+            String image = data.getStringExtra(Add_ModifyActivity.EXTRA_IMAGE);
+            int date = data.getIntExtra(Add_ModifyActivity.EXTRA_DATE, 20100101);
+            String description = data.getStringExtra(Add_ModifyActivity.EXTRA_DESCRIPTION);
+            int stars = data.getIntExtra(Add_ModifyActivity.EXTRA_STARS, 1);
 
-        Game game = new Game(name, description, stars, gender, image, date);
+            Game game = new Game(name, description, stars, gender, image, date);
 
-        gameViewModel.insert(game);
+            gameViewModel.insertGame(game, new OnAsyncEventListener() {
+                @Override
+                public void onSuccess() {
+                    Toast.makeText(GameActivity.this, "Game inserted", Toast.LENGTH_SHORT).show();
+                }
 
-        Log.i("***** PATHIMAGE *****", image);
+                @Override
+                public void onFailure(Exception e) {
+                    Toast.makeText(GameActivity.this, "Error Game not inserted", Toast.LENGTH_SHORT).show();
+                }
+            });
 
-        Toast.makeText(this, "Game added", Toast.LENGTH_SHORT).show();
-    /*}
-    else if (a==-1){
-        String name = data.getStringExtra(Add_ModifyActivity.EXTRA_NAME);
-        String gender = data.getStringExtra((Add_ModifyActivity.EXTRA_GENDER));
-        String image = data.getStringExtra(Add_ModifyActivity.EXTRA_IMAGE);
-        int date = data.getIntExtra(Add_ModifyActivity.EXTRA_DATE, 20100101);
-        String description = data.getStringExtra(Add_ModifyActivity.EXTRA_DESCRIPTION);
-        int stars = data.getIntExtra(Add_ModifyActivity.EXTRA_STARS, 1);
-        int id = Integer.parseInt(data.getStringExtra("idgame"));
+            Log.i("***** PATHIMAGE *****", image);
 
-        Game game = new Game(name,description,stars,gender,image,date);
-        game.setIdGame(id);
-
-        gameViewModel.update(game);
-
-    }*/
-    }
-
-    else{
-        Toast.makeText(this, "Error,Game not added", Toast.LENGTH_SHORT).show();
-    }
+        }
     }
 
     @Override
