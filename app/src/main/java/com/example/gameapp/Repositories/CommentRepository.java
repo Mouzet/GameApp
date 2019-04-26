@@ -28,31 +28,27 @@ public class CommentRepository {
     }
 
 
-    public LiveData<Comment> getComment(final String midGame) {
+    public LiveData<Comment> getComment(String mIdComment) {
         DatabaseReference reference = FirebaseDatabase.getInstance()
-                .getReference("comments")
-                .child(midGame);
-        return new CommentLiveData(reference);
+                .getReference("comments");
+        return new CommentLiveData(reference,mIdComment);
     }
 
-    public LiveData<List<Comment>> getByIdGame(final String mIdGame) {
+    public LiveData<List<Comment>> getCommentsByGameId(final String mIdGame) {
         DatabaseReference reference = FirebaseDatabase.getInstance()
-                .getReference("games")
-                .child(mIdGame)
-                .child("comments");
+                .getReference("comments")
+                .child(mIdGame);
         return new CommentListLiveData(reference, mIdGame);
     }
 
     public void insert(final Comment comment, final OnAsyncEventListener callback) {
         DatabaseReference reference = FirebaseDatabase.getInstance()
                 .getReference("comments")
-                .child(comment.getIdGame())
-                .child("comments");
+                .child(comment.getIdGame());
         String key = reference.push().getKey();
         FirebaseDatabase.getInstance()
-                .getReference("games")
+                .getReference("comments")
                 .child(comment.getIdGame())
-                .child("comments")
                 .child(key)
                 .setValue(comment, (databaseError, databaseReference) -> {
                     if (databaseError != null) {
@@ -67,8 +63,6 @@ public class CommentRepository {
         FirebaseDatabase.getInstance()
                 .getReference("games")
                 .child(comment.getIdGame())
-                .child("comments")
-                .child(comment.getIdComment())
                 .updateChildren(comment.toMap(), (databaseError, databaseReference) -> {
                     if (databaseError != null) {
                         callback.onFailure(databaseError.toException());
@@ -81,9 +75,6 @@ public class CommentRepository {
     public void delete(final Comment comment, OnAsyncEventListener callback) {
         FirebaseDatabase.getInstance()
                 .getReference("games")
-                .child(comment.getIdGame())
-                .child("comments")
-                .child(comment.getIdComment())
                 .removeValue((databaseError, databaseReference) -> {
                     if (databaseError != null) {
                         callback.onFailure(databaseError.toException());
@@ -93,43 +84,7 @@ public class CommentRepository {
                 });
     }
 }
-    /*
-    public void transaction(final AccountEntity sender, final AccountEntity recipient,
-                            OnAsyncEventListener callback) {
-        final DatabaseReference rootReference = FirebaseDatabase.getInstance().getReference();
-        rootReference.runTransaction(new Transaction.Handler() {
-            @NonNull
-            @Override
-            public Transaction.Result doTransaction(@NonNull MutableData mutableData) {
-                rootReference
-                        .child("clients")
-                        .child(sender.getOwner())
-                        .child("accounts")
-                        .child(sender.getId())
-                        .updateChildren(sender.toMap());
 
-                rootReference
-                        .child("clients")
-                        .child(recipient.getOwner())
-                        .child("accounts")
-                        .child(recipient.getId())
-                        .updateChildren(recipient.toMap());
-
-                return Transaction.success(mutableData);
-            }
-
-            @Override
-            public void onComplete(DatabaseError databaseError, boolean b,
-                                   DataSnapshot dataSnapshot) {
-                if (databaseError != null) {
-                    callback.onFailure(databaseError.toException());
-                } else {
-                    callback.onSuccess();
-                }
-            }
-        });
-    }
-*/
 
 
 

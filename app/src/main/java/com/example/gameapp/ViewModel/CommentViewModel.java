@@ -65,18 +65,22 @@ public class CommentViewModel extends AndroidViewModel {
     /**
      * Expose the LiveData AccountEntity query so the UI can observe it.
      */
+
     public LiveData<Comment> getComment() {
         return mObservableComment;
     }
+
 
     public void createComment(Comment comment, OnAsyncEventListener callback) {
         ((BaseApp) getApplication()).getCommentRepository()
                 .insert(comment, callback);
     }
 
-    public void deleteComment(Comment comment, OnAsyncEventListener callback) {
+    public void updateComment(Comment comment, OnAsyncEventListener callback) {
         ((BaseApp) getApplication()).getCommentRepository()
-                .delete(comment, callback);
+                .update(comment, callback);
     }
+
+
 }
 

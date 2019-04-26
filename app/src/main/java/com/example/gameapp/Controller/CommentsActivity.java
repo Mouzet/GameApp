@@ -1,7 +1,6 @@
 package com.example.gameapp.Controller;
 
 
-import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,24 +11,38 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
-import com.example.gameapp.database.database.Entity.Comment;
+import com.example.gameapp.Adapter.RecyclerAdapter;
 import com.example.gameapp.R;
+import com.example.gameapp.ViewModel.CommentListViewModel;
 import com.example.gameapp.ViewModel.CommentViewModel;
+import com.example.gameapp.entity.Comment;
+import com.example.gameapp.util.OnAsyncEventListener;
+import com.example.gameapp.util.RecyclerViewItemClickListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CommentsActivity extends AppCompatActivity {
 
-    private CommentViewModel commentViewModel;
+
 
     public final static int ADD_COMMENT_REQUEST =1;
+
+    private static final String TAG = "CommentsActivity";
+
+    private List<Comment> comments;
+    private RecyclerAdapter<Comment> commentAdapter;
+    private CommentListViewModel commentViewModel;
+    private CommentViewModel commentViewModel2;
 
     private String userComment;
     private String textComment;
     private String id_game;
+    private String id_comment;
     private String name;
 
     @Override
@@ -55,20 +68,38 @@ public class CommentsActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
 
-        final CommentAdapter adapter = new CommentAdapter();
-        recyclerView.setAdapter(adapter);
 
-        commentViewModel = ViewModelProviders.of(this).get(CommentViewModel.class);
-        commentViewModel.getCommentById(id_game).observe(this, new Observer<List<Comment>>() {
+        comments = new ArrayList<>();
+        commentAdapter = new RecyclerAdapter<>(new RecyclerViewItemClickListener() {
             @Override
-            public void onChanged(@Nullable List<Comment> comments) {
-                adapter.setComments(comments);
+            public void onItemClick(View v, int position) {
+                Intent intent = new Intent (CommentsActivity.this,Add_CommentActivity.class );
+                intent.putExtra("Texte", comments.get(position).getTextComment());
+                intent.putExtra("User", comments.get(position).getUserComment());
+                intent.putExtra("IdComment", comments.get(position).getIdComment());
             }
         });
+
+        CommentListViewModel.Factory factory = new CommentListViewModel.Factory(getApplication(),id_game,id_comment);
+        commentViewModel = ViewModelProviders.of(this,factory).get(CommentListViewModel.class);
+        commentViewModel.getCommentsByGameId().observe(this, commentEntities -> {
+            if (commentEntities != null){
+                comments = commentEntities;
+                commentAdapter.setData(comments);
+            }
+        });
+
+        recyclerView.setAdapter(commentAdapter);
+
+
+
+
+
 
 
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,
                 ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+
             @Override
             public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder viewHolder1) {
                 return false;
@@ -77,30 +108,55 @@ public class CommentsActivity extends AppCompatActivity {
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
 
-                commentViewModel.delete(adapter.getCommentAt(viewHolder.getAdapterPosition()));
+                delete(viewHolder.getAdapterPosition());
 
                 Toast.makeText(CommentsActivity.this, "Comment deleted", Toast.LENGTH_SHORT).show();
             }
         }).attachToRecyclerView(recyclerView);
     }
 
+    private void delete(final int position){
+        final Comment comment = comments.get(position);
+        Toast toast = Toast.makeText(this, "Comment deleted",Toast.LENGTH_SHORT);
+
+        commentViewModel.deleteComment(comment, new OnAsyncEventListener() {
+            @Override
+            public void onSuccess() {
+                Log.d(TAG,"Delete Comment : Success");
+            }
+
+            @Override
+            public void onFailure(Exception e) {
+            Log.d(TAG, "Delete comment : failure",e);
+            }
+
+        });
+        toast.show();
+    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode == ADD_COMMENT_REQUEST && resultCode == RESULT_OK){
+        if(requestCode == ADD_COMMENT_REQUEST && resultCode == RESULT_OK) {
             String user = data.getStringExtra(Add_CommentActivity.EXTRA_USER);
             String comment = data.getStringExtra(Add_CommentActivity.EXTRA_COMMENT);
 
-            Comment c = new Comment(textComment, userComment, id_game);
-            commentViewModel.insert(c);
+            Comment c = new Comment();
+            c.setIdGame(id_game);
+            c.setTextComment(textComment);
+            c.setUserComment(userComment);
+            commentViewModel2.createComment(c, new OnAsyncEventListener() {
+                @Override
+                public void onSuccess() {
+                    Log.d(TAG, "Add Comment : Success");
+                }
 
-            Toast.makeText(this, "Comment saved", Toast.LENGTH_SHORT).show();
+                @Override
+                public void onFailure(Exception e) {
+                    Log.d(TAG, "Add Comment : Success");
+                }
+            });
 
-        }
-        else{
-            Toast.makeText(this, "Comment not saved", Toast.LENGTH_SHORT).show();
-        }
-    }
+        }}
 
 }
