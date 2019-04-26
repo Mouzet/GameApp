@@ -44,6 +44,7 @@ public class CommentsActivity extends AppCompatActivity {
     private String id_game;
     private String id_comment;
     private String name;
+    private String nameButton;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState)
@@ -60,6 +61,7 @@ public class CommentsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(CommentsActivity.this, Add_CommentActivity.class);
+                nameButton = "Add";
                 startActivityForResult(intent, ADD_COMMENT_REQUEST);
             }
         });
@@ -76,7 +78,8 @@ public class CommentsActivity extends AppCompatActivity {
                 Intent intent = new Intent (CommentsActivity.this,Add_CommentActivity.class );
                 intent.putExtra("Texte", comments.get(position).getTextComment());
                 intent.putExtra("User", comments.get(position).getUserComment());
-                intent.putExtra("IdComment", comments.get(position).getIdComment());
+                nameButton = "modify";
+                intent.putExtra("button", nameButton);
             }
         });
 

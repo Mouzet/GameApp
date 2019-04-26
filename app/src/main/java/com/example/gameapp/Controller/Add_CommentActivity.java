@@ -34,6 +34,15 @@ public class Add_CommentActivity extends AppCompatActivity {
         editTextUser = findViewById(R.id.user);
 
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close);
+
+        Intent intent = getIntent();
+        String nameButton = intent.getStringExtra("button");
+
+        if (nameButton.equals("modify")){
+            setTitle("Modify comment");
+            editTextUser.setText(intent.getStringExtra("User"));
+            editTextComment.setText(intent.getStringExtra("Texte"));
+        }
         setTitle("Add comment");
     }
 
