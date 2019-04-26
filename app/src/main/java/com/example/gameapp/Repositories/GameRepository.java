@@ -33,17 +33,17 @@ public class GameRepository {
         return instance;
     }
 
-    public LiveData<Game> getIdGame(final String idGame) {
+    public LiveData<Game> getGame(final String idGame) {
         DatabaseReference reference = FirebaseDatabase.getInstance()
                 .getReference("games")
                 .child(idGame);
         return new GameLiveData(reference);
     }
 
-    public LiveData<List<GameWithComments>> getOtherGamesWithComments(final String mIdGame) {
+    public LiveData<List<Game>> getGames() {
         DatabaseReference reference = FirebaseDatabase.getInstance()
                 .getReference("games");
-        return new GameCommentsListLiveData(reference, mIdGame);
+        return new GameLiveData(reference);
     }
 
     public void insert(final Game game, final OnAsyncEventListener callback) {

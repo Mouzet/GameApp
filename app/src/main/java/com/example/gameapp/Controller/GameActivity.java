@@ -21,16 +21,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import com.example.gameapp.database.database.Entity.Game;
 import com.example.gameapp.R;
 import com.example.gameapp.ViewModel.CommentViewModel;
 import com.example.gameapp.ViewModel.GameViewModel;
+import com.example.gameapp.entity.Game;
 
 import java.util.List;
 
 public class GameActivity extends AppCompatActivity
 {
     public static final int ADD_GAME =1;
+
     //Déclaration des viewmodels
     private GameViewModel gameViewModel;
     private CommentViewModel commentViewModel;

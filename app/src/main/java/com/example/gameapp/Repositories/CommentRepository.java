@@ -28,11 +28,10 @@ public class CommentRepository {
     }
 
 
-    public LiveData<Comment> getAccount(final String midComment) {
+    public LiveData<Comment> getComment(final String midGame) {
         DatabaseReference reference = FirebaseDatabase.getInstance()
-                .getReference("games")
-                .child("comments")
-                .child(midComment);
+                .getReference("comments")
+                .child(midGame);
         return new CommentLiveData(reference);
     }
 
@@ -46,7 +45,7 @@ public class CommentRepository {
 
     public void insert(final Comment comment, final OnAsyncEventListener callback) {
         DatabaseReference reference = FirebaseDatabase.getInstance()
-                .getReference("games")
+                .getReference("comments")
                 .child(comment.getIdGame())
                 .child("comments");
         String key = reference.push().getKey();

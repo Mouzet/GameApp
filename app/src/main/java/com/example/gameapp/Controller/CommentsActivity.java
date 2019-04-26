@@ -29,7 +29,7 @@ public class CommentsActivity extends AppCompatActivity {
 
     private String userComment;
     private String textComment;
-    private int id_game;
+    private String id_game;
     private String name;
 
     @Override
@@ -40,7 +40,7 @@ public class CommentsActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        id_game = Integer.parseInt(intent.getStringExtra("idGame"));
+        id_game =intent.getStringExtra("idGame");
 
         FloatingActionButton buttonAdd = findViewById(R.id.add_comment);
         buttonAdd.setOnClickListener(new View.OnClickListener() {

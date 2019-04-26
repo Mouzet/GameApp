@@ -30,7 +30,7 @@ public class CommentViewModel extends AndroidViewModel {
         mObservableComment.setValue(null);
 
         if (commentId != null) {
-            LiveData<Comment> comment = mRepository.getAccount(commentId);
+            LiveData<Comment> comment = mRepository.getComment(commentId);
 
             // observe the changes of the account entity from the database and forward them
             mObservableComment.addSource(comment, mObservableComment::setValue);
@@ -65,7 +65,7 @@ public class CommentViewModel extends AndroidViewModel {
     /**
      * Expose the LiveData AccountEntity query so the UI can observe it.
      */
-    public LiveData<Comment> getAccount() {
+    public LiveData<Comment> getComment() {
         return mObservableComment;
     }
 
