@@ -96,8 +96,8 @@ public class GameActivity extends AppCompatActivity
                 getApplication(),
                 idGame
         );
-        gameViewModel = ViewModelProviders.of(this, factory).get(GameViewModel.class);
-        gameViewModel.getGame().observe(this, gameEntities -> {
+        gameListViewModel = ViewModelProviders.of(this, factory).get(GameListViewModel.class);
+        gameListViewModel.getGame().observe(this, gameEntities -> {
             if (gameEntities != null) {
                 game = gameEntities;
                 gameAdapter.setData(games);
@@ -138,8 +138,8 @@ public class GameActivity extends AppCompatActivity
                     gender = intent.getStringExtra("gender");
 
                     //Si on recherche par NOM + GENRE
-                    gameViewModel = ViewModelProviders.of(this, factory).get(GameViewModel.class);
-                    gameViewModel.getGamesByNameAndGender(nameSearch, gender).observe(this, new Observer<List<Game>>() {
+                    gameListViewModel = ViewModelProviders.of(this, factory).get(GameListViewModel.class);
+                    gameListViewModel.getGamesByNameAndGender().observe(this, new Observer<List<Game>>() {
                         @Override
                         public void onChanged(@Nullable List<Game> games) {
                             gameAdapter.setData(games);
@@ -152,8 +152,8 @@ public class GameActivity extends AppCompatActivity
                 {
                     nameSearch = intent.getStringExtra("nameSearch");
 
-                    gameViewModel = ViewModelProviders.of(this).get(GameViewModel.class);
-                    gameViewModel.getGamesByName(nameSearch).observe(this, new Observer<List<Game>>() {
+                    gameListViewModel = ViewModelProviders.of(this).get(GameListViewModel.class);
+                    gameListViewModel.getGamesByName().observe(this, new Observer<List<Game>>() {
                         @Override
                         public void onChanged(@Nullable List<Game> games) {
                             gameAdapter.setData(games);
@@ -167,8 +167,8 @@ public class GameActivity extends AppCompatActivity
             {
                 gender = intent.getStringExtra("gender");
 
-                gameViewModel = ViewModelProviders.of(this).get(GameViewModel.class);
-                gameViewModel.getGamesByGender(gender).observe(this, new Observer<List<Game>>() {
+                gameListViewModel = ViewModelProviders.of(this).get(GameListViewModel.class);
+                gameListViewModel.getGamesByGender().observe(this, new Observer<List<Game>>() {
                     @Override
                     public void onChanged(@Nullable List<Game> games) {
 
@@ -184,8 +184,8 @@ public class GameActivity extends AppCompatActivity
            // final GameAdapter adapter = new GameAdapter();
             recyclerView.setAdapter(gameAdapter);
 
-            gameViewModel = ViewModelProviders.of(this).get(GameViewModel.class);
-            gameViewModel.getAllGames().observe(this, new Observer<List<Game>>() {
+            gameListViewModel = ViewModelProviders.of(this).get(GameListViewModel.class);
+            gameListViewModel.getAllGames().observe(this, new Observer<List<Game>>() {
                 @Override
                 public void onChanged(@Nullable List<Game> games) {
                     gameAdapter.setData(games);
@@ -287,7 +287,6 @@ public class GameActivity extends AppCompatActivity
             default :
                 return super.onOptionsItemSelected(item);
         }
-
     }
 }
 

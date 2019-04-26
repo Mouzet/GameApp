@@ -75,8 +75,6 @@ public class CommentListViewModel extends AndroidViewModel {
         }
     }
 
-
-
     public LiveData<Comment> getComment() {
         return mObservableComment;
     }
