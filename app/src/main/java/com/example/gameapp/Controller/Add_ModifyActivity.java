@@ -198,7 +198,6 @@ public class Add_ModifyActivity extends AppCompatActivity implements AdapterView
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent imageReturnedIntent) {
         super.onActivityResult(requestCode, resultCode, imageReturnedIntent);
-        // Permission is not granted
 
 
 
