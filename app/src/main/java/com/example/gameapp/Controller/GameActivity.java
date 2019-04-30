@@ -68,7 +68,6 @@ public class GameActivity extends AppCompatActivity
         FloatingActionButton buttonAdd = findViewById(R.id.add_game);
 
         games = new ArrayList<>();
-
         RecyclerView recyclerView = findViewById(R.id.recycler_view_game);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
@@ -228,9 +227,14 @@ public class GameActivity extends AppCompatActivity
             String description = data.getStringExtra(Add_ModifyActivity.EXTRA_DESCRIPTION);
             int stars = data.getIntExtra(Add_ModifyActivity.EXTRA_STARS, 1);
 
-            Game game = new Game(name,description,stars,gender,date);
+            Game game = new Game();
+            game.setNameGame(name);
+            game.setDescriptionGame(description);
+            game.setDate(date);
+            game.setNumberStars(stars);
+            game.setGenderGame(gender);
 
-            gameViewModel = ViewModelProviders.of(this).get(GameViewModel.class);
+
             gameViewModel.insertGame(game, new OnAsyncEventListener() {
                 @Override
                 public void onSuccess() {
