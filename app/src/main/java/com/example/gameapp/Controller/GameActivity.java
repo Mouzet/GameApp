@@ -4,10 +4,7 @@ package com.example.gameapp.Controller;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
-import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -15,12 +12,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.gameapp.Adapter.RecyclerAdapter;
@@ -49,6 +44,7 @@ public class GameActivity extends AppCompatActivity
     private String nameSearch;
     private String gender;
 
+
     private List<Game> games;
     private RecyclerAdapter<Game> gameAdapter;
     private GameListViewModel gameListViewModel;
@@ -64,6 +60,8 @@ public class GameActivity extends AppCompatActivity
         setContentView(R.layout.activity_result_games);
 
         Intent intent = getIntent();
+
+
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -92,14 +90,13 @@ public class GameActivity extends AppCompatActivity
             }
         });
 
-        GameViewModel.Factory factory = new GameViewModel.Factory(
-                getApplication(),
-                idGame
+        GameListViewModel.Factory factory = new GameListViewModel.Factory(
+                getApplication(),idGame,nameGame,gender
         );
         gameListViewModel = ViewModelProviders.of(this, factory).get(GameListViewModel.class);
         gameListViewModel.getGame().observe(this, gameEntities -> {
             if (gameEntities != null) {
-                game = gameEntities;
+                game =  gameEntities;
                 gameAdapter.setData(games);
             }
         });
@@ -231,8 +228,9 @@ public class GameActivity extends AppCompatActivity
             String description = data.getStringExtra(Add_ModifyActivity.EXTRA_DESCRIPTION);
             int stars = data.getIntExtra(Add_ModifyActivity.EXTRA_STARS, 1);
 
-            Game game = new Game();
+            Game game = new Game(name,description,stars,gender,date);
 
+            gameViewModel = ViewModelProviders.of(this).get(GameViewModel.class);
             gameViewModel.insertGame(game, new OnAsyncEventListener() {
                 @Override
                 public void onSuccess() {
@@ -254,12 +252,7 @@ public class GameActivity extends AppCompatActivity
         return true;
     }
 
-    public String getRealPathFromURI(Uri uri) {
-        Cursor cursor = getContentResolver().query(uri, null, null, null, null);
-        cursor.moveToFirst();
-        int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
-        return cursor.getString(idx);
-    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 

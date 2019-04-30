@@ -16,12 +16,21 @@ public class GameLiveData extends LiveData<Game> {
     private static final String TAG = "GameLiveData";
 
     private final DatabaseReference reference;
-    private final String mIdGame;
+    private  String nameOrId;
+    private  String genre;
     private final GameLiveData.MyValueEventListener listener = new GameLiveData.MyValueEventListener();
 
-    public GameLiveData(DatabaseReference ref, String mIdGame) {
-        this.reference = ref;
-        this.mIdGame = mIdGame;
+    public GameLiveData(DatabaseReference ref, String idOrName) {
+        reference = ref;
+        nameOrId = idOrName;
+
+    }
+
+
+    public GameLiveData(DatabaseReference ref, String nom, String gender){
+        reference=ref;
+        nameOrId=nom;
+        genre = gender;
     }
 
     @Override
@@ -40,7 +49,7 @@ public class GameLiveData extends LiveData<Game> {
         @Override
         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
             Game entity = dataSnapshot.getValue(Game.class);
-            entity.setIdGame(dataSnapshot.getKey());
+            //entity.setIdGame(dataSnapshot.getKey());
             setValue(entity);
         }
 
@@ -59,10 +68,39 @@ public class GameLiveData extends LiveData<Game> {
             game.setIdGame(childSnapshot.getKey());
             Log.i("* GAME ID *", game.getIdGame());
 
-            if(game.getIdGame().equals(mIdGame))
+            if(game.getIdGame().equals(nameOrId))
                 return game;
         }
 
         return null;
     }
+
+    private Game getGamesByName(DataSnapshot snapshot)
+    {
+        for (DataSnapshot childSnapshot : snapshot.getChildren())
+        {
+            Game game = childSnapshot.getValue(Game.class);
+            game.setIdGame(childSnapshot.getKey());
+            Log.i("* GAME ID *", game.getIdGame());
+
+            if(game.getNameGame().equals(nameOrId))
+                return game;
+        }
+
+        return null;
+    }
+
+    private Game getGamesByNameAndGender(DataSnapshot snapshot)
+    {
+        for (DataSnapshot childSnapshot : snapshot.getChildren())
+        {
+            Game game = childSnapshot.getValue(Game.class);
+            game.setIdGame(childSnapshot.getKey());
+
+            if (game.getNameGame().equals(nameOrId) && game.getGenderGame().equals(genre))
+                return game;
+        }
+        return null;
+    }
+
 }

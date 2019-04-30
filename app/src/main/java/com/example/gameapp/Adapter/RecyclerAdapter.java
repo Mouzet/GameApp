@@ -40,10 +40,7 @@ public class RecyclerAdapter<T> extends RecyclerView.Adapter<RecyclerAdapter.Vie
                 .inflate(R.layout.activity_result_games, parent, false);
         final ViewHolder viewHolder = new ViewHolder(v);
         v.setOnClickListener(view -> listener.onItemClick(view, viewHolder.getAdapterPosition()));
-        v.setOnLongClickListener(view -> {
-            listener.onItemLongClick(view, viewHolder.getAdapterPosition());
-            return true;
-        });
+
         return viewHolder;
     }
 
@@ -68,7 +65,7 @@ public class RecyclerAdapter<T> extends RecyclerView.Adapter<RecyclerAdapter.Vie
     public void setData(final List<T> data) {
         if (this.data == null) {
             this.data = data;
-            notifyItemRangeInserted(0, data.size());
+            notifyItemRangeInserted(0, getItemCount());
         } else {
             DiffUtil.DiffResult result = DiffUtil.calculateDiff(new DiffUtil.Callback() {
                 @Override

@@ -4,7 +4,6 @@ import android.arch.lifecycle.LiveData;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
-import com.example.gameapp.entity.Comment;
 import com.example.gameapp.entity.Game;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -19,11 +18,19 @@ public class GameListLiveData extends LiveData<List<Game>> {
     private static final String TAG = "GameListLiveData";
 
     private final DatabaseReference reference;
+
+    private  String gender;
     private final MyValueEventListener listener = new MyValueEventListener();
 
     public GameListLiveData(DatabaseReference ref) {
         reference = ref;
     }
+
+    public GameListLiveData(DatabaseReference ref, String genre){
+        reference = ref;
+        gender=genre;
+    }
+
 
     @Override
     protected void onActive() {
@@ -57,6 +64,23 @@ public class GameListLiveData extends LiveData<List<Game>> {
         }
         return games;
     }
+
+    private List<Game> getGamesByGender(DataSnapshot snapshot)
+    {
+        List<Game> games = new ArrayList<>();
+        for (DataSnapshot childSnapshot : snapshot.getChildren())
+        {
+            Game game = childSnapshot.getValue(Game.class);
+            game.setIdGame(childSnapshot.getKey());
+
+
+            if(game.getGenderGame().equals(gender))
+                games.add(game);
+        }
+
+        return games;
+    }
+
 
 }
 

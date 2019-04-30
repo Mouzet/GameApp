@@ -138,7 +138,7 @@ public class Add_ModifyActivity extends AppCompatActivity implements AdapterView
         String gender = editGender.getSelectedItem().toString();
         //String idgame = tidgame.getText().toString();
 
-        if(name.trim().isEmpty() || imagePath.trim().isEmpty() || date.trim().isEmpty() || description.trim().isEmpty()){
+        if(name.trim().isEmpty() || date.trim().isEmpty() || description.trim().isEmpty()){
 
             Toast.makeText(this, "Please fill all the gaps", Toast.LENGTH_SHORT).show();
         return;

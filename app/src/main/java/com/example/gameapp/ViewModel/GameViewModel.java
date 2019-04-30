@@ -41,22 +41,22 @@ public class GameViewModel extends AndroidViewModel
 public static class Factory extends ViewModelProvider.NewInstanceFactory {
 
     @NonNull
-    private final Application application;
+    private final Application mApplication;
 
-    private final String gameId;
+    private final String mGameId;
 
     private final GameRepository repository;
 
     public Factory(@NonNull Application application, String gameId) {
-        this.application = application;
-        this.gameId = gameId;
+        mApplication = application;
+        mGameId = gameId;
         repository = ((BaseApp) application).getGameRepository();
     }
 
     @Override
     public <T extends ViewModel> T create(Class<T> modelClass) {
         //noinspection unchecked
-        return (T) new GameViewModel(application, gameId, repository);
+        return (T) new GameViewModel(mApplication, mGameId, repository);
     }
 }
 

@@ -3,10 +3,8 @@ package com.example.gameapp.Repositories;
 import android.arch.lifecycle.LiveData;
 
 import com.example.gameapp.entity.Game;
-import com.example.gameapp.firebase.GameCommentsListLiveData;
 import com.example.gameapp.firebase.GameListLiveData;
 import com.example.gameapp.firebase.GameLiveData;
-import com.example.gameapp.pojo.GameWithComments;
 import com.example.gameapp.util.OnAsyncEventListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -37,7 +35,8 @@ public class GameRepository {
     public LiveData<Game> getGame(final String idGame) {
         DatabaseReference reference = FirebaseDatabase.getInstance()
                 .getReference("games")
-                .child(idGame);
+
+                ;
         return new GameLiveData(reference, idGame);
     }
 
@@ -48,26 +47,25 @@ public class GameRepository {
         return new GameListLiveData(reference);
     }
 
-    public LiveData<List<Game>> getGamesByNameAndGender(final String nameSearch, final String gender) {
+    public LiveData<Game> getGamesByNameAndGender(final String nameSearch, final String gender) {
         DatabaseReference reference = FirebaseDatabase.getInstance()
                 .getReference("games")
-                .child(nameSearch)
-                .child(gender);
-        return new GameListLiveData(reference);
+                ;
+        return new GameLiveData(reference,nameSearch,gender);
     }
 
-    public LiveData<List<Game>> getGamesByName(final String nameSearch) {
+    public LiveData<Game> getGamesByName(final String nameSearch) {
         DatabaseReference reference = FirebaseDatabase.getInstance()
                 .getReference("games")
-                .child(nameSearch);
-        return new GameListLiveData(reference);
+                ;
+        return new GameLiveData(reference,nameSearch);
     }
 
     public LiveData<List<Game>> getGamesByGender(final String gender) {
         DatabaseReference reference = FirebaseDatabase.getInstance()
                 .getReference("games")
-                .child(gender);
-        return new GameListLiveData(reference);
+                ;
+        return new GameListLiveData(reference,gender);
     }
 
     public void insert(final Game game, final OnAsyncEventListener callback) {

@@ -21,6 +21,14 @@ public class Game implements Comparable
     public Game() {
     }
 
+    public Game ( @NonNull String nameGame, String description, int numberStars, @NonNull String gender, int date){
+        this.mNameGame = nameGame;
+        this.mDescriptionGame = description;
+        this.mNumberStars = numberStars;
+        this.mGenderGame = gender;
+        this.mDate=date;
+    }
+
     @Exclude
     public String getIdGame() {
         return mIdGame;

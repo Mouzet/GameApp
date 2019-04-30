@@ -11,9 +11,7 @@ import android.support.annotation.NonNull;
 import com.example.gameapp.BaseApp;
 import com.example.gameapp.Repositories.CommentRepository;
 import com.example.gameapp.Repositories.GameRepository;
-import com.example.gameapp.entity.Comment;
 import com.example.gameapp.entity.Game;
-import com.example.gameapp.pojo.GameWithComments;
 
 import java.util.List;
 
@@ -53,16 +51,16 @@ public class GameListViewModel extends AndroidViewModel {
 
         LiveData<List<Game>> games = mRepository.getAllGames();
         LiveData<Game> game = mRepository.getGame(mIdGame);
-        LiveData<List<Game>> gameByName = mRepository.getGamesByName(nameGame);
+        LiveData<Game> gameByName = mRepository.getGamesByName(nameGame);
         LiveData<List<Game>> gameByGender = mRepository.getGamesByGender(genderGame);
-        LiveData<List<Game>> gameByNameAndGender = mRepository.getGamesByNameAndGender(nameGame, genderGame);
+        LiveData<Game> gameByNameAndGender = mRepository.getGamesByNameAndGender(nameGame, genderGame);
 
         // observe the changes of the entities from the database and forward them
         mObservableGames.addSource(games, mObservableGames::setValue);
         mObservableGame.addSource(game, mObservableGame::setValue);
-        mObservableGameByName.addSource(gameByName, mObservableGameByName::setValue);
+        //mObservableGameByName.addSource(gameByName, mObservableGameByName::setValue);
         mObservableGameByGender.addSource(gameByGender, mObservableGameByGender::setValue);
-        mObservableGameByNameAndGender.addSource(gameByNameAndGender, mObservableGameByNameAndGender::setValue);
+        //mObservableGameByNameAndGender.addSource(gameByNameAndGender, mObservableGameByNameAndGender::setValue);
     }
 
     public static class Factory extends ViewModelProvider.NewInstanceFactory {
